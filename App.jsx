@@ -84,7 +84,7 @@ export default function App() {
       if (hash.startsWith('col-')||hash.startsWith('ted-') && hash !== 'ted-program') { setPage('blog'); setPostId(hash) }
       else if (hash === 'ted-program') { setPage('ted-program'); setPostId(null) }
       else if (hash==='blog') { setPage('blog'); setPostId(null) }
-      else if (['register','waitlist','ebooks','admin','login','consent','payment'].includes(hash)) {
+      else if (['register','waitlist','ebooks','admin','login','consent','payment','mock-a','mock-b','mock-c'].includes(hash)) {
         setPage(hash); setPostId(null)
       }
       else { setPage('home'); setPostId(null) }
@@ -158,6 +158,9 @@ export default function App() {
         {page==='blog' && (post ? <Post post={post} nav={nav} auth={auth}/> : <BlogList nav={nav}/>)}
         {page==='ebooks' && <Ebooks preview={ebookPreview} setPreview={setEbookPreview} nav={nav}/>}
         {page==='ted-program' && <TedProgram nav={nav}/>}
+        {page==='mock-a' && <MockA nav={nav}/>}
+        {page==='mock-b' && <MockB nav={nav}/>}
+        {page==='mock-c' && <MockC nav={nav}/>}
         {page==='login' && <Login auth={auth} nav={nav}/>}
         {page==='consent' && <ConsentPage auth={auth} nav={nav}/>}
         {page==='payment' && <PaymentPage auth={auth} nav={nav}/>}
@@ -236,6 +239,14 @@ function Home({nav}) {
   ]
 
   return (<div>
+
+    {/* 🎨 디자인 비교 배너 (임시) */}
+    <div style={{background:'#FFF9E6',borderBottom:`1px solid ${T.border}`,padding:'10px 20px',textAlign:'center',fontSize:12,color:T.txtS}}>
+      🎨 디자인 비교:
+      <button onClick={()=>nav('mock-a')} style={{marginLeft:10,padding:'4px 12px',background:'#fff',border:`1px solid ${T.borderH}`,borderRadius:100,fontSize:11,fontWeight:600,cursor:'pointer',color:T.txt}}>A. Orson 스타일</button>
+      <button onClick={()=>nav('mock-b')} style={{marginLeft:6,padding:'4px 12px',background:'#fff',border:`1px solid ${T.borderH}`,borderRadius:100,fontSize:11,fontWeight:600,cursor:'pointer',color:T.txt}}>B. 더챕터 스타일</button>
+      <button onClick={()=>nav('mock-c')} style={{marginLeft:6,padding:'4px 12px',background:'#fff',border:`1px solid ${T.borderH}`,borderRadius:100,fontSize:11,fontWeight:600,cursor:'pointer',color:T.txt}}>C. 워시 스타일</button>
+    </div>
 
     {/* ━━ HERO ━━ */}
     <section style={{position:'relative',padding:'140px 24px 120px',textAlign:'center',overflow:'hidden'}}>
@@ -422,6 +433,153 @@ function Home({nav}) {
         .featured-grid { grid-template-columns: 1fr !important; padding: 40px 28px !important; }
       }
     `}</style>
+  </div>)
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// MOCK UPS — 히어로 섹션 디자인 비교용
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const MockNav = ({nav, current}) => (
+  <div style={{position:'fixed',top:74,left:'50%',transform:'translateX(-50%)',zIndex:50,background:'#fff',border:`1px solid ${T.border}`,borderRadius:100,padding:'6px 8px',display:'flex',gap:4,boxShadow:T.shadowHover}}>
+    {[['home','현재'],['mock-a','A: Orson'],['mock-b','B: 더챕터'],['mock-c','C: 워시']].map(([id,l])=>(
+      <button key={id} onClick={()=>nav(id)} style={{padding:'6px 14px',background:current===id?T.navy:'transparent',color:current===id?'#fff':T.txtS,border:'none',borderRadius:100,fontSize:11,fontWeight:600,cursor:'pointer'}}>{l}</button>
+    ))}
+  </div>
+)
+
+const MockBelow = ({nav}) => (
+  <section style={{padding:'100px 24px 120px',textAlign:'center',background:'#fff'}}>
+    <p style={{fontSize:12,color:T.txtD,marginBottom:20}}>↓ 이 아래부터는 공통 섹션 (예시)</p>
+    <div style={{maxWidth:900,margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
+      {['📝 무료 칼럼','🎙️ TED 스터디','📚 전자책'].map(l=>(
+        <div key={l} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'28px 22px',boxShadow:T.shadow,textAlign:'left'}}>
+          <div style={{fontSize:22,marginBottom:10}}>{l.split(' ')[0]}</div>
+          <h3 style={{fontSize:14,fontWeight:700,color:T.txt}}>{l.split(' ').slice(1).join(' ')}</h3>
+          <p style={{fontSize:12,color:T.txtS,marginTop:4}}>공통 섹션 미리보기</p>
+        </div>
+      ))}
+    </div>
+    <button onClick={()=>nav('home')} style={{marginTop:32,padding:'10px 22px',background:T.bg,color:T.txt,border:`1px solid ${T.borderH}`,borderRadius:8,fontSize:12,cursor:'pointer'}}>← 홈으로</button>
+  </section>
+)
+
+// ─── MOCK A: Orson 스타일 (크림 + 강한 골드 글로우) ───
+function MockA({nav}) {
+  return (<div>
+    <MockNav nav={nav} current="mock-a"/>
+    <section style={{position:'relative',padding:'160px 24px 140px',textAlign:'center',overflow:'hidden',background:'linear-gradient(180deg,#FFFDF7 0%,#FFF6E5 45%,#FFFFFF 100%)',borderBottom:`1px solid ${T.border}`}}>
+      {/* 강한 골드 글로우 */}
+      <div style={{position:'absolute',top:'20%',left:'50%',transform:'translate(-50%,-50%)',width:900,height:700,background:'radial-gradient(ellipse at center, rgba(212,168,83,0.45) 0%, rgba(212,168,83,0.2) 25%, rgba(212,168,83,0.06) 50%, transparent 75%)',pointerEvents:'none'}}/>
+      {/* 장식 원 (orson 스타일) */}
+      <svg style={{position:'absolute',top:'18%',left:'50%',transform:'translate(-50%,-50%)',width:700,height:700,opacity:0.25,pointerEvents:'none'}} viewBox="0 0 700 700">
+        <circle cx="350" cy="350" r="320" fill="none" stroke="#B8860B" strokeWidth="0.6"/>
+        <circle cx="350" cy="350" r="260" fill="none" stroke="#B8860B" strokeWidth="0.6"/>
+        <circle cx="350" cy="350" r="200" fill="none" stroke="#B8860B" strokeWidth="0.6"/>
+        <circle cx="350" cy="350" r="140" fill="none" stroke="#B8860B" strokeWidth="0.6"/>
+      </svg>
+
+      <div style={{position:'relative',maxWidth:900,margin:'0 auto'}}>
+        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'7px 18px',background:'rgba(255,255,255,0.8)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.3)',borderRadius:100,fontSize:11,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}>
+          <span style={{width:6,height:6,borderRadius:'50%',background:'#B8860B'}}/>
+          SILENT AMBITIOUS PEOPLE
+        </div>
+        <h1 style={{fontSize:'clamp(38px,6.5vw,72px)',fontWeight:800,color:T.txt,lineHeight:1.1,marginBottom:30,letterSpacing:-2.8}}>
+          떠들지 않지만<br/>
+          <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 50%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>실행하는 사람들</span>의<br/>
+          커뮤니티
+        </h1>
+        <p style={{fontSize:17,color:T.txt,marginBottom:48,lineHeight:1.75,maxWidth:560,margin:'0 auto 48px',fontWeight:400}}>
+          동기부여보다 구조, 영감보다 루트맵.<br/>
+          <strong style={{color:'#8B6914',fontWeight:600}}>영어 · 커리어 · 실행 시스템</strong>을 함께 만들어 갑니다.
+        </p>
+        <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+          <button onClick={()=>nav('ted-program')} style={{padding:'15px 30px',background:T.navy,color:'#fff',fontSize:14,fontWeight:600,border:'none',borderRadius:10,cursor:'pointer',boxShadow:'0 10px 30px rgba(184,134,11,0.25)'}}>TED 스터디 자세히 →</button>
+          <button onClick={()=>nav('blog')} style={{padding:'15px 30px',background:'rgba(255,255,255,0.9)',color:T.txt,fontSize:14,fontWeight:600,border:'1px solid rgba(184,134,11,0.3)',borderRadius:10,cursor:'pointer',backdropFilter:'blur(10px)'}}>무료 칼럼 읽기</button>
+        </div>
+      </div>
+
+      {/* Divider: 얇은 골드 라인 + 중앙 장식 */}
+      <div style={{position:'absolute',bottom:0,left:0,right:0,display:'flex',alignItems:'center',justifyContent:'center',gap:16}}>
+        <div style={{flex:1,height:1,background:'linear-gradient(90deg,transparent,rgba(184,134,11,0.4),transparent)'}}/>
+        <div style={{width:10,height:10,background:'#B8860B',transform:'rotate(45deg)',opacity:0.6}}/>
+        <div style={{flex:1,height:1,background:'linear-gradient(90deg,transparent,rgba(184,134,11,0.4),transparent)'}}/>
+      </div>
+    </section>
+    <MockBelow nav={nav}/>
+  </div>)
+}
+
+// ─── MOCK B: 더챕터 스타일 (딥 네이비 + 물결 SVG divider) ───
+function MockB({nav}) {
+  return (<div>
+    <MockNav nav={nav} current="mock-b"/>
+    <section style={{position:'relative',padding:'160px 24px 180px',textAlign:'center',overflow:'hidden',background:`linear-gradient(135deg, #0D1117 0%, #151D2B 50%, #1A2440 100%)`}}>
+      {/* 글로우 */}
+      <div style={{position:'absolute',top:'20%',left:'50%',transform:'translate(-50%,-50%)',width:900,height:600,background:'radial-gradient(ellipse at center, rgba(212,168,83,0.3) 0%, rgba(168,85,247,0.08) 30%, transparent 60%)',pointerEvents:'none'}}/>
+      {/* 서브틀 패턴 */}
+      <div style={{position:'absolute',inset:0,background:'radial-gradient(circle at 20% 50%, rgba(212,168,83,0.08), transparent 40%), radial-gradient(circle at 80% 30%, rgba(168,85,247,0.06), transparent 40%)',pointerEvents:'none'}}/>
+
+      <div style={{position:'relative',maxWidth:900,margin:'0 auto'}}>
+        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'7px 18px',background:'rgba(255,255,255,0.06)',backdropFilter:'blur(10px)',border:'1px solid rgba(212,168,83,0.3)',borderRadius:100,fontSize:11,color:'#E8CFA0',marginBottom:32,letterSpacing:1,fontWeight:600}}>
+          <span style={{width:6,height:6,borderRadius:'50%',background:'#D4A853'}}/>
+          SILENT AMBITIOUS PEOPLE
+        </div>
+        <h1 style={{fontSize:'clamp(38px,6.5vw,72px)',fontWeight:800,color:'#fff',lineHeight:1.1,marginBottom:30,letterSpacing:-2.8}}>
+          떠들지 않지만<br/>
+          <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,background:'linear-gradient(135deg,#D4A853 0%,#E8CFA0 50%,#F5E8D0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>실행하는 사람들</span>의<br/>
+          커뮤니티
+        </h1>
+        <p style={{fontSize:17,color:'rgba(255,255,255,0.7)',marginBottom:48,lineHeight:1.75,maxWidth:560,margin:'0 auto 48px',fontWeight:400}}>
+          동기부여보다 구조, 영감보다 루트맵.<br/>
+          <strong style={{color:'#E8CFA0',fontWeight:600}}>영어 · 커리어 · 실행 시스템</strong>을 함께 만들어 갑니다.
+        </p>
+        <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+          <button onClick={()=>nav('ted-program')} style={{padding:'15px 30px',background:'#fff',color:T.navy,fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer'}}>TED 스터디 자세히 →</button>
+          <button onClick={()=>nav('blog')} style={{padding:'15px 30px',background:'transparent',color:'#fff',fontSize:14,fontWeight:600,border:'1px solid rgba(255,255,255,0.3)',borderRadius:10,cursor:'pointer'}}>무료 칼럼 읽기</button>
+        </div>
+      </div>
+
+      {/* Wave SVG divider */}
+      <svg style={{position:'absolute',bottom:-1,left:0,width:'100%',height:100,display:'block'}} viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,60 C240,100 480,20 720,50 C960,80 1200,30 1440,60 L1440,100 L0,100 Z" fill="#fff"/>
+      </svg>
+    </section>
+    <MockBelow nav={nav}/>
+  </div>)
+}
+
+// ─── MOCK C: 그라디언트 워시 (크림 → 화이트 자연 전환) ───
+function MockC({nav}) {
+  return (<div>
+    <MockNav nav={nav} current="mock-c"/>
+    <section style={{position:'relative',padding:'160px 24px 140px',textAlign:'center',overflow:'hidden',background:'linear-gradient(180deg, #FFF3E0 0%, #FFEBD6 15%, #FFF5E6 35%, #FFFAF0 55%, #FFFDF9 75%, #FFFFFF 100%)'}}>
+      {/* 파스텔 글로우 여러 개 (Sketch 스타일) */}
+      <div style={{position:'absolute',top:'10%',left:'15%',width:500,height:500,background:'radial-gradient(circle,rgba(255,192,203,0.35) 0%,transparent 60%)',pointerEvents:'none',filter:'blur(20px)'}}/>
+      <div style={{position:'absolute',top:'25%',right:'10%',width:500,height:500,background:'radial-gradient(circle,rgba(212,168,83,0.35) 0%,transparent 60%)',pointerEvents:'none',filter:'blur(20px)'}}/>
+      <div style={{position:'absolute',top:'40%',left:'50%',transform:'translateX(-50%)',width:600,height:400,background:'radial-gradient(ellipse,rgba(186,160,234,0.25) 0%,transparent 60%)',pointerEvents:'none',filter:'blur(30px)'}}/>
+
+      <div style={{position:'relative',maxWidth:900,margin:'0 auto'}}>
+        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'7px 18px',background:'rgba(255,255,255,0.7)',backdropFilter:'blur(10px)',border:'1px solid rgba(13,17,23,0.1)',borderRadius:100,fontSize:11,color:T.txtS,marginBottom:32,letterSpacing:1,fontWeight:600}}>
+          <span style={{width:6,height:6,borderRadius:'50%',background:'#B8860B'}}/>
+          SILENT AMBITIOUS PEOPLE
+        </div>
+        <h1 style={{fontSize:'clamp(38px,6.5vw,72px)',fontWeight:800,color:T.txt,lineHeight:1.1,marginBottom:30,letterSpacing:-2.8}}>
+          떠들지 않지만<br/>
+          <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:'#8B6914'}}>실행하는 사람들</span>의<br/>
+          커뮤니티
+        </h1>
+        <p style={{fontSize:17,color:T.txtS,marginBottom:48,lineHeight:1.75,maxWidth:560,margin:'0 auto 48px'}}>
+          동기부여보다 구조, 영감보다 루트맵.<br/>
+          <strong style={{color:T.txt,fontWeight:600}}>영어 · 커리어 · 실행 시스템</strong>을 함께 만들어 갑니다.
+        </p>
+        <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
+          <button onClick={()=>nav('ted-program')} style={{padding:'15px 30px',background:T.navy,color:'#fff',fontSize:14,fontWeight:600,border:'none',borderRadius:10,cursor:'pointer',boxShadow:'0 10px 40px rgba(13,17,23,0.15)'}}>TED 스터디 자세히 →</button>
+          <button onClick={()=>nav('blog')} style={{padding:'15px 30px',background:'rgba(255,255,255,0.85)',color:T.txt,fontSize:14,fontWeight:600,border:'1px solid rgba(13,17,23,0.12)',borderRadius:10,cursor:'pointer',backdropFilter:'blur(10px)'}}>무료 칼럼 읽기</button>
+        </div>
+      </div>
+    </section>
+    <MockBelow nav={nav}/>
   </div>)
 }
 
