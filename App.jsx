@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { COLUMNS, EBOOKS } from './data'
 import { useAuth } from './src/useAuth'
+import GatedArticle from './src/GatedArticle'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const FORMSPREE_WAITLIST = 'https://formspree.io/f/xgopnwdd'
@@ -46,6 +47,7 @@ export default function App(){
       if(hash.startsWith('col-')||(hash.startsWith('ted-')&&hash!=='ted-program')){setPage('blog');setPostId(hash)}
       else if(hash==='ted-program'){setPage('ted-program');setPostId(null)}
       else if(hash==='blog'){setPage('blog');setPostId(null)}
+      else if(hash==='article'){setPage('article');setPostId(null)}
       else if(['register','waitlist','ebooks','admin','login','consent','payment'].includes(hash)){setPage(hash);setPostId(null)}
       else{setPage('home');setPostId(null)}
       window.scrollTo(0,0)
@@ -74,7 +76,7 @@ export default function App(){
           <div style={{display:'flex',alignItems:'center',gap:10,cursor:'pointer'}} onClick={()=>nav('home')}><Flame size={24}/><span style={{color:T.txt,fontSize:15,fontWeight:800,letterSpacing:-0.3}}>조용한 야망가들</span></div>
           <div style={{display:'flex',gap:28,alignItems:'center'}}>
             <div style={{display:'flex',gap:24,alignItems:'center'}} className="nav-links">
-              {[['home','홈'],['blog','칼럼'],['ebooks','전자책'],['ted-program','TED 스터디']].map(([p,l])=>(<button key={p} onClick={()=>nav(p)} style={{background:'none',border:'none',cursor:'pointer',color:page===p?T.txt:T.txtS,fontSize:13,fontWeight:page===p?600:500,padding:0}}>{l}</button>))}
+              {[['home','홈'],['article','아티클'],['ebooks','전자책'],['ted-program','TED 스터디']].map(([p,l])=>(<button key={p} onClick={()=>nav(p)} style={{background:'none',border:'none',cursor:'pointer',color:page===p?T.txt:T.txtS,fontSize:13,fontWeight:page===p?600:500,padding:0}}>{l}</button>))}
             </div>
             {auth.isLoggedIn?(<div style={{display:'flex',alignItems:'center',gap:8}}><span style={{fontSize:12,color:T.txtS,maxWidth:90,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{auth.profile?.display_name||auth.user?.email?.split('@')[0]}</span><button onClick={auth.signOut} style={{background:T.bg,border:`1px solid ${T.border}`,color:T.txtS,padding:'6px 12px',borderRadius:6,fontSize:11,fontWeight:500,cursor:'pointer'}}>로그아웃</button></div>):(<button onClick={()=>nav('login')} style={{background:'none',border:'none',color:T.txt,padding:0,fontSize:13,fontWeight:500,cursor:'pointer'}}>로그인</button>)}
             <button onClick={()=>nav('waitlist')} style={{padding:'9px 18px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',boxShadow:T.shadow}}>사전 등록</button>
@@ -87,6 +89,7 @@ export default function App(){
         {page==='blog'&&(post?<Post post={post} nav={nav} auth={auth}/>:<BlogList nav={nav}/>)}
         {page==='ebooks'&&<Ebooks preview={ebookPreview} setPreview={setEbookPreview} nav={nav}/>}
         {page==='ted-program'&&<TedProgram nav={nav}/>}
+        {page==='article'&&<GatedArticle auth={auth}/>}
         {page==='login'&&<Login auth={auth} nav={nav}/>}
         {page==='consent'&&<ConsentPage auth={auth} nav={nav}/>}
         {page==='payment'&&<PaymentPage auth={auth} nav={nav}/>}
@@ -99,7 +102,7 @@ export default function App(){
       <footer style={{background:T.bgSoft,borderTop:`1px solid ${T.border}`,marginTop:80}}>
         <div style={{maxWidth:1200,margin:'0 auto',padding:'64px 24px 32px',display:'grid',gridTemplateColumns:'1.3fr 1fr 1fr 1fr',gap:40}} className="footer-grid">
           <div><div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}><Flame size={24}/><span style={{fontSize:14,fontWeight:800,color:T.txt}}>조용한 야망가들</span></div><p style={{fontSize:12,color:T.txtS,lineHeight:1.8,maxWidth:280}}>Silent Ambitious People.<br/>떠들지 않지만 실행하는 사람들을 위한 커뮤니티.</p></div>
-          <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>콘텐츠</p><FL onClick={()=>nav('blog')}>무료 칼럼</FL><FL onClick={()=>nav('ebooks')}>전자책 · 자료집</FL><FL onClick={()=>nav('ted-program')}>TED 올인원 스터디</FL></div>
+          <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>콘텐츠</p><FL onClick={()=>nav('article')}>아티클</FL><FL onClick={()=>nav('ebooks')}>전자책 · 자료집</FL><FL onClick={()=>nav('ted-program')}>TED 올인원 스터디</FL></div>
           <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>커뮤니티</p><FL onClick={()=>nav('waitlist')}>1기 사전 등록</FL><FL onClick={()=>nav('login')}>로그인 / 가입</FL><FL onClick={()=>nav('consent')}>개인정보 처리방침</FL></div>
           <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>SNS</p><a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>YouTube</a><a href="https://instagram.com/kglobal.tech.girl" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>Instagram</a><a href="https://threads.net/@getnerdywithgrace" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>Threads</a></div>
         </div>
@@ -115,7 +118,7 @@ export default function App(){
 // ━━━━━━━━━━━━━━━━━━━━━━━━
 function Home({nav}){
   const features=[
-    {icon:'📝',label:'무료 칼럼',desc:'영어·커리어·시스템 16편',goto:'blog'},
+    {icon:'📝',label:'아티클',desc:'나를 지켜주었던 말들',goto:'article'},
     {icon:'🎙️',label:'TED 올인원 스터디',desc:'4주 집중 프로그램',goto:'ted-program'},
     {icon:'📚',label:'전자책 · 자료집',desc:'깊이 있는 이야기',goto:'ebooks'},
     {icon:'💬',label:'디스코드 커뮤니티',desc:'실행하는 사람들',goto:'waitlist'},
@@ -133,7 +136,7 @@ function Home({nav}){
         <p style={{fontSize:17,color:T.txt,marginBottom:48,lineHeight:1.75,maxWidth:560,margin:'0 auto 48px'}}>동기부여보다 구조, 영감보다 루트맵.<br/><strong style={{color:'#8B6914',fontWeight:600}}>영어 · 커리어 · 실행 시스템</strong>을 함께 만들어 갑니다.</p>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap'}}>
           <button onClick={()=>nav('ted-program')} style={{padding:'15px 30px',background:T.navy,color:'#fff',fontSize:14,fontWeight:600,border:'none',borderRadius:10,cursor:'pointer',boxShadow:'0 10px 30px rgba(184,134,11,0.25)',transition:'transform 0.15s'}} onMouseEnter={e=>e.currentTarget.style.transform='translateY(-1px)'} onMouseLeave={e=>e.currentTarget.style.transform='translateY(0)'}>TED 스터디 자세히 →</button>
-          <button onClick={()=>nav('blog')} style={{padding:'15px 30px',background:'rgba(255,255,255,0.9)',color:T.txt,fontSize:14,fontWeight:600,border:'1px solid rgba(184,134,11,0.3)',borderRadius:10,cursor:'pointer',backdropFilter:'blur(10px)'}}>무료 칼럼 읽기</button>
+          <button onClick={()=>nav('article')} style={{padding:'15px 30px',background:'rgba(255,255,255,0.9)',color:T.txt,fontSize:14,fontWeight:600,border:'1px solid rgba(184,134,11,0.3)',borderRadius:10,cursor:'pointer',backdropFilter:'blur(10px)'}}>아티클 읽기</button>
         </div>
       </div>
       <div style={{position:'absolute',bottom:0,left:0,right:0}}><GoldDivider/></div>
@@ -186,28 +189,20 @@ function Home({nav}){
     <section style={{padding:'100px 24px'}}>
       <div style={{maxWidth:780,margin:'0 auto',background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'56px 48px',textAlign:'center',boxShadow:T.shadow,position:'relative',overflow:'hidden'}}>
         <div style={{position:'absolute',top:0,left:0,right:0,height:4,background:`linear-gradient(90deg,${T.gold},${T.goldL})`}}/>
-        <div style={{fontSize:36,marginBottom:16}}>🎁</div>
-        <h2 style={{fontSize:'clamp(22px,3vw,28px)',fontWeight:800,color:T.txt,marginBottom:12}}>16편 무료 칼럼, 즉시 열람</h2>
-        <p style={{fontSize:14,color:T.txtS,marginBottom:28,lineHeight:1.7,maxWidth:480,margin:'0 auto 28px'}}>영어·커리어·실행 시스템에 대한 솔직한 이야기.<br/>Google 계정으로 1초 가입하고 바로 읽어보세요.</p>
-        <button onClick={()=>nav('blog')} style={{padding:'13px 28px',background:T.navy,color:'#fff',fontSize:13,fontWeight:600,border:'none',borderRadius:10,cursor:'pointer',boxShadow:T.shadow}}>무료 칼럼 읽기 →</button>
+        <div style={{fontSize:36,marginBottom:16}}>✍️</div>
+        <h2 style={{fontSize:'clamp(22px,3vw,28px)',fontWeight:800,color:T.txt,marginBottom:12}}>나를 단단하게 만든 문장들</h2>
+        <p style={{fontSize:14,color:T.txtS,marginBottom:28,lineHeight:1.7,maxWidth:480,margin:'0 auto 28px'}}>흔들리는 시간 속에서 나를 지켜준 세 가지 말.<br/>Google 계정으로 가입하고 전문을 읽어보세요.</p>
+        <button onClick={()=>nav('article')} style={{padding:'13px 28px',background:T.navy,color:'#fff',fontSize:13,fontWeight:600,border:'none',borderRadius:10,cursor:'pointer',boxShadow:T.shadow}}>아티클 읽기 →</button>
       </div>
     </section>
 
-    {/* 최신 칼럼 */}
+    {/* 아티클 소개 */}
     <section style={{padding:'60px 24px 120px'}}>
-      <div style={{maxWidth:1100,margin:'0 auto'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:40,flexWrap:'wrap',gap:16}}>
-          <div><SL>LATEST COLUMNS</SL><h2 style={{fontSize:28,fontWeight:800,color:T.txt}}>최신 칼럼</h2></div>
-          <button onClick={()=>nav('blog')} style={{background:T.bg,border:`1px solid ${T.borderH}`,color:T.txt,padding:'10px 20px',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer'}}>전체 보기 →</button>
-        </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18}}>
-          {COLUMNS.slice(0,3).map(c=>(<div key={c.id} onClick={()=>nav('blog',c.id)} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'28px 26px',cursor:'pointer',transition:'all 0.2s',boxShadow:T.shadow}} onMouseEnter={e=>{e.currentTarget.style.boxShadow=T.shadowH}} onMouseLeave={e=>{e.currentTarget.style.boxShadow=T.shadow}}>
-            <span style={{fontSize:10,fontWeight:700,color:T.gold,letterSpacing:1.5,textTransform:'uppercase'}}>{c.tag} · {c.num}</span>
-            <h3 style={{fontSize:16,fontWeight:700,color:T.txt,margin:'12px 0 10px',lineHeight:1.4}}>{c.title}</h3>
-            <p style={{fontSize:13,color:T.txtS,lineHeight:1.6,marginBottom:16}}>{c.summary}</p>
-            <p style={{fontSize:11,color:T.txtD}}>{c.date}</p>
-          </div>))}
-        </div>
+      <div style={{maxWidth:800,margin:'0 auto',textAlign:'center'}}>
+        <SL>FEATURED ARTICLE</SL>
+        <h2 style={{fontSize:28,fontWeight:800,color:T.txt,marginBottom:16}}>내 삶의 기둥이 무너져가는 것 같은 때,<br/>나를 지켜주었던 말들.</h2>
+        <p style={{fontSize:14,color:T.txtS,lineHeight:1.7,marginBottom:32,maxWidth:520,margin:'0 auto 32px'}}>첫 출근을 앞두고 정리한 글. 흔들리는 시간 속에서 나를 붙들어 준 세 가지 말에 대하여.</p>
+        <button onClick={()=>nav('article')} style={{padding:'14px 28px',background:T.navy,color:'#fff',fontSize:14,fontWeight:600,border:'none',borderRadius:10,cursor:'pointer',boxShadow:T.shadow}}>전문 읽기 →</button>
       </div>
     </section>
   </div>)
@@ -413,6 +408,7 @@ function WaitlistForm({submitForm,formMsg,nav}){
       </Sel>
       <In name="motivation" placeholder="참여 동기 (한 줄, 필수)" required/>
       <In name="industry" placeholder="소속 업계 (선택, Grace만 열람)"/>
+      <In name="expectation" placeholder="이 프로그램에 기대하는 것 (선택)"/>
 
       <label style={{display:'flex',alignItems:'flex-start',gap:10,marginTop:8,cursor:'pointer',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10}}>
         <input type="checkbox" name="privacy_consent" required style={{marginTop:2,accentColor:T.gold}}/>
