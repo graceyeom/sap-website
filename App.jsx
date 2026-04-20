@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { COLUMNS, EBOOKS } from './data'
 import { useAuth } from './src/useAuth'
 import GatedArticle from './src/GatedArticle'
@@ -328,8 +328,8 @@ function TedProgram({nav}){
       </div>
 
       {/* Block 1: 독자의 문제 — 기존 스터디의 한계 */}
-      <div style={{maxWidth:580,margin:'0 auto',textAlign:'center'}}>
-        <p style={{fontSize:'clamp(20px,2.6vw,28px)',fontWeight:800,letterSpacing:-0.6,marginBottom:22,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 55%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>대부분의 영어 스터디는 왜 망할까요</p>
+      <div style={{maxWidth:580,margin:'0 auto',textAlign:'center',padding:'0 0 60px'}}>
+        <p style={{fontSize:'clamp(20px,2.6vw,28px)',fontWeight:800,letterSpacing:-0.6,marginBottom:22,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 55%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>"같이 공부하자"만으로는 부족했어요</p>
         <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85}}>
           대부분의 영어 스터디는 "같이 공부하자"에서 끝나요.<br/>
           커리큘럼도, 제출 구조도, 피드백 루프도 없이<br/>
@@ -338,10 +338,12 @@ function TedProgram({nav}){
       </div>
 
       {/* 세로 그라데이션 라인 구분자 */}
-      <div style={{width:'1.5px',height:48,background:'linear-gradient(180deg,rgba(184,134,11,0.05),rgba(184,134,11,0.35),rgba(184,134,11,0.05))',margin:'40px auto'}}/>
+      <div style={{padding:'24px 0'}}>
+        <div style={{width:'1.5px',height:48,background:'linear-gradient(180deg,rgba(184,134,11,0.05),rgba(184,134,11,0.35),rgba(184,134,11,0.05))',margin:'0 auto'}}/>
+      </div>
 
       {/* Block 2: 이 프로그램은 다릅니다 */}
-      <div style={{maxWidth:580,margin:'0 auto 40px',textAlign:'center'}}>
+      <div style={{maxWidth:580,margin:'0 auto',textAlign:'center',padding:'60px 0'}}>
         <p style={{fontSize:'clamp(20px,2.6vw,28px)',fontWeight:800,letterSpacing:-0.6,marginBottom:22,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 55%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>이 프로그램은 다릅니다</p>
         <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85}}>
           매일 <strong>무엇을</strong>, <strong>어떤 순서로</strong> 하고,<br/>
@@ -358,17 +360,18 @@ function TedProgram({nav}){
         </p>
       </div>
 
-      {/* Block 3: 큰 인용문 */}
-      <div style={{maxWidth:860,margin:'0 auto',textAlign:'center',padding:'72px 32px',background:`linear-gradient(135deg,${T.cream},#FFFDF7)`,border:`1px solid rgba(184,134,11,0.25)`,borderRadius:24,position:'relative',overflow:'hidden'}}>
-        <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:600,height:400,background:'radial-gradient(ellipse,rgba(184,134,11,0.15) 0%,transparent 65%)',pointerEvents:'none'}}/>
-        <div style={{position:'relative'}}>
-          <span style={{fontFamily:"'Playfair Display',serif",fontSize:80,color:T.gold,opacity:0.4,lineHeight:0.5,display:'inline-block',marginBottom:8}}>"</span>
-          <p style={{fontSize:'clamp(24px,3.8vw,40px)',color:T.txt,fontWeight:800,lineHeight:1.35,letterSpacing:-1.5,marginBottom:20,fontFamily:"'Noto Sans KR',sans-serif"}}>
-            좋은 시스템 하나가<br/>
-            개인의 의지보다<br/>
-            <em style={{color:T.gold,fontStyle:'italic',fontFamily:"'Playfair Display',serif",fontWeight:500}}>훨씬 큰 임팩트</em>를 만들어내요.
-          </p>
-          <p style={{fontSize:13,color:T.txtS,marginTop:20,letterSpacing:1}}>— 8년간 반복하며 내린 결론</p>
+      {/* Block 3: 큰 인용문 — border 없이 풀와이드 페이드 */}
+      <div style={{marginTop:80}}>
+        <div style={{textAlign:'center',padding:'96px 32px',background:'linear-gradient(180deg,#FAF7F2 0%,transparent 100%)',borderRadius:0,position:'relative'}}>
+          <div style={{maxWidth:860,margin:'0 auto'}}>
+            <span style={{fontFamily:"'Playfair Display',serif",fontSize:80,color:T.gold,opacity:0.4,lineHeight:0.5,display:'inline-block',marginBottom:8}}>"</span>
+            <p style={{fontSize:'clamp(24px,3.8vw,40px)',color:T.txt,fontWeight:800,lineHeight:1.35,letterSpacing:-1.5,marginBottom:20,fontFamily:"'Noto Sans KR',sans-serif"}}>
+              좋은 시스템 하나가<br/>
+              개인의 의지보다<br/>
+              <em style={{color:T.gold,fontStyle:'italic',fontFamily:"'Playfair Display',serif",fontWeight:500}}>훨씬 큰 임팩트</em>를 만들어내요.
+            </p>
+            <p style={{fontSize:13,color:T.txtS,marginTop:20,letterSpacing:1}}>— 반복하며 내린 결론</p>
+          </div>
         </div>
       </div>
     </section>
@@ -383,24 +386,29 @@ function TedProgram({nav}){
             <span style={{width:6,height:6,borderRadius:'50%',background:'#E8CFA0'}}/>
             Meet your instructor
           </div>
-          <h3 style={{fontSize:'clamp(22px,2.8vw,30px)',fontWeight:700,color:'#fff',marginBottom:28,lineHeight:1.4,letterSpacing:-0.5}}>
-            수능 영어 4등급, 유학 경험 없음.<br/>
-            국내 독학으로 <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',color:'#E8CFA0',fontWeight:500}}>글로벌 빅테크 커리어 8년차</span>가 되었어요.
-          </h3>
-          <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.78)',lineHeight:1.95,marginBottom:36,maxWidth:640,margin:'0 auto 36px'}}>
-            영어 10년 해도 말 못했다가,<br/>
-            <strong style={{color:'#fff'}}>방법을 바꾸고 6개월 만에 달라진 경험</strong>이 있어요.<br/>
-            그 방법론을 4주 프로그램으로 만들었습니다.
-          </p>
-          <div style={{padding:'28px 24px',background:'rgba(255,255,255,0.06)',border:'1px solid rgba(212,168,83,0.35)',borderRadius:14,backdropFilter:'blur(10px)',maxWidth:600,margin:'0 auto'}}>
-            <p style={{fontSize:'clamp(18px,2.2vw,22px)',color:'#fff',lineHeight:1.55,fontWeight:700,letterSpacing:-0.3}}>
-              완벽한 영어가 아니라,<br/>
-              <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',color:'#E8CFA0',fontWeight:500}}>'입을 여는 시스템'</span>을 드립니다.
+          <div style={{maxWidth:680,margin:'0 auto',textAlign:'left'}}>
+            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
+              수능 영어 4등급. 유학 경험 없음. 국내 독학으로 영어를 시작해서, 말하기를 시작한 지 1년 만에 통역을 하게 됐어요.
             </p>
+            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
+              그 경험을 기반으로 TED 스터디를 직접 운영하며 구조를 다듬어왔어요. 이후 불어, 중국어까지 공부하고, 토스트마스터즈, 혼자 1분 말하기를 8년 넘게 이어오면서 하나의 확신이 생겼어요.
+            </p>
+            <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:'#fff',fontWeight:700,lineHeight:1.7,marginBottom:24,letterSpacing:-0.3}}>
+              인풋을 기반으로 아웃풋을 만들 때, 그 인풋이 진짜 내 것이 된다는 것.
+            </p>
+            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
+              그래서 이 프로그램에는 매주 스피치를 넣었어요. 피드백이 있을 때 2배, 3배 빠르게 성장한다는 것도 직접 경험했기 때문에 원어민 튜터까지 섭외했어요.
+            </p>
+            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
+              그리고 가장 중요한 건 — 이건 여기서만 하는 게 아니에요. <strong style={{color:'#fff',fontWeight:700}}>4주 동안 만든 이 습관과 루틴을, 프로그램이 끝난 후에도 혼자 계속 가져갈 수 있어요.</strong> 솔직히, 충분히 혼자 할 수 있어요.
+            </p>
+            <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:'#B8860B',fontWeight:700,lineHeight:1.7,letterSpacing:-0.3}}>
+              그 '혼자 할 수 있는 힘'을 만들어드리는 게 이 프로그램일 뿐입니다.
+            </p>
+            <a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'inline-block',marginTop:28,fontSize:14,color:'#E8CFA0',textDecoration:'none',fontWeight:600,letterSpacing:0.3}}>
+              YouTube @kglobaltechgirl →
+            </a>
           </div>
-          <a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'inline-block',marginTop:28,fontSize:14,color:'#E8CFA0',textDecoration:'none',fontWeight:600,letterSpacing:0.3}}>
-            YouTube @kglobaltechgirl →
-          </a>
         </div>
       </div>
     </Sec>
@@ -675,25 +683,67 @@ function TedProgram({nav}){
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━
 // WAITLIST — 확장된 신청서
+// (헬퍼 컴포넌트는 모듈 레벨 — 매 렌더 새 함수 참조로 재마운트되는 버그 방지)
 // ━━━━━━━━━━━━━━━━━━━━━━━━
+const WLabel=({children,req})=>(<p style={{fontSize:13,fontWeight:700,color:T.txt,marginBottom:10,marginTop:8,letterSpacing:-0.2}}>{children}{req&&<span style={{color:T.gold,marginLeft:4}}>*</span>}</p>)
+const WHelp=({children})=>(<p style={{fontSize:11,color:T.txtD,marginBottom:10,lineHeight:1.6}}>{children}</p>)
+const WRadio=({name,value,onChange,checked,children})=>(
+  <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
+    <input type="radio" name={name} value={value} required style={{marginTop:3,accentColor:T.gold}} onChange={onChange} checked={checked}/>
+    <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
+  </label>
+)
+const WCheck=({name,value,children})=>(
+  <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
+    <input type="checkbox" name={name} value={value} style={{marginTop:3,accentColor:T.gold}}/>
+    <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
+  </label>
+)
+const WField=({children})=>(<div style={{marginBottom:28}}>{children}</div>)
+
+const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const PHONE_RE=/^010-\d{4}-\d{4}$/
+const ERR_COLOR='#E24B4A'
+
+const formatPhone=(raw)=>{
+  const d=(raw||'').replace(/\D/g,'').slice(0,11)
+  if(d.length<4)return d
+  if(d.length<8)return `${d.slice(0,3)}-${d.slice(3)}`
+  return `${d.slice(0,3)}-${d.slice(3,7)}-${d.slice(7)}`
+}
+// 포맷 전후 커서 위치 재계산: 원본 문자열에서 커서 앞까지의 숫자 개수를 센 뒤, 포맷된 문자열에서 같은 개수의 숫자가 나타난 뒤의 인덱스로 이동
+const recalcPhoneCursor=(oldCursor,formatted)=>{
+  const digitsBefore=oldCursor
+  let count=0
+  for(let i=0;i<formatted.length;i++){
+    if(/\d/.test(formatted[i]))count++
+    if(count>=digitsBefore)return i+1
+  }
+  return formatted.length
+}
+
 function WaitlistForm({submitForm,formMsg,nav}){
   const [errors,setErrors]=useState({})
   const [phone,setPhone]=useState('')
   const [email,setEmail]=useState('')
   const [engStatus,setEngStatus]=useState('')
+  const phoneRef=useRef(null)
+  const cursorRef=useRef(null)
 
-  const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const PHONE_RE=/^010-\d{4}-\d{4}$/
-  const ERR_COLOR='#E24B4A'
+  useLayoutEffect(()=>{
+    if(phoneRef.current&&cursorRef.current!==null){
+      const pos=cursorRef.current
+      phoneRef.current.setSelectionRange(pos,pos)
+      cursorRef.current=null
+    }
+  },[phone])
 
-  const formatPhone=(raw)=>{
-    const d=raw.replace(/\D/g,'').slice(0,11)
-    if(d.length<4)return d
-    if(d.length<8)return `${d.slice(0,3)}-${d.slice(3)}`
-    return `${d.slice(0,3)}-${d.slice(3,7)}-${d.slice(7)}`
-  }
   const onPhoneChange=(e)=>{
-    const f=formatPhone(e.target.value)
+    const raw=e.target.value
+    const rawCursor=e.target.selectionStart??raw.length
+    const digitsBeforeCursor=(raw.slice(0,rawCursor).match(/\d/g)||[]).length
+    const f=formatPhone(raw)
+    cursorRef.current=recalcPhoneCursor(digitsBeforeCursor,f)
     setPhone(f)
     if(errors.phone&&PHONE_RE.test(f))setErrors(p=>{const n={...p};delete n.phone;return n})
   }
@@ -701,8 +751,9 @@ function WaitlistForm({submitForm,formMsg,nav}){
     if(phone&&!PHONE_RE.test(phone))setErrors(p=>({...p,phone:'010-0000-0000 형식으로 입력해주세요'}))
   }
   const onEmailChange=(e)=>{
-    setEmail(e.target.value)
-    if(errors.email&&EMAIL_RE.test(e.target.value))setErrors(p=>{const n={...p};delete n.email;return n})
+    const v=e.target.value
+    setEmail(v)
+    if(errors.email&&EMAIL_RE.test(v))setErrors(p=>{const n={...p};delete n.email;return n})
   }
   const onEmailBlur=()=>{
     if(email&&!EMAIL_RE.test(email))setErrors(p=>({...p,email:'올바른 이메일 주소를 입력해주세요 (예: name@email.com)'}))
@@ -718,24 +769,8 @@ function WaitlistForm({submitForm,formMsg,nav}){
   }
 
   const errStyle={fontSize:12,color:ERR_COLOR,marginTop:6,lineHeight:1.5}
-  const fieldBorder=(k)=>errors[k]?ERR_COLOR:T.border
-  const inStyle=(k)=>({border:`1px solid ${fieldBorder(k)}`})
-
-  const Label=({children,req})=>(<p style={{fontSize:13,fontWeight:700,color:T.txt,marginBottom:10,marginTop:8,letterSpacing:-0.2}}>{children}{req&&<span style={{color:T.gold,marginLeft:4}}>*</span>}</p>)
-  const HelpText=({children})=>(<p style={{fontSize:11,color:T.txtD,marginBottom:10,lineHeight:1.6}}>{children}</p>)
-  const Radio=({name,value,onChange,checked,children})=>(
-    <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
-      <input type="radio" name={name} value={value} required style={{marginTop:3,accentColor:T.gold}} onChange={onChange} checked={checked}/>
-      <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
-    </label>
-  )
-  const Check=({name,value,children})=>(
-    <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
-      <input type="checkbox" name={name} value={value} style={{marginTop:3,accentColor:T.gold}}/>
-      <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
-    </label>
-  )
-  const FieldBlock=({children})=>(<div style={{marginBottom:28}}>{children}</div>)
+  const baseInput={width:'100%',padding:'12px 14px',background:T.bg,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit'}
+  const inputWithErr=(k)=>({...baseInput,border:`1px solid ${errors[k]?ERR_COLOR:T.border}`})
 
   return(<div style={{padding:'80px 24px 60px',maxWidth:560,margin:'0 auto'}}>
     <div style={{textAlign:'center',marginBottom:28}}><Flame size={40}/></div>
@@ -752,64 +787,64 @@ function WaitlistForm({submitForm,formMsg,nav}){
     <form onSubmit={onSubmit} noValidate style={{display:'flex',flexDirection:'column'}}>
 
       {/* 기본 정보 */}
-      <FieldBlock>
-        <Label req>기본 정보</Label>
-        <HelpText>연락용으로만 사용되며, 외부에 공유되지 않습니다.</HelpText>
+      <WField>
+        <WLabel req>기본 정보</WLabel>
+        <WHelp>연락용으로만 사용되며, 외부에 공유되지 않습니다.</WHelp>
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           <In name="name" placeholder="이름" required/>
           <div>
-            <In name="phone" placeholder="010-0000-0000" required value={phone} onChange={onPhoneChange} onBlur={onPhoneBlur} maxLength={13} inputMode="numeric" pattern="010-\d{4}-\d{4}" style={inStyle('phone')}/>
+            <input ref={phoneRef} type="tel" name="phone" placeholder="010-0000-0000" required value={phone} onChange={onPhoneChange} onBlur={onPhoneBlur} maxLength={13} inputMode="numeric" pattern="010-\d{4}-\d{4}" style={inputWithErr('phone')}/>
             {errors.phone&&<p style={errStyle}>{errors.phone}</p>}
           </div>
           <div>
-            <In name="email" type="email" placeholder="name@email.com" required value={email} onChange={onEmailChange} onBlur={onEmailBlur} style={inStyle('email')}/>
+            <input type="email" name="email" placeholder="name@email.com" required value={email} onChange={onEmailChange} onBlur={onEmailBlur} style={inputWithErr('email')}/>
             {errors.email&&<p style={errStyle}>{errors.email}</p>}
           </div>
         </div>
-      </FieldBlock>
+      </WField>
 
       {/* 영어 상황 */}
-      <FieldBlock>
-        <Label req>현재 영어 상황</Label>
-        <HelpText>현재 상황과 가장 가까운 걸 하나 골라주세요.</HelpText>
-        <Radio name="english_status" value="a" checked={engStatus==='a'} onChange={()=>setEngStatus('a')}>토익/오픽 점수는 있는데, 실전에서 말이 잘 안나와요. 머릿속에서 한국어→영어 번역하다가 타이밍을 놓쳐요.</Radio>
-        <Radio name="english_status" value="b" checked={engStatus==='b'} onChange={()=>setEngStatus('b')}>영어 이메일은 쓰는데, 회의에서 의견 말하라고 하면 얼어붙어요. 듣는 건 되는데 입이 안 열려요.</Radio>
-        <Radio name="english_status" value="c" checked={engStatus==='c'} onChange={()=>setEngStatus('c')}>일상 대화는 되는데, 논리적으로 설명하거나 설득하는 게 안 돼요. 두세 문장 이상 이어가기가 어려워요.</Radio>
-        <Radio name="english_status" value="d" checked={engStatus==='d'} onChange={()=>setEngStatus('d')}>업무 영어는 하고 있는데, 매번 같은 표현만 쓰게 돼요. 더 자연스럽고 다양하게 말하고 싶어요.</Radio>
-        <Radio name="english_status" value="other" checked={engStatus==='other'} onChange={()=>setEngStatus('other')}>기타 (직접 입력)</Radio>
+      <WField>
+        <WLabel req>현재 영어 상황</WLabel>
+        <WHelp>현재 상황과 가장 가까운 걸 하나 골라주세요.</WHelp>
+        <WRadio name="english_status" value="a" checked={engStatus==='a'} onChange={()=>setEngStatus('a')}>토익/오픽 점수는 있는데, 실전에서 말이 잘 안나와요. 머릿속에서 한국어→영어 번역하다가 타이밍을 놓쳐요.</WRadio>
+        <WRadio name="english_status" value="b" checked={engStatus==='b'} onChange={()=>setEngStatus('b')}>영어 이메일은 쓰는데, 회의에서 의견 말하라고 하면 얼어붙어요. 듣는 건 되는데 입이 안 열려요.</WRadio>
+        <WRadio name="english_status" value="c" checked={engStatus==='c'} onChange={()=>setEngStatus('c')}>일상 대화는 되는데, 논리적으로 설명하거나 설득하는 게 안 돼요. 두세 문장 이상 이어가기가 어려워요.</WRadio>
+        <WRadio name="english_status" value="d" checked={engStatus==='d'} onChange={()=>setEngStatus('d')}>업무 영어는 하고 있는데, 매번 같은 표현만 쓰게 돼요. 더 자연스럽고 다양하게 말하고 싶어요.</WRadio>
+        <WRadio name="english_status" value="other" checked={engStatus==='other'} onChange={()=>setEngStatus('other')}>기타 (직접 입력)</WRadio>
         {engStatus==='other'&&(
           <textarea name="english_status_other" required placeholder="현재 영어 상황을 자유롭게 적어주세요" style={{width:'100%',minHeight:80,padding:'12px 14px',marginTop:6,background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
         )}
-      </FieldBlock>
+      </WField>
 
       {/* 학습 타입 */}
-      <FieldBlock>
-        <Label>나의 영어 학습 타입 (복수 선택 가능)</Label>
-        <HelpText>해당되는 모든 항목을 체크해주세요. 커리큘럼 보완 자료로 활용됩니다.</HelpText>
-        <Check name="learner_type_perfectionist" value="yes">완벽주의형 — 틀릴까봐 입을 못 연다</Check>
-        <Check name="learner_type_procrastinator" value="yes">실행 미루기형 — 시작은 맨날 하는데 3일이면 흐지부지</Check>
-        <Check name="learner_type_input_heavy" value="yes">인풋 과다형 — 영상/책은 많이 보는데 아웃풋이 없다</Check>
-        <Check name="learner_type_no_env" value="yes">환경 부재형 — 영어 쓸 일이 없어서 연습할 곳이 없다</Check>
-        <Check name="learner_type_lost" value="yes">방법 미아형 — 이것저것 해봤는데 뭐가 맞는지 모르겠다</Check>
-      </FieldBlock>
+      <WField>
+        <WLabel>나의 영어 학습 타입 (복수 선택 가능)</WLabel>
+        <WHelp>해당되는 모든 항목을 체크해주세요. 커리큘럼 보완 자료로 활용됩니다.</WHelp>
+        <WCheck name="learner_type_perfectionist" value="yes">완벽주의형 — 틀릴까봐 입을 못 연다</WCheck>
+        <WCheck name="learner_type_procrastinator" value="yes">실행 미루기형 — 시작은 맨날 하는데 3일이면 흐지부지</WCheck>
+        <WCheck name="learner_type_input_heavy" value="yes">인풋 과다형 — 영상/책은 많이 보는데 아웃풋이 없다</WCheck>
+        <WCheck name="learner_type_no_env" value="yes">환경 부재형 — 영어 쓸 일이 없어서 연습할 곳이 없다</WCheck>
+        <WCheck name="learner_type_lost" value="yes">방법 미아형 — 이것저것 해봤는데 뭐가 맞는지 모르겠다</WCheck>
+      </WField>
 
       {/* 공부법 */}
-      <FieldBlock>
-        <Label req>지금까지 해본 영어 공부법</Label>
+      <WField>
+        <WLabel req>지금까지 해본 영어 공부법</WLabel>
         <textarea name="study_history" required placeholder="예: 토익, 학원, 미드 쉐도잉, 영어 앱, 1:1 과외, 독학 등" style={{width:'100%',minHeight:80,padding:'12px 14px',background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
-      </FieldBlock>
+      </WField>
 
       {/* 기대하는 것 */}
-      <FieldBlock>
-        <Label req>이 프로그램에서 얻고 싶은 것</Label>
-        <HelpText>⭐ <strong style={{color:T.gold}}>이 답변이 선발에 반영됩니다.</strong> 구체적으로 써주세요.</HelpText>
+      <WField>
+        <WLabel req>이 프로그램에서 얻고 싶은 것</WLabel>
+        <WHelp>⭐ <strong style={{color:T.gold}}>이 답변이 선발에 반영됩니다.</strong> 구체적으로 써주세요.</WHelp>
         <textarea name="expectation" required placeholder="예: 매일 짧게라도 영어로 말하는 습관을 만들고 싶다 / 회의에서 의견을 논리적으로 전달할 수 있게 되고 싶다" style={{width:'100%',minHeight:100,padding:'12px 14px',background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
-      </FieldBlock>
+      </WField>
 
       {/* 추가 정보 (선택) */}
-      <FieldBlock>
-        <Label>추가 정보 (선택)</Label>
-        <HelpText>비슷한 업계/연차 분들 매칭에 참고됩니다. 회사명은 비공개 처리됩니다.</HelpText>
+      <WField>
+        <WLabel>추가 정보 (선택)</WLabel>
+        <WHelp>비슷한 업계/연차 분들 매칭에 참고됩니다. 회사명은 비공개 처리됩니다.</WHelp>
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           <In name="industry" placeholder="업계/분야 (예: IT, 금융, 마케팅, 교육 등)"/>
           <In name="company" placeholder="회사명 (비공개 처리됩니다)"/>
@@ -822,11 +857,11 @@ function WaitlistForm({submitForm,formMsg,nav}){
             <option value="student">학생 · 취준생</option>
           </Sel>
         </div>
-      </FieldBlock>
+      </WField>
 
       {/* 동의 */}
-      <FieldBlock>
-        <Label req>동의 항목</Label>
+      <WField>
+        <WLabel req>동의 항목</WLabel>
         <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'14px 16px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,marginBottom:8}}>
           <input type="checkbox" name="privacy_consent" required style={{marginTop:3,accentColor:T.gold}}/>
           <span style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>
@@ -844,13 +879,12 @@ function WaitlistForm({submitForm,formMsg,nav}){
             <strong style={{color:T.txt}}>[선택]</strong> 추후 네트워킹 이벤트 오픈 시 알림 받는 것에 동의합니다.
           </span>
         </label>
-      </FieldBlock>
+      </WField>
 
       <button type="submit" style={{padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',boxShadow:T.shadow,marginTop:8}}>신청 제출하기</button>
 
       <div style={{marginTop:20,padding:'16px 18px',background:T.bgSoft,borderRadius:10,fontSize:11,color:T.txtD,lineHeight:1.9}}>
         ※ <strong>신청 ≠ 결제</strong>입니다. 검토 후 선발된 분에게 결제 안내를 드립니다.<br/>
-        ※ 1기 특별가: <strong style={{color:T.txt}}>150,000원</strong><br/>
         ※ 프로그램 구성과 가격은 기수별로 달라질 수 있습니다.<br/>
         ※ 결제 후 환불은 불가합니다.
       </div>
