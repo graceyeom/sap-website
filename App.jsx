@@ -224,14 +224,16 @@ function TedProgram({nav}){
     {n:'Step 06 — 08',t:'쉐도잉 & 녹음',d:'스피커의 속도와 인토네이션을 따라 읽습니다. 녹음해서 자신의 발화를 객관적으로 확인하는 과정.',tag:'아웃풋'},
     {n:'Step 09 — 10',t:'스피치 & 피어 피드백',d:'그 주의 TED를 요약하거나, 자신의 생각을 담은 3분 스피치를 녹음합니다. 동료와 서로 피드백을 주고받으며 성장.',tag:'성장'},
   ]
-  const week=[
-    {d:'Day 1 (월)',t:'1차 리스닝',s:'전체 흐름 파악',o:'3줄 요약 제출'},
-    {d:'Day 2 (화)',t:'노트테이킹',s:'색깔별 메모',o:'노트 공유'},
-    {d:'Day 3 (수)',t:'오답노트',s:'안 들린 부분 분석·공유',o:'오답노트 제출'},
-    {d:'Day 4 (목)',t:'표현 정리',s:'단어·표현 위주',o:'5개 이상 정리'},
-    {d:'Day 5 (금)',t:'쉐도잉 & 녹음',s:'쉐도잉 후 녹음',o:'녹음 제출'},
-    {d:'Day 6 (토)',t:'3분 스피치',s:'TED 요약 or 의견',o:'스피치 녹음'},
-    {d:'Day 7 (일)',t:'피어 피드백',s:'서로 스피치 듣기',o:'주말까지 공유'},
+  const weekLeft=[
+    {d:'Day 1 (월)',t:'1차 리스닝',s:'자막 없이 TED 전체를 듣고 흐름을 파악해요. 완벽하게 안 들려도 괜찮아요 — 핵심 메시지만 잡으면 돼요.',o:'3줄 요약 제출'},
+    {d:'Day 2 (화)',t:'노트테이킹',s:'색깔별로 메모해요. 검은색은 들리는 키워드, 파란색은 새로 들린 부분, 빨간색은 여전히 안 들리는 부분.',o:'노트 공유'},
+    {d:'Day 3 (수)',t:'오답노트',s:'안 들렸던 원인을 분석해요. 단어를 몰라서? 연음 때문에? 발음이 달라서? 원인을 알아야 교정이 돼요.',o:'오답노트 제출'},
+    {d:'Day 4 (목)',t:'표현 정리',s:'이번 주 TED에서 내가 실제로 쓸 수 있는 표현 5개를 뽑아요. 내 상황에 맞게 문장을 바꿔보는 게 핵심.',o:'5개 이상 정리'},
+  ]
+  const weekRight=[
+    {d:'Day 5 (금)',t:'쉐도잉 & 녹음',s:'스피커의 속도와 인토네이션을 따라 읽어요. 천천히 시작해서 영상 속도까지. 녹음해서 내 발화를 객관적으로 확인.',o:'녹음 제출'},
+    {d:'Day 6 (토)',t:'3분 스피치',s:'이번 주 TED를 내 말로 요약하거나, 주제에 대한 내 의견을 3분 안에 말해요. 매주 쌓이면 포트폴리오가 돼요.',o:'스피치 녹음'},
+    {d:'Day 7 (일)',t:'피어 피드백 + 원어민 서면 피드백',s:'동료의 스피치를 듣고 전달 체크 · 표현 수집 · 차이 발견 3가지를 코멘트해요. 평가가 아니라 서로 거울이 되는 구조. 원어민 서면 피드백도 함께 받아요.',o:'주말까지 공유'},
   ]
   const beforeAfter=[
     {b:'영상 틀면 막막하고 속상하다. 뭔 말인지 모르겠고 어디서부터 손 대야 할지 모르겠다.',a:'안 들려도 당황하지 않는다. 어디가 안 들리는지, 왜 안 들리는지 스스로 진단할 수 있다.'},
@@ -291,7 +293,7 @@ function TedProgram({nav}){
         </div>
         <div style={{maxWidth:680,margin:'0 auto',textAlign:'center'}}>
           <div style={{width:60,height:2,background:`linear-gradient(90deg,transparent,${T.gold},transparent)`,margin:'0 auto 18px'}}/>
-          <p style={{fontSize:15,color:T.txtS,fontWeight:400,letterSpacing:-0.2}}><strong style={{fontWeight:700,color:T.txt}}>36만 명</strong>이 공감한 TED 올인원 영어 스터디</p>
+          <p style={{fontSize:15,color:T.txtS,fontWeight:400,letterSpacing:-0.2}}><strong style={{fontWeight:700,color:T.txt}}>36만 명</strong>이 공감한 TED 공부법 기반</p>
         </div>
       </div>
     </section>
@@ -326,7 +328,7 @@ function TedProgram({nav}){
       </div>
 
       {/* Block 1: 독자의 문제 — 기존 스터디의 한계 */}
-      <div style={{maxWidth:760,margin:'0 auto 56px',textAlign:'center'}}>
+      <div style={{maxWidth:580,margin:'0 auto',textAlign:'center'}}>
         <p style={{fontSize:'clamp(20px,2.6vw,28px)',fontWeight:800,letterSpacing:-0.6,marginBottom:22,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 55%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>대부분의 영어 스터디는 왜 망할까요</p>
         <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85}}>
           대부분의 영어 스터디는 "같이 공부하자"에서 끝나요.<br/>
@@ -335,19 +337,25 @@ function TedProgram({nav}){
         </p>
       </div>
 
-      {/* Block 2: 이 프로그램은 다름 + 본업 한 줄 연결 */}
-      <div style={{maxWidth:760,margin:'0 auto 48px',textAlign:'center'}}>
+      {/* 세로 그라데이션 라인 구분자 */}
+      <div style={{width:'1.5px',height:48,background:'linear-gradient(180deg,rgba(184,134,11,0.05),rgba(184,134,11,0.35),rgba(184,134,11,0.05))',margin:'40px auto'}}/>
+
+      {/* Block 2: 이 프로그램은 다릅니다 */}
+      <div style={{maxWidth:580,margin:'0 auto 40px',textAlign:'center'}}>
         <p style={{fontSize:'clamp(20px,2.6vw,28px)',fontWeight:800,letterSpacing:-0.6,marginBottom:22,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 55%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>이 프로그램은 다릅니다</p>
-        <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85,marginBottom:32}}>
+        <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85}}>
           매일 <strong>무엇을</strong>, <strong>어떤 순서로</strong> 하고,<br/>
           <strong>언제 제출</strong>하고, <strong>어떤 피드백</strong>을 받는지까지<br/>
           전부 <strong style={{color:T.gold}}>시스템으로 설계</strong>되어 있어요.
         </p>
-        <div style={{padding:'28px 32px',background:T.bgWarm,border:`1px solid rgba(184,134,11,0.25)`,borderLeft:`4px solid ${T.gold}`,borderRadius:10,textAlign:'left'}}>
-          <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:T.txt,lineHeight:1.9,fontWeight:500}}>
-            제 본업이 그 일이거든요. <strong style={{color:T.gold,fontWeight:700}}>글로벌 빅테크에서 어떤 지표를 볼지, 어떤 주기로 트래킹할지 설계해서 사람들의 행동이 바뀌도록 만드는 일</strong>을 8년간 해왔어요.
-          </p>
-        </div>
+      </div>
+
+      {/* 본업 브릿지 */}
+      <div style={{maxWidth:580,margin:'0 auto',padding:'32px 32px 28px',borderRadius:14,background:'linear-gradient(135deg,rgba(184,134,11,0.06),rgba(184,134,11,0.02))',textAlign:'center',position:'relative'}}>
+        <div style={{position:'absolute',top:0,left:'50%',transform:'translateX(-50%)',width:60,height:3,background:`linear-gradient(90deg,transparent,${T.gold},transparent)`}}/>
+        <p style={{fontSize:'clamp(16px,1.9vw,18px)',color:T.txt,lineHeight:1.95,fontWeight:500,marginTop:6}}>
+          제 본업이 그 일이거든요. <strong style={{color:T.gold,fontWeight:700}}>어떤 지표를 볼지, 어떤 주기로 트래킹할지 설계해서 사람들의 행동이 바뀌도록 만드는 일</strong>을 해왔어요.
+        </p>
       </div>
 
       {/* Block 3: 큰 인용문 */}
@@ -440,18 +448,38 @@ function TedProgram({nav}){
 
     {/* ━ 7. WEEKLY ━ */}
     <Sec label="WEEKLY SCHEDULE" title="1주일, 이렇게 진행됩니다" sub="매일 한 시간 정도 필요해요. 출퇴근·점심·퇴근 후로 나눠서 언제 어디서든 실행할 수 있는 시스템이에요.">
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))',gap:12}}>
-        {week.map(w=>(<div key={w.d} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:'24px 18px 20px',textAlign:'center',boxShadow:T.shadow,display:'flex',flexDirection:'column'}}>
-          <div style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1.5,marginBottom:16,textTransform:'uppercase'}}>{w.d}</div>
-          <div style={{fontSize:'clamp(17px,1.9vw,20px)',fontWeight:800,color:T.txt,marginBottom:10,letterSpacing:-0.3,lineHeight:1.3}}>{w.t}</div>
-          <div style={{fontSize:12,color:T.txtS,marginBottom:18,lineHeight:1.55,flex:1}}>{w.s}</div>
-          <div style={{display:'inline-block',padding:'6px 10px',background:'rgba(184,134,11,0.12)',border:`1px solid rgba(184,134,11,0.3)`,borderRadius:100,fontSize:11,color:T.gold,fontWeight:700,letterSpacing:0.2}}>{w.o}</div>
-        </div>))}
+      {(() => {
+        const DayItem=({w})=>(
+          <div style={{padding:'20px 22px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:12,marginBottom:12}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:10,marginBottom:10,flexWrap:'wrap'}}>
+              <span style={{display:'inline-block',padding:'4px 10px',background:'rgba(184,134,11,0.12)',border:`1px solid rgba(184,134,11,0.3)`,borderRadius:100,fontSize:11,color:T.gold,fontWeight:700,letterSpacing:0.3}}>{w.d}</span>
+              <span style={{fontSize:'clamp(15px,1.7vw,17px)',fontWeight:800,color:T.txt,letterSpacing:-0.3,lineHeight:1.3}}>{w.t}</span>
+            </div>
+            <p style={{fontSize:13,color:T.txtS,lineHeight:1.7,marginBottom:12}}>{w.s}</p>
+            <div style={{display:'inline-block',padding:'5px 10px',background:T.gold,color:'#fff',borderRadius:6,fontSize:11,fontWeight:700,letterSpacing:0.3}}>제출물 · {w.o}</div>
+          </div>
+        )
+        const GroupCard=({phase,title,sub,items})=>(
+          <div style={{border:`1px solid ${T.border}`,borderRadius:14,padding:'28px 28px 18px',background:T.bgCard,boxShadow:T.shadow}}>
+            <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:2,marginBottom:8,textTransform:'uppercase'}}>{phase}</p>
+            <h3 style={{fontSize:'clamp(17px,2vw,20px)',fontWeight:800,color:T.txt,marginBottom:6,letterSpacing:-0.4}}>{title}</h3>
+            <p style={{fontSize:13,color:T.txtS,marginBottom:22,lineHeight:1.6}}>{sub}</p>
+            {items.map(w=><DayItem key={w.d} w={w}/>)}
+          </div>
+        )
+        return(
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}} className="week-grid">
+            <GroupCard phase="Input + Understanding" title="월~목: 듣고, 분석하고, 쌓는 시간" sub="이번 주 TED를 내 안에 통과시키는 단계" items={weekLeft}/>
+            <GroupCard phase="Output + Feedback" title="금~일: 말하고, 듣고, 교정받는 시간" sub="쌓인 인풋을 내 말과 기준으로 바꾸는 단계" items={weekRight}/>
+          </div>
+        )
+      })()}
+      <div style={{marginTop:28,padding:'24px 28px',background:'rgba(184,134,11,0.06)',border:`1px solid rgba(184,134,11,0.22)`,borderLeft:`4px solid ${T.gold}`,borderRadius:12}}>
+        <p style={{fontSize:'clamp(14px,1.6vw,15px)',color:T.txt,lineHeight:1.85,fontWeight:500}}>
+          <strong style={{color:T.gold,fontWeight:700}}>매일 과제 완료를 실시간 트래킹해요.</strong> 매주 완주 현황을 공유하고, 끝까지 함께 가는 시스템을 만들어 드립니다.
+        </p>
       </div>
-      <div style={{marginTop:36,padding:'24px 32px',background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,textAlign:'center',boxShadow:T.shadow}}>
-        <p style={{fontSize:16,color:T.txt,fontWeight:700,marginBottom:8}}>📊 과제 완료 트래킹</p>
-        <p style={{fontSize:14,color:T.txtS,lineHeight:1.75}}>매일 과제 완료 여부를 실시간으로 트래킹해요. 매주 완주 현황을 공유하고, 끝까지 함께 가는 시스템을 만들어 드려요.</p>
-      </div>
+      <style>{`@media(max-width:600px){.week-grid{grid-template-columns:1fr!important}}`}</style>
     </Sec>
 
     {/* ━ 8. SAMPLE CURRICULUM ━ */}
@@ -649,11 +677,55 @@ function TedProgram({nav}){
 // WAITLIST — 확장된 신청서
 // ━━━━━━━━━━━━━━━━━━━━━━━━
 function WaitlistForm({submitForm,formMsg,nav}){
+  const [errors,setErrors]=useState({})
+  const [phone,setPhone]=useState('')
+  const [email,setEmail]=useState('')
+  const [engStatus,setEngStatus]=useState('')
+
+  const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const PHONE_RE=/^010-\d{4}-\d{4}$/
+  const ERR_COLOR='#E24B4A'
+
+  const formatPhone=(raw)=>{
+    const d=raw.replace(/\D/g,'').slice(0,11)
+    if(d.length<4)return d
+    if(d.length<8)return `${d.slice(0,3)}-${d.slice(3)}`
+    return `${d.slice(0,3)}-${d.slice(3,7)}-${d.slice(7)}`
+  }
+  const onPhoneChange=(e)=>{
+    const f=formatPhone(e.target.value)
+    setPhone(f)
+    if(errors.phone&&PHONE_RE.test(f))setErrors(p=>{const n={...p};delete n.phone;return n})
+  }
+  const onPhoneBlur=()=>{
+    if(phone&&!PHONE_RE.test(phone))setErrors(p=>({...p,phone:'010-0000-0000 형식으로 입력해주세요'}))
+  }
+  const onEmailChange=(e)=>{
+    setEmail(e.target.value)
+    if(errors.email&&EMAIL_RE.test(e.target.value))setErrors(p=>{const n={...p};delete n.email;return n})
+  }
+  const onEmailBlur=()=>{
+    if(email&&!EMAIL_RE.test(email))setErrors(p=>({...p,email:'올바른 이메일 주소를 입력해주세요 (예: name@email.com)'}))
+  }
+
+  const onSubmit=(e)=>{
+    const newErr={}
+    if(!EMAIL_RE.test(email))newErr.email='올바른 이메일 주소를 입력해주세요 (예: name@email.com)'
+    if(!PHONE_RE.test(phone))newErr.phone='010-0000-0000 형식으로 입력해주세요'
+    if(Object.keys(newErr).length){e.preventDefault();setErrors(newErr);return}
+    setErrors({})
+    submitForm(e,'https://formspree.io/f/xgopnwdd')
+  }
+
+  const errStyle={fontSize:12,color:ERR_COLOR,marginTop:6,lineHeight:1.5}
+  const fieldBorder=(k)=>errors[k]?ERR_COLOR:T.border
+  const inStyle=(k)=>({border:`1px solid ${fieldBorder(k)}`})
+
   const Label=({children,req})=>(<p style={{fontSize:13,fontWeight:700,color:T.txt,marginBottom:10,marginTop:8,letterSpacing:-0.2}}>{children}{req&&<span style={{color:T.gold,marginLeft:4}}>*</span>}</p>)
   const HelpText=({children})=>(<p style={{fontSize:11,color:T.txtD,marginBottom:10,lineHeight:1.6}}>{children}</p>)
-  const Radio=({name,value,children})=>(
+  const Radio=({name,value,onChange,checked,children})=>(
     <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
-      <input type="radio" name={name} value={value} required style={{marginTop:3,accentColor:T.gold}}/>
+      <input type="radio" name={name} value={value} required style={{marginTop:3,accentColor:T.gold}} onChange={onChange} checked={checked}/>
       <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
     </label>
   )
@@ -677,7 +749,7 @@ function WaitlistForm({submitForm,formMsg,nav}){
       <p style={{fontSize:17,fontWeight:700,color:T.gold,marginBottom:10}}>{formMsg}</p>
       <p style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>제출해주셔서 감사합니다.<br/>검토 후 이메일/휴대폰으로 연락드리겠습니다.</p>
     </div>:
-    <form onSubmit={e=>submitForm(e,'https://formspree.io/f/xgopnwdd')} style={{display:'flex',flexDirection:'column'}}>
+    <form onSubmit={onSubmit} noValidate style={{display:'flex',flexDirection:'column'}}>
 
       {/* 기본 정보 */}
       <FieldBlock>
@@ -685,18 +757,29 @@ function WaitlistForm({submitForm,formMsg,nav}){
         <HelpText>연락용으로만 사용되며, 외부에 공유되지 않습니다.</HelpText>
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           <In name="name" placeholder="이름" required/>
-          <In name="phone" placeholder="휴대폰 번호" required/>
-          <In name="email" type="email" placeholder="이메일" required/>
+          <div>
+            <In name="phone" placeholder="010-0000-0000" required value={phone} onChange={onPhoneChange} onBlur={onPhoneBlur} maxLength={13} inputMode="numeric" pattern="010-\d{4}-\d{4}" style={inStyle('phone')}/>
+            {errors.phone&&<p style={errStyle}>{errors.phone}</p>}
+          </div>
+          <div>
+            <In name="email" type="email" placeholder="name@email.com" required value={email} onChange={onEmailChange} onBlur={onEmailBlur} style={inStyle('email')}/>
+            {errors.email&&<p style={errStyle}>{errors.email}</p>}
+          </div>
         </div>
       </FieldBlock>
 
       {/* 영어 상황 */}
       <FieldBlock>
-        <Label req>현재 영어 상황 (택 1)</Label>
-        <Radio name="english_status" value="a">읽기는 되는데 말은 거의 못 함. 외국인 앞에서 얼어붙은 적 있음.</Radio>
-        <Radio name="english_status" value="b">간단한 인사/주문은 되는데, 회의나 발표에서 의견 말하기 어려움.</Radio>
-        <Radio name="english_status" value="c">일상 대화는 되는데, 논리적으로 생각을 전달하는 게 약함.</Radio>
-        <Radio name="english_status" value="d">업무 영어는 하는데, 더 자연스럽고 설득력 있게 말하고 싶음.</Radio>
+        <Label req>현재 영어 상황</Label>
+        <HelpText>현재 상황과 가장 가까운 걸 하나 골라주세요.</HelpText>
+        <Radio name="english_status" value="a" checked={engStatus==='a'} onChange={()=>setEngStatus('a')}>토익/오픽 점수는 있는데, 실전에서 말이 잘 안나와요. 머릿속에서 한국어→영어 번역하다가 타이밍을 놓쳐요.</Radio>
+        <Radio name="english_status" value="b" checked={engStatus==='b'} onChange={()=>setEngStatus('b')}>영어 이메일은 쓰는데, 회의에서 의견 말하라고 하면 얼어붙어요. 듣는 건 되는데 입이 안 열려요.</Radio>
+        <Radio name="english_status" value="c" checked={engStatus==='c'} onChange={()=>setEngStatus('c')}>일상 대화는 되는데, 논리적으로 설명하거나 설득하는 게 안 돼요. 두세 문장 이상 이어가기가 어려워요.</Radio>
+        <Radio name="english_status" value="d" checked={engStatus==='d'} onChange={()=>setEngStatus('d')}>업무 영어는 하고 있는데, 매번 같은 표현만 쓰게 돼요. 더 자연스럽고 다양하게 말하고 싶어요.</Radio>
+        <Radio name="english_status" value="other" checked={engStatus==='other'} onChange={()=>setEngStatus('other')}>기타 (직접 입력)</Radio>
+        {engStatus==='other'&&(
+          <textarea name="english_status_other" required placeholder="현재 영어 상황을 자유롭게 적어주세요" style={{width:'100%',minHeight:80,padding:'12px 14px',marginTop:6,background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
+        )}
       </FieldBlock>
 
       {/* 학습 타입 */}
@@ -767,7 +850,7 @@ function WaitlistForm({submitForm,formMsg,nav}){
 
       <div style={{marginTop:20,padding:'16px 18px',background:T.bgSoft,borderRadius:10,fontSize:11,color:T.txtD,lineHeight:1.9}}>
         ※ <strong>신청 ≠ 결제</strong>입니다. 검토 후 선발된 분에게 결제 안내를 드립니다.<br/>
-        ※ 1기 특별가: <strong style={{color:T.txt}}>120,000원</strong> (정가 150,000원)<br/>
+        ※ 1기 특별가: <strong style={{color:T.txt}}>150,000원</strong><br/>
         ※ 프로그램 구성과 가격은 기수별로 달라질 수 있습니다.<br/>
         ※ 결제 후 환불은 불가합니다.
       </div>
@@ -950,7 +1033,7 @@ function PricingCards({nav}){
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:20,flexWrap:'wrap',marginBottom:32,paddingTop:8}}>
         <div>
           <p style={{fontSize:14,color:T.gold,fontWeight:700,marginBottom:10,letterSpacing:0.3}}>TED 올인원 4주 스터디</p>
-          <p style={{fontSize:13,color:T.txtS}}>셀프 스터디 + 원어민 서면 피드백</p>
+          <p style={{fontSize:13,color:T.txtS}}>챌린지 + 원어민 서면 피드백</p>
         </div>
         <div style={{textAlign:'right'}}>
           <p style={{fontSize:'clamp(32px,4vw,42px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:14,color:T.txtS,fontWeight:400}}> / 4주</span></p>
@@ -969,7 +1052,7 @@ function PricingCards({nav}){
       <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}} className="future-tiers">
         <div style={{background:T.bgSoft,border:`1px dashed ${T.border}`,borderRadius:12,padding:'20px 22px',wordBreak:'keep-all'}}>
           <p style={{fontSize:11,fontWeight:700,color:T.txtS,letterSpacing:0.5,marginBottom:6,textTransform:'uppercase'}}>Tier 2</p>
-          <h4 style={{fontSize:14,fontWeight:700,color:T.txt,marginBottom:6,lineHeight:1.4}}>셀프 + 비디오 피드백</h4>
+          <h4 style={{fontSize:14,fontWeight:700,color:T.txt,marginBottom:6,lineHeight:1.4}}>챌린지 + 비디오 피드백</h4>
           <p style={{fontSize:12,color:T.txtS,lineHeight:1.7,marginBottom:4}}>Tier 1 전체 + 원어민 비디오 피드백</p>
           <p style={{fontSize:11,color:T.txtD}}>가격 · 일정 추후 공지</p>
         </div>
