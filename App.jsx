@@ -240,11 +240,10 @@ function TedProgram({nav}){
     {b:'혼자 시작하면 3일 만에 포기한다.',a:'28일 연속 실행 기록. 시스템과 동료가 나를 움직여줬다.'},
   ]
   const timeline=[
-    {date:'4/21 (화)',title:'모집 오픈',desc:'파일럿 기수 신청 접수를 시작해요.',icon:'🚀',active:true},
-    {date:'4/29 (수) ~ 5/1 (금)',title:'결제 기간',desc:'합격 확정 후 개별 안내드리는 링크로 결제해주세요.',icon:'💳'},
-    {date:'5/1 (금) 자정 마감',title:'모집 마감',desc:'정원 20명 선착 시 조기 마감될 수 있어요.',icon:'⏰'},
-    {date:'5/2 (토)',title:'오리엔테이션',desc:'프로그램 안내 · 디스코드 입장 · 서로 인사.',icon:'👋'},
-    {date:'5/4 (월)',title:'스터디 시작',desc:'첫 번째 TED Talk과 함께 4주간 시작해요.',icon:'🎬',active:true},
+    {label:'사전 모집',date:'4월 21일(화) ~ 5월 1일(금) · 조기마감 가능',active:true},
+    {label:'정식 결제',date:'4월 29일(수) ~ 5월 1일(금)',active:false},
+    {label:'오리엔테이션',date:'5월 2일(토)',active:false},
+    {label:'스터디 시작',date:'5월 4일(월)',active:true},
   ]
 
   const faqs=[
@@ -316,24 +315,40 @@ function TedProgram({nav}){
       <p style={{textAlign:'center',marginTop:44,fontSize:'clamp(18px,2vw,22px)',color:T.txt,lineHeight:1.7,fontWeight:500}}>의지력의 문제가 아니에요.<br/><span style={{color:T.gold,fontWeight:700}}>시스템의 문제</span>였을 뿐.</p>
     </Sec>
 
-    {/* ━ 3. WHY I BUILT THIS — 3블록 분리 ━ */}
+    {/* ━ 3. WHY THIS WORKS — 독자 관점 전개 ━ */}
     <section style={{padding:'120px 24px',borderTop:`1px solid ${T.border}`}}>
       <div style={{maxWidth:900,margin:'0 auto',textAlign:'center',marginBottom:64}}>
-        <p style={{fontSize:13,fontWeight:700,color:T.gold,letterSpacing:2.5,marginBottom:16,textTransform:'uppercase'}}>WHY I BUILT THIS</p>
-        <h2 style={{fontSize:'clamp(30px,4.5vw,46px)',fontWeight:800,color:T.txt,lineHeight:1.22,letterSpacing:-1.2}}>이 프로그램을<br/>시작하게 된 이유</h2>
+        <p style={{fontSize:13,fontWeight:700,color:T.gold,letterSpacing:2.5,marginBottom:16,textTransform:'uppercase'}}>WHY THIS WORKS</p>
+        <h2 style={{fontSize:'clamp(30px,4.5vw,46px)',fontWeight:800,color:T.txt,lineHeight:1.22,letterSpacing:-1.2}}>이 스터디가<br/>작심삼일로 끝나지 않는 이유</h2>
       </div>
 
-      {/* Block 1: 본업 소개 (짧게) */}
+      {/* Block 1: 독자의 문제 — 기존 스터디의 한계 */}
       <div style={{maxWidth:760,margin:'0 auto 48px'}}>
-        <p style={{fontSize:13,color:T.gold,fontWeight:700,marginBottom:18,letterSpacing:1.5,textTransform:'uppercase'}}>본업 이야기</p>
+        <p style={{fontSize:13,color:T.gold,fontWeight:700,marginBottom:18,letterSpacing:1.5,textTransform:'uppercase'}}>대부분의 영어 스터디는 왜 망할까요</p>
         <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85}}>
-          저는 글로벌 빅테크에서 <strong>Operations</strong>를 해요.<br/>
-          <strong style={{color:T.gold}}>영업 매출이 더 잘 나오도록 프로그램과 시스템을 설계하는 일</strong>이에요. 어떤 지표를 볼지, 누가 리포팅할지를 설계해서 리더들의 우선순위를 바꾸고, 그 변화로 전사의 움직임을 만들어 오고 있어요.
+          대부분의 영어 스터디는 "같이 공부하자"에서 끝나요.<br/>
+          커리큘럼도, 제출 구조도, 피드백 루프도 없이<br/>
+          2~3주면 자연스럽게 흐지부지되죠.
         </p>
       </div>
 
-      {/* Block 2: 큰 인용문 (센터, 크게) */}
-      <div style={{maxWidth:860,margin:'0 auto 48px',textAlign:'center',padding:'72px 32px',background:`linear-gradient(135deg,${T.cream},#FFFDF7)`,border:`1px solid rgba(184,134,11,0.25)`,borderRadius:24,position:'relative',overflow:'hidden'}}>
+      {/* Block 2: 이 프로그램은 다름 + 본업 한 줄 연결 */}
+      <div style={{maxWidth:760,margin:'0 auto 48px'}}>
+        <p style={{fontSize:13,color:T.gold,fontWeight:700,marginBottom:18,letterSpacing:1.5,textTransform:'uppercase'}}>이 프로그램은 다릅니다</p>
+        <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85,marginBottom:28}}>
+          매일 <strong>무엇을</strong>, <strong>어떤 순서로</strong> 하고,<br/>
+          <strong>언제 제출</strong>하고, <strong>어떤 피드백</strong>을 받는지까지<br/>
+          전부 <strong style={{color:T.gold}}>시스템으로 설계</strong>되어 있어요.
+        </p>
+        <div style={{padding:'20px 24px',background:T.bgWarm,borderLeft:`3px solid ${T.gold}`,borderRadius:8}}>
+          <p style={{fontSize:'clamp(15px,1.8vw,17px)',color:T.txt,lineHeight:1.85}}>
+            제 본업이 그 일이거든요. 글로벌 빅테크에서 어떤 지표를 볼지, 어떤 주기로 트래킹할지 설계해서 <strong>사람들의 행동이 바뀌도록 만드는 일</strong>을 8년째 해오고 있어요.
+          </p>
+        </div>
+      </div>
+
+      {/* Block 3: 큰 인용문 */}
+      <div style={{maxWidth:860,margin:'0 auto',textAlign:'center',padding:'72px 32px',background:`linear-gradient(135deg,${T.cream},#FFFDF7)`,border:`1px solid rgba(184,134,11,0.25)`,borderRadius:24,position:'relative',overflow:'hidden'}}>
         <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:600,height:400,background:'radial-gradient(ellipse,rgba(184,134,11,0.15) 0%,transparent 65%)',pointerEvents:'none'}}/>
         <div style={{position:'relative'}}>
           <span style={{fontFamily:"'Playfair Display',serif",fontSize:80,color:T.gold,opacity:0.4,lineHeight:0.5,display:'inline-block',marginBottom:8}}>"</span>
@@ -343,22 +358,6 @@ function TedProgram({nav}){
             <em style={{color:T.gold,fontStyle:'italic',fontFamily:"'Playfair Display',serif",fontWeight:500}}>훨씬 큰 임팩트</em>를 만들어내요.
           </p>
           <p style={{fontSize:13,color:T.txtS,marginTop:20,letterSpacing:1}}>— 8년간 반복하며 내린 결론</p>
-        </div>
-      </div>
-
-      {/* Block 3: 영어 적용 + 마감 브릿지 */}
-      <div style={{maxWidth:760,margin:'0 auto'}}>
-        <p style={{fontSize:'clamp(16px,1.9vw,18px)',color:T.txtS,lineHeight:1.95,marginBottom:24}}>
-          이 프로그램은 제가 본업에서 익힌 <strong style={{color:T.txt}}>시스템 설계</strong>를 영어 학습에 적용한 결과물이에요. 습관이 만들어지면 꾸준한 변화가 오고, 더 이상 학원에 의존하지 않고 <strong style={{color:T.txt}}>스스로 할 수 있는 힘</strong>이 길러지도록 설계했어요.
-        </p>
-        <p style={{fontSize:'clamp(16px,1.9vw,18px)',color:T.txtS,lineHeight:1.95,marginBottom:36}}>
-          쉽지는 않을 거예요. 하지만 매일 과제는 <strong style={{color:T.txt}}>snack 사이즈</strong>로 쪼개져 있고, 여기서 나오는 표현·구조는 실제 비즈니스 상황에서 바로 쓸 수 있는 것들이에요.
-        </p>
-        <div style={{background:'rgba(184,134,11,0.08)',border:`1px solid rgba(184,134,11,0.2)`,borderRadius:14,padding:'28px 32px'}}>
-          <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:T.txt,lineHeight:1.75,fontWeight:600}}>
-            4주 뒤 돌이켜봤을 때,<br/>
-            <strong style={{color:T.gold}}>"영어 습관을 만드는 데 이만한 게 없었다"</strong>고 말하실 거라 확신해요.
-          </p>
         </div>
       </div>
     </section>
@@ -565,35 +564,31 @@ function TedProgram({nav}){
       </div>
     </Sec>
 
-    {/* ━ 13. PRICING ━ */}
-    <Sec label="CHOOSE YOUR PATH" title={<>당신의 4주를<br/>어떻게 설계할까요</>} sub="같은 시스템 위에서, 피드백의 깊이만 달라져요. 무엇을 쌓고 싶은지에 따라 선택하세요.">
+    {/* ━ 13. PRICING — 1기 메인, 2/3기는 하단에 작게 ━ */}
+    <Sec label="YOUR 4 WEEKS" title={<>4주 뒤, 당신의 영어가<br/>달라져 있을 겁니다</>} sub="이 시스템에 투자하는 4주가 혼자 흘려보내는 6개월을 바꿉니다.">
       <PricingCards nav={nav}/>
       <p style={{textAlign:'center',fontSize:13,color:T.txtD,marginTop:36,lineHeight:2}}>
         * 파일럿 기수는 정원 <strong style={{color:T.txt}}>20명</strong>으로 운영되며, 2기 이후 오픈 여부와 일정은 미정이에요.<br/>
         * 추후 alumni 네트워킹 모임 진행 시 참여 우선권이 제공돼요.<br/>
-        ※ 1기 특별가: <strong style={{color:T.txt}}>120,000원</strong> (정가 150,000원 → 대기자 한정 할인)<br/>
         ※ 신청 ≠ 결제. 검토 후 선발된 분에게 결제 안내를 드려요.<br/>
         ※ 결제 후 환불은 불가해요.
       </p>
     </Sec>
 
-    {/* ━ 14. TIMELINE — 스터디 일정 ━ */}
-    <Sec label="SCHEDULE" title="1기 스터디 일정" sub="모집부터 스터디 시작까지의 전체 타임라인이에요." bg={T.bgWarm} maxW={720}>
-      <div style={{position:'relative',paddingLeft:8}}>
-        <div style={{position:'absolute',left:27,top:28,bottom:28,width:2,background:T.border}}/>
+    {/* ━ 14. TIMELINE — 심플 리스트 ━ */}
+    <Sec label="SCHEDULE" title="모집 일정" bg={T.bgWarm} maxW={820}>
+      <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'12px 40px',boxShadow:T.shadow}}>
         {timeline.map((t,i)=>(
-          <div key={i} style={{display:'grid',gridTemplateColumns:'58px 1fr',gap:20,alignItems:'flex-start',padding:'14px 0',position:'relative'}}>
-            <div style={{width:56,height:56,borderRadius:'50%',background:t.active?'rgba(184,134,11,0.12)':T.bgCard,border:`2px solid ${t.active?T.gold:T.border}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:24,flexShrink:0,zIndex:1,boxShadow:t.active?'0 4px 14px rgba(184,134,11,0.15)':T.shadow}}>
-              {t.icon}
+          <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'24px 0',borderBottom:i<timeline.length-1?`1px solid ${T.border}`:'none',gap:20,flexWrap:'wrap'}} className="tl-row">
+            <div style={{display:'flex',alignItems:'center',gap:16}}>
+              <span style={{width:10,height:10,borderRadius:'50%',background:t.active?T.gold:T.borderH,flexShrink:0,boxShadow:t.active?`0 0 0 4px rgba(184,134,11,0.12)`:'none'}}/>
+              <span style={{fontSize:'clamp(15px,1.7vw,17px)',fontWeight:700,color:T.txt,letterSpacing:-0.3}}>{t.label}</span>
             </div>
-            <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:'20px 24px',boxShadow:T.shadow}}>
-              <p style={{fontSize:12,fontWeight:700,color:t.active?T.gold:T.txtD,letterSpacing:1,marginBottom:6,textTransform:'uppercase'}}>{t.date}</p>
-              <h4 style={{fontSize:17,fontWeight:700,color:T.txt,marginBottom:6,letterSpacing:-0.3}}>{t.title}</h4>
-              <p style={{fontSize:13,color:T.txtS,lineHeight:1.75}}>{t.desc}</p>
-            </div>
+            <span style={{fontSize:'clamp(14px,1.6vw,16px)',color:T.txtS,fontWeight:500,textAlign:'right'}}>{t.date}</span>
           </div>
         ))}
       </div>
+      <style>{`@media(max-width:560px){.tl-row{justify-content:flex-start!important}}`}</style>
     </Sec>
 
     {/* ━ 15. FAQ ━ */}
@@ -926,65 +921,45 @@ function PricingCards({nav}){
     </li>
   )
 
-  const cardStyle=(featured)=>({
-    background:T.bgCard,
-    border:featured?`2px solid ${T.gold}`:`1px solid ${T.border}`,
-    borderRadius:16,
-    padding:'36px 28px',
-    position:'relative',
-    boxShadow:featured?T.shadowH:T.shadow,
-    display:'flex',
-    flexDirection:'column',
-    wordBreak:'keep-all',
-    lineBreak:'strict',
-  })
-
-  return(<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18,maxWidth:1040,margin:'0 auto',alignItems:'stretch'}}>
-    {/* Tier 1 */}
-    <div style={cardStyle(true)}>
-      <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.gold,color:'#fff',fontSize:10,fontWeight:700,borderRadius:6}}>1기 모집 중</div>
-      <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 서면 피드백</p>
-      <div style={{margin:'12px 0 4px',minHeight:96}}>
-        <p style={{fontSize:11,color:T.txtD,textDecoration:'line-through',marginBottom:2}}>정가 ₩150,000</p>
-        <p style={{fontSize:32,fontWeight:800,color:T.txt,letterSpacing:-1}}>₩120,000<span style={{fontSize:12,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-        <p style={{fontSize:11,color:T.gold,fontWeight:600}}>1기 특별가 · 대기자 한정</p>
+  return(<div style={{maxWidth:720,margin:'0 auto'}}>
+    {/* Tier 1 — 1기 메인 카드, 크고 중앙 */}
+    <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:20,padding:'48px 44px',position:'relative',boxShadow:T.shadowH,wordBreak:'keep-all',lineBreak:'strict'}}>
+      <div style={{position:'absolute',top:-14,left:36,padding:'5px 14px',background:T.gold,color:'#fff',fontSize:11,fontWeight:700,borderRadius:6,letterSpacing:0.5}}>파일럿 기수 모집 중</div>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:20,flexWrap:'wrap',marginBottom:32,paddingTop:8}}>
+        <div>
+          <p style={{fontSize:14,color:T.gold,fontWeight:700,marginBottom:10,letterSpacing:0.3}}>TED 올인원 4주 스터디</p>
+          <p style={{fontSize:13,color:T.txtS}}>셀프 스터디 + 원어민 서면 피드백</p>
+        </div>
+        <div style={{textAlign:'right'}}>
+          <p style={{fontSize:'clamp(32px,4vw,42px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:14,color:T.txtS,fontWeight:400}}> / 4주</span></p>
+          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>정원 20명 · 선착순</p>
+        </div>
       </div>
-      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0',flex:1}}>
+      <ul style={{listStyle:'none',padding:0,margin:'0 0 32px'}}>
         {base.map(f=><Item key={f} text={f}/>)}
       </ul>
-      <button onClick={()=>nav('waitlist')} style={{width:'100%',padding:14,background:T.navy,color:'#fff',fontSize:13,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',marginTop:24}}>사전 신청하기</button>
+      <button onClick={()=>nav('waitlist')} style={{width:'100%',padding:16,background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>사전 신청하기 →</button>
     </div>
 
-    {/* Tier 2 */}
-    <div style={cardStyle(false)}>
-      <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
-      <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 비디오 피드백</p>
-      <div style={{margin:'12px 0 4px',minHeight:96}}>
-        <p style={{fontSize:22,fontWeight:700,color:T.txtS,letterSpacing:-0.5}}>가격 추후 공지</p>
-        <p style={{fontSize:11,color:T.txtD,marginTop:4}}>2기부터 오픈 예정</p>
+    {/* 2기/3기 — 작게, 하단에 접은 형태 */}
+    <div style={{marginTop:32}}>
+      <p style={{fontSize:12,fontWeight:700,color:T.txtD,letterSpacing:1.5,marginBottom:14,textTransform:'uppercase',textAlign:'center'}}>향후 오픈 예정인 옵션</p>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}} className="future-tiers">
+        <div style={{background:T.bgSoft,border:`1px dashed ${T.border}`,borderRadius:12,padding:'20px 22px',wordBreak:'keep-all'}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.txtS,letterSpacing:0.5,marginBottom:6,textTransform:'uppercase'}}>Tier 2</p>
+          <h4 style={{fontSize:14,fontWeight:700,color:T.txt,marginBottom:6,lineHeight:1.4}}>셀프 + 비디오 피드백</h4>
+          <p style={{fontSize:12,color:T.txtS,lineHeight:1.7,marginBottom:4}}>Tier 1 전체 + 원어민 비디오 피드백</p>
+          <p style={{fontSize:11,color:T.txtD}}>가격 · 일정 추후 공지</p>
+        </div>
+        <div style={{background:T.bgSoft,border:`1px dashed ${T.border}`,borderRadius:12,padding:'20px 22px',wordBreak:'keep-all'}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.txtS,letterSpacing:0.5,marginBottom:6,textTransform:'uppercase'}}>Tier 3</p>
+          <h4 style={{fontSize:14,fontWeight:700,color:T.txt,marginBottom:6,lineHeight:1.4}}>프리미엄 올인원</h4>
+          <p style={{fontSize:12,color:T.txtS,lineHeight:1.7,marginBottom:4}}>Tier 2 + 라이브 코칭 + 1:1 컨설팅 2회 + 전자책</p>
+          <p style={{fontSize:11,color:T.txtD}}>가격 · 일정 추후 공지</p>
+        </div>
       </div>
-      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0',flex:1}}>
-        {base.map(f=><Item key={f} text={f}/>)}
-        {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
-      </ul>
-      <div style={{width:'100%',padding:14,background:T.bgSoft,color:T.txtD,fontSize:13,fontWeight:600,border:`1px solid ${T.border}`,borderRadius:10,marginTop:24,textAlign:'center'}}>오픈 시 안내드려요</div>
     </div>
-
-    {/* Tier 3 */}
-    <div style={cardStyle(false)}>
-      <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
-      <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>프리미엄 올인원</p>
-      <div style={{margin:'12px 0 4px',minHeight:96}}>
-        <p style={{fontSize:22,fontWeight:700,color:T.txtS,letterSpacing:-0.5}}>가격 추후 공지</p>
-        <p style={{fontSize:11,color:T.txtD,marginTop:4}}>2기부터 오픈 예정</p>
-      </div>
-      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0',flex:1}}>
-        {base.map(f=><Item key={f} text={f}/>)}
-        {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
-        {tier3Extra.map(f=><Item key={f} text={f} hl/>)}
-      </ul>
-      <div style={{width:'100%',padding:14,background:T.bgSoft,color:T.txtD,fontSize:13,fontWeight:600,border:`1px solid ${T.border}`,borderRadius:10,marginTop:24,textAlign:'center'}}>오픈 시 안내드려요</div>
-    </div>
+    <style>{`@media(max-width:560px){.future-tiers{grid-template-columns:1fr!important}}`}</style>
   </div>)
 }
 
