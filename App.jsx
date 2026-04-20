@@ -69,7 +69,7 @@ export default function App(){
   const post=postId?COLUMNS.find(c=>c.id===postId):null
 
   return(
-    <div style={{background:T.bg,minHeight:'100vh',color:T.txt,fontFamily:"'DM Sans','Noto Sans KR',-apple-system,sans-serif",WebkitFontSmoothing:'antialiased'}}>
+    <div style={{background:T.bg,minHeight:'100vh',color:T.txt,fontFamily:"'DM Sans','Noto Sans KR',-apple-system,sans-serif",WebkitFontSmoothing:'antialiased',wordBreak:'keep-all',lineBreak:'strict'}}>
       {/* NAV */}
       <nav style={{position:'sticky',top:0,zIndex:100,padding:'0 24px',height:64,display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(20px)',borderBottom:`1px solid ${T.border}`}}>
         <div style={{width:'100%',maxWidth:1200,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
@@ -470,49 +470,78 @@ function TedProgram({nav}){
       </div>
     </Sec>
 
-    {/* ━ 9. NATIVE TUTOR ━ */}
-    <Sec label="NATIVE TUTOR" title={<>매주, 내 스피치를 직접 듣는<br/>원어민 튜터</>} maxW={840}>
-      <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'44px 48px',boxShadow:T.shadow}}>
-        <div style={{display:'grid',gap:18}}>
-          {[
-            {k:'학력',v:'캐나다 명문대 생물의학 전공 · QS 세계대학 Top 150'},
-            {k:'경력',v:'영어 스피킹 전문 지도 6년 이상'},
-            {k:'이력',v:'대기업 및 임원 대상 영어 티칭 경험'},
-            {k:'언어',v:'영어 · 한국어 · 중국어 유창'},
-          ].map((r,i)=>(
-            <div key={i} style={{display:'grid',gridTemplateColumns:'80px 1fr',gap:24,alignItems:'flex-start',paddingBottom:18,borderBottom:i<3?`1px solid ${T.border}`:'none'}}>
-              <span style={{fontSize:13,fontWeight:700,color:T.gold,letterSpacing:1,paddingTop:3,textTransform:'uppercase'}}>{r.k}</span>
-              <span style={{fontSize:17,color:T.txt,lineHeight:1.7}}>{r.v}</span>
-            </div>
-          ))}
+    {/* ━ 9. NATIVE FEEDBACK — 튜터 소개 + 피드백 통합 ━ */}
+    <Sec label="NATIVE FEEDBACK · 이 프로그램의 심장" title={<>매주 내 스피치를 직접 듣는<br/>원어민 서면 피드백</>} sub={<>매주 5분 TED를 3분으로 요약한 스피치를 녹음하면, 원어민이 직접 듣고 <strong style={{color:T.txt}}>5가지 기준으로 서면 피드백</strong>을 드려요. "이렇게 말했는데 → 이렇게 바꿔보세요"까지 구체적으로. <strong style={{color:T.gold}}>혼자 연습하면 기준이 없어요. 이 피드백이 기준이 돼요.</strong></>} bg={T.bgWarm} maxW={900}>
+
+      {/* 튜터 프로필 카드 — 임팩트 있게 */}
+      <div style={{background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,borderRadius:20,padding:'40px 44px',marginBottom:40,position:'relative',overflow:'hidden',boxShadow:T.shadowH}}>
+        <div style={{position:'absolute',top:'50%',right:'-10%',transform:'translateY(-50%)',width:400,height:400,background:'radial-gradient(circle,rgba(212,168,83,0.25) 0%,transparent 60%)',pointerEvents:'none'}}/>
+        <div style={{position:'relative'}}>
+          <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:11,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:20,textTransform:'uppercase'}}>
+            <span style={{width:6,height:6,borderRadius:'50%',background:'#E8CFA0'}}/>
+            Meet your native tutor
+          </div>
+          <h3 style={{fontSize:'clamp(20px,2.4vw,26px)',fontWeight:700,color:'#fff',marginBottom:24,lineHeight:1.4,letterSpacing:-0.5}}>
+            한국인이 자주 놓치는 부분을 정확히 짚어주는,<br/>
+            <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',color:'#E8CFA0',fontWeight:500}}>6년 경력의 원어민 튜터</span>
+          </h3>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:18}}>
+            {[
+              {k:'학력',v:'캐나다 명문대 생물의학 전공',sub:'QS 세계대학 Top 150'},
+              {k:'경력',v:'영어 스피킹 전문 지도 6년+',sub:'대기업·임원 대상 티칭 경험'},
+              {k:'언어',v:'영어 · 한국어 · 중국어 유창',sub:'한국인의 학습 맥락 이해'},
+            ].map((r,i)=>(
+              <div key={i} style={{padding:'18px 20px',background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:12,backdropFilter:'blur(10px)'}}>
+                <p style={{fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.5,marginBottom:8,textTransform:'uppercase'}}>{r.k}</p>
+                <p style={{fontSize:14,color:'#fff',fontWeight:600,marginBottom:4,lineHeight:1.4}}>{r.v}</p>
+                <p style={{fontSize:11,color:'rgba(255,255,255,0.55)',lineHeight:1.5}}>{r.sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </Sec>
 
-    {/* ━ 10. NATIVE FEEDBACK — 핵심, 크게 ━ */}
-    <Sec label="NATIVE FEEDBACK · 이 프로그램의 심장" title={<>매주 내 스피치를 직접 듣는<br/>원어민 서면 피드백</>} sub={<>매주 5분 TED를 3분으로 요약한 스피치를 녹음하면,<br/>원어민이 직접 듣고 <strong style={{color:T.txt}}>5가지 기준으로 서면 피드백</strong>을 드려요.<br/>"이렇게 말했는데 → 이렇게 바꿔보세요"까지 구체적으로.<br/><br/><strong style={{color:T.gold,fontSize:'1.1em'}}>혼자 연습하면 기준이 없어요. 이 피드백이 기준이 돼요.</strong></>} bg={T.bgWarm} maxW={900}>
+      {/* 피드백 샘플 */}
       <FeedbackSample/>
     </Sec>
 
-    {/* ━ 11. PEER FEEDBACK — 서브, 간결 ━ */}
-    <Sec label="PEER FEEDBACK · 커뮤니티의 힘" title="동료와 주고받는 피어 피드백" sub="토요일마다 동료의 스피치를 듣고 3관점으로 짧게 코멘트해요. 평가가 아니라, 서로의 스피치를 거울 삼아 배우는 구조예요." maxW={860}>
-      <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'36px 40px',boxShadow:T.shadow}}>
-        <div style={{display:'grid',gap:24}}>
+    {/* ━ 10. LEARNING LOOP — 선순환 사이클 다이어그램 ━ */}
+    <Sec label="THE LEARNING LOOP" title={<>4주 내내 돌아가는<br/>선순환 사이클</>} sub="매주 같은 구조로 반복돼요. 인풋으로 시작해서 피드백으로 닫히고, 그 피드백이 다시 다음 주의 인풋이 돼요. 4번 돌리면 습관이 남아요.">
+      <div style={{maxWidth:820,margin:'0 auto'}}>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,position:'relative'}} className="loop-grid">
           {[
-            {icon:'📩',title:'전달 체크',q:'"이 요약만 듣고 TED 내용이 이해됐나요?"'},
-            {icon:'🧲',title:'표현 수집',q:'"이 사람이 쓴 표현 중 내가 쓰고 싶은 것 1개"'},
-            {icon:'🔀',title:'차이 발견',q:'"같은 TED인데 나와 다르게 한 것 1개"'},
-          ].map((p,i)=>(
-            <div key={i} style={{display:'grid',gridTemplateColumns:'56px 1fr',gap:20,alignItems:'center',paddingBottom:i<2?24:0,borderBottom:i<2?`1px solid ${T.border}`:'none'}}>
-              <div style={{fontSize:32}}>{p.icon}</div>
-              <div>
-                <h4 style={{fontSize:16,fontWeight:700,color:T.txt,marginBottom:4}}>{p.title}</h4>
-                <p style={{fontSize:14,color:T.gold,fontStyle:'italic',lineHeight:1.6}}>{p.q}</p>
-              </div>
+            {step:'01',label:'INPUT',title:'인풋',desc:'TED 듣기 · 노트테이킹으로 이해가능한 입력(i+1) 쌓기',icon:'🎧',color:'#3B82F6'},
+            {step:'02',label:'UNDERSTANDING',title:'이해',desc:'오답노트 · 표현 분석으로 안 들린 이유를 구조화',icon:'🔍',color:'#8B5CF6'},
+            {step:'03',label:'OUTPUT',title:'아웃풋',desc:'쉐도잉 녹음 · 3분 스피치로 내 말로 재생산',icon:'🎙️',color:'#EC4899'},
+            {step:'04',label:'FEEDBACK',title:'피드백',desc:'원어민 서면 피드백 + 동료 피어 피드백으로 기준 수립',icon:'💬',color:T.gold},
+          ].map((n,i)=>(
+            <div key={i} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:18,padding:'32px 28px',boxShadow:T.shadow,position:'relative',textAlign:'center'}}>
+              <div style={{position:'absolute',top:-14,left:'50%',transform:'translateX(-50%)',padding:'4px 14px',background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:100,fontSize:11,fontWeight:700,color:n.color,letterSpacing:1.5}}>{n.step}</div>
+              <div style={{fontSize:44,marginBottom:14,marginTop:4}}>{n.icon}</div>
+              <p style={{fontSize:10,fontWeight:700,color:n.color,letterSpacing:2,marginBottom:8,textTransform:'uppercase'}}>{n.label}</p>
+              <h4 style={{fontSize:20,fontWeight:800,color:T.txt,marginBottom:10,letterSpacing:-0.3}}>{n.title}</h4>
+              <p style={{fontSize:13,color:T.txtS,lineHeight:1.7}}>{n.desc}</p>
             </div>
           ))}
         </div>
+
+        {/* 화살표 순환 (데스크탑만) */}
+        <div style={{display:'flex',justifyContent:'center',marginTop:36,padding:'20px 28px',background:T.bgCard,border:`1px dashed ${T.borderH}`,borderRadius:14,textAlign:'center',maxWidth:640,marginLeft:'auto',marginRight:'auto'}}>
+          <p style={{fontSize:14,color:T.txtS,lineHeight:1.8}}>
+            <span style={{color:T.gold,fontWeight:700}}>피드백 → 다시 인풋</span>으로 돌아가요.<br/>
+            이번 주의 교정이 다음 주의 시작점이 되는 구조예요.
+          </p>
+        </div>
+
+        <div style={{marginTop:32,padding:'28px 32px',background:'rgba(184,134,11,0.06)',border:`1px solid rgba(184,134,11,0.2)`,borderRadius:14}}>
+          <p style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.5,marginBottom:12,textTransform:'uppercase'}}>Peer Feedback · 커뮤니티의 힘</p>
+          <p style={{fontSize:14,color:T.txt,lineHeight:1.9}}>
+            피드백 단계에는 <strong>원어민 서면 피드백</strong>과 함께 <strong>동료와의 피어 피드백</strong>이 함께 이루어져요.
+            토요일마다 동료의 스피치를 듣고 <strong style={{color:T.gold}}>"전달 체크 · 표현 수집 · 차이 발견"</strong> 3관점으로 짧게 코멘트해요. 평가가 아니라, 서로의 스피치를 거울 삼아 배우는 구조예요.
+          </p>
+        </div>
       </div>
+      <style>{`@media(max-width:640px){.loop-grid{grid-template-columns:1fr!important}}`}</style>
     </Sec>
 
     {/* ━ 12. BEFORE/AFTER ━ */}
@@ -537,7 +566,7 @@ function TedProgram({nav}){
     </Sec>
 
     {/* ━ 13. PRICING ━ */}
-    <Sec label="PRICING" title={<>투자 대비 가장 확실한<br/>성장을 약속해요</>}>
+    <Sec label="CHOOSE YOUR PATH" title={<>당신의 4주를<br/>어떻게 설계할까요</>} sub="같은 시스템 위에서, 피드백의 깊이만 달라져요. 무엇을 쌓고 싶은지에 따라 선택하세요.">
       <PricingCards nav={nav}/>
       <p style={{textAlign:'center',fontSize:13,color:T.txtD,marginTop:36,lineHeight:2}}>
         * 파일럿 기수는 정원 <strong style={{color:T.txt}}>20명</strong>으로 운영되며, 2기 이후 오픈 여부와 일정은 미정이에요.<br/>
@@ -897,49 +926,64 @@ function PricingCards({nav}){
     </li>
   )
 
-  return(<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18,maxWidth:1040,margin:'0 auto'}}>
+  const cardStyle=(featured)=>({
+    background:T.bgCard,
+    border:featured?`2px solid ${T.gold}`:`1px solid ${T.border}`,
+    borderRadius:16,
+    padding:'36px 28px',
+    position:'relative',
+    boxShadow:featured?T.shadowH:T.shadow,
+    display:'flex',
+    flexDirection:'column',
+    wordBreak:'keep-all',
+    lineBreak:'strict',
+  })
+
+  return(<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18,maxWidth:1040,margin:'0 auto',alignItems:'stretch'}}>
     {/* Tier 1 */}
-    <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadowH}}>
+    <div style={cardStyle(true)}>
       <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.gold,color:'#fff',fontSize:10,fontWeight:700,borderRadius:6}}>1기 모집 중</div>
       <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 서면 피드백</p>
-      <div style={{margin:'12px 0 4px'}}>
+      <div style={{margin:'12px 0 4px',minHeight:96}}>
         <p style={{fontSize:11,color:T.txtD,textDecoration:'line-through',marginBottom:2}}>정가 ₩150,000</p>
         <p style={{fontSize:32,fontWeight:800,color:T.txt,letterSpacing:-1}}>₩120,000<span style={{fontSize:12,color:T.txtS,fontWeight:400}}> / 4주</span></p>
         <p style={{fontSize:11,color:T.gold,fontWeight:600}}>1기 특별가 · 대기자 한정</p>
       </div>
-      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
+      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0',flex:1}}>
         {base.map(f=><Item key={f} text={f}/>)}
       </ul>
-      <button onClick={()=>nav('waitlist')} style={{width:'100%',padding:13,background:T.navy,color:'#fff',fontSize:13,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',marginTop:20}}>사전 신청하기</button>
+      <button onClick={()=>nav('waitlist')} style={{width:'100%',padding:14,background:T.navy,color:'#fff',fontSize:13,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',marginTop:24}}>사전 신청하기</button>
     </div>
 
     {/* Tier 2 */}
-    <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadow}}>
+    <div style={cardStyle(false)}>
       <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
       <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 비디오 피드백</p>
-      <div style={{margin:'12px 0 4px'}}>
+      <div style={{margin:'12px 0 4px',minHeight:96}}>
         <p style={{fontSize:22,fontWeight:700,color:T.txtS,letterSpacing:-0.5}}>가격 추후 공지</p>
         <p style={{fontSize:11,color:T.txtD,marginTop:4}}>2기부터 오픈 예정</p>
       </div>
-      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
+      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0',flex:1}}>
         {base.map(f=><Item key={f} text={f}/>)}
         {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
       </ul>
+      <div style={{width:'100%',padding:14,background:T.bgSoft,color:T.txtD,fontSize:13,fontWeight:600,border:`1px solid ${T.border}`,borderRadius:10,marginTop:24,textAlign:'center'}}>오픈 시 안내드려요</div>
     </div>
 
     {/* Tier 3 */}
-    <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadow}}>
+    <div style={cardStyle(false)}>
       <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
       <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>프리미엄 올인원</p>
-      <div style={{margin:'12px 0 4px'}}>
+      <div style={{margin:'12px 0 4px',minHeight:96}}>
         <p style={{fontSize:22,fontWeight:700,color:T.txtS,letterSpacing:-0.5}}>가격 추후 공지</p>
         <p style={{fontSize:11,color:T.txtD,marginTop:4}}>2기부터 오픈 예정</p>
       </div>
-      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
+      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0',flex:1}}>
         {base.map(f=><Item key={f} text={f}/>)}
         {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
         {tier3Extra.map(f=><Item key={f} text={f} hl/>)}
       </ul>
+      <div style={{width:'100%',padding:14,background:T.bgSoft,color:T.txtD,fontSize:13,fontWeight:600,border:`1px solid ${T.border}`,borderRadius:10,marginTop:24,textAlign:'center'}}>오픈 시 안내드려요</div>
     </div>
   </div>)
 }
