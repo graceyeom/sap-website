@@ -225,13 +225,13 @@ function TedProgram({nav}){
     {n:'Step 09 — 10',t:'스피치 & 피어 피드백',d:'그 주의 TED를 요약하거나, 자신의 생각을 담은 3분 스피치를 녹음합니다. 동료와 서로 피드백을 주고받으며 성장.',tag:'성장'},
   ]
   const week=[
-    {d:'MON',i:'🎧',t:'1차 리스닝',s:'전체 흐름 파악',o:'3줄 요약 제출'},
-    {d:'TUE',i:'📝',t:'노트테이킹',s:'색깔별 메모',o:'노트 공유'},
-    {d:'WED',i:'📋',t:'오답노트',s:'안 들린 부분 분석·공유',o:'오답노트 제출'},
-    {d:'THU',i:'🔍',t:'표현 정리',s:'단어·표현 위주',o:'5개 이상 정리'},
-    {d:'FRI',i:'🎙️',t:'쉐도잉 & 녹음',s:'쉐도잉 후 녹음',o:'녹음 제출'},
-    {d:'SAT',i:'🗣️',t:'3분 스피치',s:'TED 요약 or 의견',o:'스피치 녹음'},
-    {d:'SUN',i:'🤝',t:'피어 피드백',s:'서로 스피치 듣기',o:'주말까지 공유'},
+    {d:'Day 1 (월)',t:'1차 리스닝',s:'전체 흐름 파악',o:'3줄 요약 제출'},
+    {d:'Day 2 (화)',t:'노트테이킹',s:'색깔별 메모',o:'노트 공유'},
+    {d:'Day 3 (수)',t:'오답노트',s:'안 들린 부분 분석·공유',o:'오답노트 제출'},
+    {d:'Day 4 (목)',t:'표현 정리',s:'단어·표현 위주',o:'5개 이상 정리'},
+    {d:'Day 5 (금)',t:'쉐도잉 & 녹음',s:'쉐도잉 후 녹음',o:'녹음 제출'},
+    {d:'Day 6 (토)',t:'3분 스피치',s:'TED 요약 or 의견',o:'스피치 녹음'},
+    {d:'Day 7 (일)',t:'피어 피드백',s:'서로 스피치 듣기',o:'주말까지 공유'},
   ]
   const beforeAfter=[
     {b:'영상 틀면 막막하고 속상하다. 뭔 말인지 모르겠고 어디서부터 손 대야 할지 모르겠다.',a:'안 들려도 당황하지 않는다. 어디가 안 들리는지, 왜 안 들리는지 스스로 진단할 수 있다.'},
@@ -274,7 +274,7 @@ function TedProgram({nav}){
       <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:900,height:600,background:'radial-gradient(ellipse,rgba(184,134,11,0.22) 0%,transparent 65%)',pointerEvents:'none'}}/>
       <svg style={{position:'absolute',top:'28%',left:'50%',transform:'translate(-50%,-50%)',width:700,height:700,opacity:0.15,pointerEvents:'none'}} viewBox="0 0 700 700"><circle cx="350" cy="350" r="320" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="260" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="200" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="140" fill="none" stroke="#B8860B" strokeWidth="0.7"/></svg>
       <div style={{position:'relative',maxWidth:900,margin:'0 auto'}}>
-        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>파일럿 기수 · 사전 모집 · 정원 20명</div>
+        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>파일럿 기수 · 사전 모집 중 · 인원 한정</div>
         <h1 style={{fontSize:'clamp(36px,6.5vw,68px)',fontWeight:800,color:T.txt,lineHeight:1.12,marginBottom:30,letterSpacing:-2.5}}>
           토익은 되는데<br/>
           <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:T.gold}}>입이 안 열리는</span> 당신을 위한<br/>
@@ -289,8 +289,9 @@ function TedProgram({nav}){
           <button onClick={()=>nav('waitlist')} style={{padding:'17px 36px',background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',boxShadow:'0 10px 30px rgba(184,134,11,0.25)'}}>사전 신청하기 →</button>
           <button onClick={()=>scrollTo('curriculum')} style={{padding:'17px 36px',background:'rgba(255,255,255,0.9)',color:T.txt,fontSize:15,fontWeight:600,border:'1px solid rgba(184,134,11,0.35)',borderRadius:10,cursor:'pointer',backdropFilter:'blur(10px)'}}>커리큘럼 보기 ↓</button>
         </div>
-        <div style={{display:'flex',gap:48,justifyContent:'center',paddingTop:40,borderTop:`1px solid ${T.border}`,maxWidth:680,margin:'0 auto',flexWrap:'wrap'}}>
-          {[['10년','영어 독학'],['8년','총 커리어'],['18K+','유튜브 구독자'],['10단계','검증된 메소드']].map(([v,l])=>(<div key={l} style={{textAlign:'center'}}><div style={{fontSize:'clamp(26px,3vw,32px)',fontWeight:800,color:T.txt,fontFamily:"'Playfair Display',serif"}}>{v}</div><div style={{fontSize:12,color:T.txtS,marginTop:5}}>{l}</div></div>))}
+        <div style={{maxWidth:680,margin:'0 auto',textAlign:'center'}}>
+          <div style={{width:60,height:2,background:`linear-gradient(90deg,transparent,${T.gold},transparent)`,margin:'0 auto 18px'}}/>
+          <p style={{fontSize:15,color:T.txtS,fontWeight:400,letterSpacing:-0.2}}><strong style={{fontWeight:700,color:T.txt}}>36만 명</strong>이 공감한 TED 올인원 영어 스터디</p>
         </div>
       </div>
     </section>
@@ -306,10 +307,12 @@ function TedProgram({nav}){
           <p style={{fontSize:15,color:T.txtS,lineHeight:1.8}}>{p.a}</p>
         </div>))}
       </div>
-      <div style={{maxWidth:680,margin:'48px auto 0',textAlign:'center'}}>
-        <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:T.txt,lineHeight:1.8,padding:'24px 32px',background:T.bgCard,border:`1px solid ${T.borderH}`,borderRadius:14,fontWeight:500}}>
-          하나라도 해당된다면,<br/>
-          <strong style={{color:T.gold}}>이 프로그램이 답이 될 수도 있어요.</strong>
+      <div style={{maxWidth:820,margin:'56px auto 0',textAlign:'center'}}>
+        <p style={{fontSize:'clamp(18px,2.2vw,22px)',color:T.txt,lineHeight:1.6,marginBottom:14,fontWeight:600}}>
+          하나라도 해당된다면,
+        </p>
+        <p style={{fontSize:'clamp(26px,4.2vw,42px)',lineHeight:1.3,fontWeight:800,letterSpacing:-1.2,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 50%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>
+          이 프로그램이 답이 될 수도 있어요.
         </p>
       </div>
       <p style={{textAlign:'center',marginTop:44,fontSize:'clamp(18px,2vw,22px)',color:T.txt,lineHeight:1.7,fontWeight:500}}>의지력의 문제가 아니에요.<br/><span style={{color:T.gold,fontWeight:700}}>시스템의 문제</span>였을 뿐.</p>
@@ -323,8 +326,8 @@ function TedProgram({nav}){
       </div>
 
       {/* Block 1: 독자의 문제 — 기존 스터디의 한계 */}
-      <div style={{maxWidth:760,margin:'0 auto 48px'}}>
-        <p style={{fontSize:13,color:T.gold,fontWeight:700,marginBottom:18,letterSpacing:1.5,textTransform:'uppercase'}}>대부분의 영어 스터디는 왜 망할까요</p>
+      <div style={{maxWidth:760,margin:'0 auto 56px',textAlign:'center'}}>
+        <p style={{fontSize:'clamp(20px,2.6vw,28px)',fontWeight:800,letterSpacing:-0.6,marginBottom:22,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 55%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>대부분의 영어 스터디는 왜 망할까요</p>
         <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85}}>
           대부분의 영어 스터디는 "같이 공부하자"에서 끝나요.<br/>
           커리큘럼도, 제출 구조도, 피드백 루프도 없이<br/>
@@ -333,16 +336,16 @@ function TedProgram({nav}){
       </div>
 
       {/* Block 2: 이 프로그램은 다름 + 본업 한 줄 연결 */}
-      <div style={{maxWidth:760,margin:'0 auto 48px'}}>
-        <p style={{fontSize:13,color:T.gold,fontWeight:700,marginBottom:18,letterSpacing:1.5,textTransform:'uppercase'}}>이 프로그램은 다릅니다</p>
-        <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85,marginBottom:28}}>
+      <div style={{maxWidth:760,margin:'0 auto 48px',textAlign:'center'}}>
+        <p style={{fontSize:'clamp(20px,2.6vw,28px)',fontWeight:800,letterSpacing:-0.6,marginBottom:22,background:'linear-gradient(135deg,#8B6914 0%,#D4A853 55%,#E8CFA0 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>이 프로그램은 다릅니다</p>
+        <p style={{fontSize:'clamp(17px,2vw,21px)',color:T.txt,lineHeight:1.85,marginBottom:32}}>
           매일 <strong>무엇을</strong>, <strong>어떤 순서로</strong> 하고,<br/>
           <strong>언제 제출</strong>하고, <strong>어떤 피드백</strong>을 받는지까지<br/>
           전부 <strong style={{color:T.gold}}>시스템으로 설계</strong>되어 있어요.
         </p>
-        <div style={{padding:'20px 24px',background:T.bgWarm,borderLeft:`3px solid ${T.gold}`,borderRadius:8}}>
-          <p style={{fontSize:'clamp(15px,1.8vw,17px)',color:T.txt,lineHeight:1.85}}>
-            제 본업이 그 일이거든요. 글로벌 빅테크에서 어떤 지표를 볼지, 어떤 주기로 트래킹할지 설계해서 <strong>사람들의 행동이 바뀌도록 만드는 일</strong>을 8년째 해오고 있어요.
+        <div style={{padding:'28px 32px',background:T.bgWarm,border:`1px solid rgba(184,134,11,0.25)`,borderLeft:`4px solid ${T.gold}`,borderRadius:10,textAlign:'left'}}>
+          <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:T.txt,lineHeight:1.9,fontWeight:500}}>
+            제 본업이 그 일이거든요. <strong style={{color:T.gold,fontWeight:700}}>글로벌 빅테크에서 어떤 지표를 볼지, 어떤 주기로 트래킹할지 설계해서 사람들의 행동이 바뀌도록 만드는 일</strong>을 8년간 해왔어요.
           </p>
         </div>
       </div>
@@ -363,22 +366,34 @@ function TedProgram({nav}){
     </section>
 
     {/* ━ 4. ABOUT GRACE — 만든 사람 ━ */}
-    <Sec label="ABOUT" title="만든 사람" bg={T.bgWarm} maxW={720}>
-      <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'44px 48px',boxShadow:T.shadow}}>
-        <p style={{fontSize:'clamp(16px,1.9vw,18px)',color:T.txt,lineHeight:1.9,marginBottom:22}}>
-          <strong>수능 영어 4등급. 유학 경험 없음.</strong><br/>
-          국내에서 독학으로 영어를 익힌 커리어 8년차가 되었어요.
-        </p>
-        <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:T.txtS,lineHeight:1.95,marginBottom:22}}>
-          영어 10년 해도 말 못했다가, <strong style={{color:T.txt}}>방법을 바꾸고 6개월 만에 달라진 경험</strong>이 있어요. 그 방법론을 4주 프로그램으로 만들었어요.
-        </p>
-        <p style={{fontSize:'clamp(17px,2vw,20px)',color:T.txt,lineHeight:1.6,fontWeight:700,marginTop:28,paddingTop:28,borderTop:`1px solid ${T.border}`}}>
-          완벽한 영어가 아니라,<br/>
-          <span style={{color:T.gold}}>'입을 여는 시스템'</span>을 드립니다.
-        </p>
-        <a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'inline-block',marginTop:24,fontSize:14,color:T.gold,textDecoration:'none',fontWeight:600}}>
-          YouTube @kglobaltechgirl →
-        </a>
+    <Sec label="ABOUT" title="만든 사람" bg={T.bgWarm} maxW={860}>
+      <div style={{background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,borderRadius:20,padding:'48px 52px',position:'relative',overflow:'hidden',boxShadow:T.shadowH,textAlign:'center'}}>
+        <div style={{position:'absolute',top:'50%',right:'-10%',transform:'translateY(-50%)',width:400,height:400,background:'radial-gradient(circle,rgba(212,168,83,0.25) 0%,transparent 60%)',pointerEvents:'none'}}/>
+        <div style={{position:'absolute',top:'50%',left:'-10%',transform:'translateY(-50%)',width:300,height:300,background:'radial-gradient(circle,rgba(212,168,83,0.15) 0%,transparent 60%)',pointerEvents:'none'}}/>
+        <div style={{position:'relative'}}>
+          <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:11,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:26,textTransform:'uppercase'}}>
+            <span style={{width:6,height:6,borderRadius:'50%',background:'#E8CFA0'}}/>
+            Meet your instructor
+          </div>
+          <h3 style={{fontSize:'clamp(22px,2.8vw,30px)',fontWeight:700,color:'#fff',marginBottom:28,lineHeight:1.4,letterSpacing:-0.5}}>
+            수능 영어 4등급, 유학 경험 없음.<br/>
+            국내 독학으로 <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',color:'#E8CFA0',fontWeight:500}}>글로벌 빅테크 커리어 8년차</span>가 되었어요.
+          </h3>
+          <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.78)',lineHeight:1.95,marginBottom:36,maxWidth:640,margin:'0 auto 36px'}}>
+            영어 10년 해도 말 못했다가,<br/>
+            <strong style={{color:'#fff'}}>방법을 바꾸고 6개월 만에 달라진 경험</strong>이 있어요.<br/>
+            그 방법론을 4주 프로그램으로 만들었습니다.
+          </p>
+          <div style={{padding:'28px 24px',background:'rgba(255,255,255,0.06)',border:'1px solid rgba(212,168,83,0.35)',borderRadius:14,backdropFilter:'blur(10px)',maxWidth:600,margin:'0 auto'}}>
+            <p style={{fontSize:'clamp(18px,2.2vw,22px)',color:'#fff',lineHeight:1.55,fontWeight:700,letterSpacing:-0.3}}>
+              완벽한 영어가 아니라,<br/>
+              <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',color:'#E8CFA0',fontWeight:500}}>'입을 여는 시스템'</span>을 드립니다.
+            </p>
+          </div>
+          <a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'inline-block',marginTop:28,fontSize:14,color:'#E8CFA0',textDecoration:'none',fontWeight:600,letterSpacing:0.3}}>
+            YouTube @kglobaltechgirl →
+          </a>
+        </div>
       </div>
     </Sec>
 
@@ -425,13 +440,12 @@ function TedProgram({nav}){
 
     {/* ━ 7. WEEKLY ━ */}
     <Sec label="WEEKLY SCHEDULE" title="1주일, 이렇게 진행됩니다" sub="매일 한 시간 정도 필요해요. 출퇴근·점심·퇴근 후로 나눠서 언제 어디서든 실행할 수 있는 시스템이에요.">
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))',gap:12}}>
-        {week.map(w=>(<div key={w.d} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:'26px 16px',textAlign:'center',boxShadow:T.shadow}}>
-          <div style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.8,marginBottom:14}}>{w.d}</div>
-          <div style={{fontSize:34,marginBottom:14}}>{w.i}</div>
-          <div style={{fontSize:15,fontWeight:700,color:T.txt,marginBottom:6}}>{w.t}</div>
-          <div style={{fontSize:12,color:T.txtD,marginBottom:12,lineHeight:1.5}}>{w.s}</div>
-          <div style={{fontSize:11,color:T.gold,paddingTop:12,borderTop:`1px solid ${T.border}`,fontWeight:600}}>{w.o}</div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))',gap:12}}>
+        {week.map(w=>(<div key={w.d} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:'24px 18px 20px',textAlign:'center',boxShadow:T.shadow,display:'flex',flexDirection:'column'}}>
+          <div style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1.5,marginBottom:16,textTransform:'uppercase'}}>{w.d}</div>
+          <div style={{fontSize:'clamp(17px,1.9vw,20px)',fontWeight:800,color:T.txt,marginBottom:10,letterSpacing:-0.3,lineHeight:1.3}}>{w.t}</div>
+          <div style={{fontSize:12,color:T.txtS,marginBottom:18,lineHeight:1.55,flex:1}}>{w.s}</div>
+          <div style={{display:'inline-block',padding:'6px 10px',background:'rgba(184,134,11,0.12)',border:`1px solid rgba(184,134,11,0.3)`,borderRadius:100,fontSize:11,color:T.gold,fontWeight:700,letterSpacing:0.2}}>{w.o}</div>
         </div>))}
       </div>
       <div style={{marginTop:36,padding:'24px 32px',background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,textAlign:'center',boxShadow:T.shadow}}>
@@ -460,11 +474,12 @@ function TedProgram({nav}){
           </a>
         ))}
       </div>
-      <div style={{maxWidth:720,margin:'40px auto 0',padding:'28px 32px',background:T.bgCard,border:`1px solid rgba(184,134,11,0.25)`,borderRadius:14,textAlign:'center',boxShadow:T.shadow}}>
-        <p style={{fontSize:15,color:T.txt,lineHeight:1.9}}>
-          <strong style={{color:T.gold,fontSize:16}}>💡 참여 적합도 체크</strong><br/>
+      <div style={{width:'100%',margin:'48px auto 0',padding:'28px 32px',background:'linear-gradient(180deg,#FAF7F2 0%,transparent 100%)',border:`1px solid ${T.border}`,borderRadius:12,textAlign:'center',position:'relative'}}>
+        <div style={{position:'absolute',top:0,left:'50%',transform:'translateX(-50%)',width:60,height:3,background:`linear-gradient(90deg,transparent,${T.gold},transparent)`}}/>
+        <p style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:2,marginBottom:12,textTransform:'uppercase',marginTop:6}}>참여 적합도 체크</p>
+        <p style={{fontSize:'clamp(15px,1.8vw,17px)',color:T.txt,lineHeight:1.9}}>
           위 영상 중 하나를 골라 들어보세요.<br/>
-          <strong>60~80% 정도 이해</strong>된다면 이 스터디에 딱 맞는 레벨이에요.
+          <strong style={{color:T.gold,fontWeight:700}}>60~80% 정도 이해</strong>된다면 이 스터디에 딱 맞는 레벨이에요.
         </p>
       </div>
     </Sec>
@@ -507,40 +522,47 @@ function TedProgram({nav}){
     {/* ━ 10. LEARNING LOOP — 선순환 사이클 다이어그램 ━ */}
     <Sec label="THE LEARNING LOOP" title={<>4주 내내 돌아가는<br/>선순환 사이클</>} sub="매주 같은 구조로 반복돼요. 인풋으로 시작해서 피드백으로 닫히고, 그 피드백이 다시 다음 주의 인풋이 돼요. 4번 돌리면 습관이 남아요.">
       <div style={{maxWidth:820,margin:'0 auto'}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,position:'relative'}} className="loop-grid">
-          {[
-            {step:'01',label:'INPUT',title:'인풋',desc:'TED 듣기 · 노트테이킹으로 이해가능한 입력(i+1) 쌓기',icon:'🎧',color:'#3B82F6'},
-            {step:'02',label:'UNDERSTANDING',title:'이해',desc:'오답노트 · 표현 분석으로 안 들린 이유를 구조화',icon:'🔍',color:'#8B5CF6'},
-            {step:'03',label:'OUTPUT',title:'아웃풋',desc:'쉐도잉 녹음 · 3분 스피치로 내 말로 재생산',icon:'🎙️',color:'#EC4899'},
-            {step:'04',label:'FEEDBACK',title:'피드백',desc:'원어민 서면 피드백 + 동료 피어 피드백으로 기준 수립',icon:'💬',color:T.gold},
-          ].map((n,i)=>(
-            <div key={i} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:18,padding:'32px 28px',boxShadow:T.shadow,position:'relative',textAlign:'center'}}>
-              <div style={{position:'absolute',top:-14,left:'50%',transform:'translateX(-50%)',padding:'4px 14px',background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:100,fontSize:11,fontWeight:700,color:n.color,letterSpacing:1.5}}>{n.step}</div>
-              <div style={{fontSize:44,marginBottom:14,marginTop:4}}>{n.icon}</div>
-              <p style={{fontSize:10,fontWeight:700,color:n.color,letterSpacing:2,marginBottom:8,textTransform:'uppercase'}}>{n.label}</p>
-              <h4 style={{fontSize:20,fontWeight:800,color:T.txt,marginBottom:10,letterSpacing:-0.3}}>{n.title}</h4>
-              <p style={{fontSize:13,color:T.txtS,lineHeight:1.7}}>{n.desc}</p>
+        <div style={{position:'relative',background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,overflow:'hidden',boxShadow:T.shadow}}>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gridTemplateRows:'1fr 1fr',position:'relative'}} className="loop-grid">
+            {[
+              {step:'01',label:'INPUT',title:'인풋',desc:'TED 듣기 · 노트테이킹으로 이해가능한 입력(i+1) 쌓기'},
+              {step:'02',label:'UNDERSTANDING',title:'이해',desc:'오답노트 · 표현 분석으로 안 들린 이유를 구조화'},
+              {step:'04',label:'FEEDBACK',title:'피드백',desc:'원어민 서면 피드백 + 동료 피어 피드백으로 기준 수립'},
+              {step:'03',label:'OUTPUT',title:'아웃풋',desc:'쉐도잉 녹음 · 3분 스피치로 내 말로 재생산'},
+            ].map((n,i)=>{
+              const isRight=i%2===1, isBottom=i>=2
+              return(
+                <div key={n.step} style={{padding:'44px 36px 40px',minHeight:220,display:'flex',flexDirection:'column',justifyContent:'center',borderRight:!isRight?`1px solid ${T.border}`:'none',borderBottom:!isBottom?`1px solid ${T.border}`:'none',textAlign:'center',position:'relative'}}>
+                  <p style={{fontFamily:"'Playfair Display',serif",fontSize:36,fontWeight:700,color:T.gold,lineHeight:1,marginBottom:10,letterSpacing:-0.5}}>{n.step}</p>
+                  <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:2.2,marginBottom:8,textTransform:'uppercase'}}>{n.label}</p>
+                  <h4 style={{fontSize:'clamp(18px,2.2vw,22px)',fontWeight:800,color:T.txt,marginBottom:12,letterSpacing:-0.4}}>{n.title}</h4>
+                  <p style={{fontSize:13,color:T.txtS,lineHeight:1.75,maxWidth:260,margin:'0 auto'}}>{n.desc}</p>
+                </div>
+              )
+            })}
+            {/* 중앙 원형 장식 */}
+            <div className="loop-center" style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:64,height:64,borderRadius:'50%',background:`radial-gradient(circle at 30% 30%,#E8CFA0,#B8860B)`,boxShadow:'0 4px 16px rgba(184,134,11,0.35), 0 0 0 8px #fff',display:'flex',alignItems:'center',justifyContent:'center',zIndex:3}}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
             </div>
-          ))}
+            {/* 화살표: 01→02 (상단 가로) */}
+            <svg className="loop-arrow" style={{position:'absolute',top:'calc(25% - 12px)',left:'50%',transform:'translateX(-50%)',zIndex:2}} width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M4 12 H34" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/><path d="M28 5 L36 12 L28 19" stroke="#B8860B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            {/* 화살표: 02→03 (우측 세로) */}
+            <svg className="loop-arrow" style={{position:'absolute',top:'50%',right:'calc(0% + 12px)',transform:'translateY(-50%) rotate(90deg)',zIndex:2}} width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M4 12 H34" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/><path d="M28 5 L36 12 L28 19" stroke="#B8860B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            {/* 화살표: 03→04 (하단 가로, 우→좌) */}
+            <svg className="loop-arrow" style={{position:'absolute',bottom:'calc(25% - 12px)',left:'50%',transform:'translateX(-50%) rotate(180deg)',zIndex:2}} width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M4 12 H34" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/><path d="M28 5 L36 12 L28 19" stroke="#B8860B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            {/* 화살표: 04→01 (좌측 세로, 아래→위) */}
+            <svg className="loop-arrow" style={{position:'absolute',top:'50%',left:'calc(0% + 12px)',transform:'translateY(-50%) rotate(-90deg)',zIndex:2}} width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M4 12 H34" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/><path d="M28 5 L36 12 L28 19" stroke="#B8860B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+          </div>
         </div>
 
-        {/* 화살표 순환 (데스크탑만) */}
-        <div style={{display:'flex',justifyContent:'center',marginTop:36,padding:'20px 28px',background:T.bgCard,border:`1px dashed ${T.borderH}`,borderRadius:14,textAlign:'center',maxWidth:640,marginLeft:'auto',marginRight:'auto'}}>
-          <p style={{fontSize:14,color:T.txtS,lineHeight:1.8}}>
-            <span style={{color:T.gold,fontWeight:700}}>피드백 → 다시 인풋</span>으로 돌아가요.<br/>
-            이번 주의 교정이 다음 주의 시작점이 되는 구조예요.
-          </p>
-        </div>
-
-        <div style={{marginTop:32,padding:'28px 32px',background:'rgba(184,134,11,0.06)',border:`1px solid rgba(184,134,11,0.2)`,borderRadius:14}}>
-          <p style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.5,marginBottom:12,textTransform:'uppercase'}}>Peer Feedback · 커뮤니티의 힘</p>
-          <p style={{fontSize:14,color:T.txt,lineHeight:1.9}}>
-            피드백 단계에는 <strong>원어민 서면 피드백</strong>과 함께 <strong>동료와의 피어 피드백</strong>이 함께 이루어져요.
-            토요일마다 동료의 스피치를 듣고 <strong style={{color:T.gold}}>"전달 체크 · 표현 수집 · 차이 발견"</strong> 3관점으로 짧게 코멘트해요. 평가가 아니라, 서로의 스피치를 거울 삼아 배우는 구조예요.
+        {/* 하단 callout — 피드백→인풋 메시지 + 피어 피드백 통합 */}
+        <div style={{marginTop:28,padding:'28px 32px',background:'rgba(184,134,11,0.06)',border:`1px solid rgba(184,134,11,0.22)`,borderLeft:`4px solid ${T.gold}`,borderRadius:12}}>
+          <p style={{fontSize:'clamp(15px,1.8vw,17px)',color:T.txt,lineHeight:1.85,fontWeight:500}}>
+            <strong style={{color:T.gold,fontWeight:700}}>피드백 → 다시 인풋</strong>으로 돌아가요. 이번 주의 교정이 다음 주의 시작점이 되는 구조예요. 피드백 단계에는 원어민 서면 피드백과 동료의 피어 피드백이 함께 이루어져, 평가가 아니라 서로의 스피치를 거울 삼아 배웁니다.
           </p>
         </div>
       </div>
-      <style>{`@media(max-width:640px){.loop-grid{grid-template-columns:1fr!important}}`}</style>
+      <style>{`@media(max-width:640px){.loop-grid{grid-template-columns:1fr!important;grid-template-rows:repeat(4,1fr)!important}.loop-center,.loop-arrow{display:none!important}}`}</style>
     </Sec>
 
     {/* ━ 12. BEFORE/AFTER ━ */}
@@ -568,7 +590,7 @@ function TedProgram({nav}){
     <Sec label="YOUR 4 WEEKS" title={<>4주 뒤, 당신의 영어가<br/>달라져 있을 겁니다</>} sub="이 시스템에 투자하는 4주가 혼자 흘려보내는 6개월을 바꿉니다.">
       <PricingCards nav={nav}/>
       <p style={{textAlign:'center',fontSize:13,color:T.txtD,marginTop:36,lineHeight:2}}>
-        * 파일럿 기수는 정원 <strong style={{color:T.txt}}>20명</strong>으로 운영되며, 2기 이후 오픈 여부와 일정은 미정이에요.<br/>
+        * 파일럿 기수는 <strong style={{color:T.txt}}>인원이 한정</strong>되어 있으며, 2기 이후 오픈 여부와 일정은 미정이에요.<br/>
         * 추후 alumni 네트워킹 모임 진행 시 참여 우선권이 제공돼요.<br/>
         ※ 신청 ≠ 결제. 검토 후 선발된 분에게 결제 안내를 드려요.<br/>
         ※ 결제 후 환불은 불가해요.
@@ -610,7 +632,7 @@ function TedProgram({nav}){
           신청은 <strong style={{color:T.txt}}>무료</strong>이며, 검토 후 선발된 분에게 결제 안내를 드려요.
         </p>
         <button onClick={()=>nav('waitlist')} style={{padding:'18px 40px',background:T.navy,color:'#fff',fontSize:16,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadowH}}>사전 신청하기 →</button>
-        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>무료 · 파일럿 기수 정원 20명 · 2기 오픈 여부 미정</p>
+        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>무료 · 파일럿 기수 인원 한정 · 2기 오픈 여부 미정</p>
       </div>
     </section>
 
@@ -932,7 +954,7 @@ function PricingCards({nav}){
         </div>
         <div style={{textAlign:'right'}}>
           <p style={{fontSize:'clamp(32px,4vw,42px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:14,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>정원 20명 · 선착순</p>
+          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>선착순 · 인원 한정</p>
         </div>
       </div>
       <ul style={{listStyle:'none',padding:0,margin:'0 0 32px'}}>
@@ -1071,8 +1093,7 @@ function FeedbackSample(){
     </BlockCard>
 
     <p style={{fontSize:12,color:T.txtD,textAlign:'center',marginTop:24,lineHeight:1.8}}>
-      ※ 피드백 예시는 수강생의 수준과 스피치 내용에 따라 달라져요.<br/>
-      ※ 실제 수강생의 스피치·피드백을 재구성한 샘플입니다.
+      ※ 피드백 예시는 샘플이며, 실제 내용 및 분량은 수강생의 수준과 스피치 내용에 따라 달라질 수 있습니다.
     </p>
 
     <style>{`@media(max-width:600px){.fb-compare{grid-template-columns:1fr!important}}`}</style>
