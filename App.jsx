@@ -273,6 +273,33 @@ function TedProgram({nav}){
       <p style={{textAlign:'center',marginTop:44,fontSize:16,color:T.txt,lineHeight:1.7}}>의지력의 문제가 아닙니다.<br/><span style={{color:T.gold,fontWeight:700}}>시스템의 문제</span>였을 뿐.</p>
     </Sec>
 
+    {/* WHY THIS SYSTEM — Grace BPM 전문성 */}
+    <Sec label="WHY THIS SYSTEM" title={<>왜 '시스템'이어야 할까요?</>}>
+      <div style={{maxWidth:720,margin:'0 auto'}}>
+        <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'40px 36px',boxShadow:T.shadow}}>
+          <p style={{fontSize:14,color:T.gold,fontWeight:600,marginBottom:18,letterSpacing:0.3}}>본업 이야기</p>
+          <p style={{fontSize:15,color:T.txt,lineHeight:2,marginBottom:20}}>
+            저는 글로벌 빅테크에서 <strong>Business Process Management</strong>를 합니다. 쉽게 말하면, <strong style={{color:T.gold}}>시스템을 설계해서 사람들의 행동을 바꾸는 일</strong>이에요.
+          </p>
+          <p style={{fontSize:14,color:T.txtS,lineHeight:2,marginBottom:20}}>
+            어떤 지표를 볼지, 어떤 주기로 트래킹할지, 누가 리포팅할지를 설계해서 리더들의 우선순위와 행동을 바꾸고, 리더들의 변화를 통해 전사 직원의 움직임을 유도합니다. 이 과정을 8년간 반복하면서 한 가지를 확신하게 됐어요.
+          </p>
+          <p style={{fontSize:17,color:T.txt,fontWeight:700,lineHeight:1.8,marginBottom:20,paddingLeft:20,borderLeft:`3px solid ${T.gold}`}}>
+            좋은 시스템 하나가 개인의 의지보다<br/>훨씬 큰 임팩트를 만들어냅니다.
+          </p>
+          <p style={{fontSize:14,color:T.txtS,lineHeight:2,marginBottom:20}}>
+            이 프로그램은 제가 본업에서 익힌 시스템 설계를 <strong style={{color:T.txt}}>영어 학습</strong>에 적용한 결과물입니다. 습관이 들면 꾸준한 변화를 만들 수 있고, 더 이상 학원에 의존하지 않고 <strong style={{color:T.txt}}>스스로 할 수 있는 힘</strong>을 길러주도록 설계했어요.
+          </p>
+          <p style={{fontSize:14,color:T.txtS,lineHeight:2,marginBottom:20}}>
+            쉽지는 않을 거예요. 하지만 매일 과제는 <strong style={{color:T.txt}}>snack 사이즈</strong>이고, 여기서 나오는 표현·구조는 실제 비즈니스 상황에서 바로 쓸 수 있는 것들입니다.
+          </p>
+          <p style={{fontSize:14,color:T.gold,lineHeight:1.9,fontWeight:600}}>
+            4주 뒤 돌이켜봤을 때, <br/>"영어 습관을 만드는 데 이만한 게 없었다"고 말하실 거라 확신합니다.
+          </p>
+        </div>
+      </div>
+    </Sec>
+
     {/* METHOD */}
     <Sec label="THE METHOD" title={<>TED Talk 기반<br/>10단계 스피킹 메소드</>}>
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:16}}>
@@ -302,53 +329,77 @@ function TedProgram({nav}){
       </div>
     </Sec>
 
-    {/* 원어민 튜터 소개 */}
-    <section style={{padding:'80px 24px',textAlign:'center',borderTop:`1px solid ${T.border}`}}>
-      <div style={{maxWidth:680,margin:'0 auto'}}>
-        <SL>NATIVE TUTOR</SL>
-        <SH>캐나다 명문대 출신 원어민 튜터의<br/>1:1 맞춤 피드백</SH>
-        <p style={{fontSize:15,color:T.txtS,lineHeight:1.8,marginTop:20}}>
-          매주 당신의 스피치를 직접 듣고 피드백합니다.<br/>
-          한국인이 자주 놓치는 발음, 인토네이션, 표현의 자연스러움까지 —<br/>
-          <strong style={{color:T.txt}}>교과서에 없는 피드백</strong>을 받으세요.
+    {/* SAMPLE CURRICULUM — 4주 TED Talk 샘플 */}
+    <Sec label="SAMPLE CURRICULUM" title={<>1기 커리큘럼 엿보기<br/>비즈니스 × 자기계발</>} sub="이번 달의 주제는 '비즈니스 성장을 위한 자기계발'입니다. 주차별 TED Talk 1편씩, 모두 5~6분 안팎으로 1주일 안에 충분히 마스터할 수 있도록 큐레이션했어요.">
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:14,maxWidth:900,margin:'0 auto'}}>
+        {[
+          {w:'Week 1',t:'3 ways to measure your adaptability',sp:'Natalie Fratto',dur:'6:23',url:'https://www.ted.com/talks/natalie_fratto_3_ways_to_measure_your_adaptability_and_how_to_improve_it'},
+          {w:'Week 2',t:'Why working from home is good for business',sp:'Matt Mullenweg',dur:'4:27',url:'https://www.ted.com/talks/matt_mullenweg_why_working_from_home_is_good_for_business'},
+          {w:'Week 3',t:'3 steps to getting what you want in a negotiation',sp:'Ruchi Sinha',dur:'5:00',url:'https://www.ted.com/talks/ruchi_sinha_3_steps_to_getting_what_you_want_in_a_negotiation'},
+          {w:'Week 4',t:'3 rules for better work-life balance',sp:'Ashley Whillans',dur:'5:07',url:'https://www.ted.com/talks/ashley_whillans_3_rules_for_better_work_life_balance'},
+        ].map((v,i)=>(
+          <a key={i} href={v.url} target="_blank" rel="noreferrer" style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:'24px 22px',textDecoration:'none',boxShadow:T.shadow,transition:'all 0.2s',display:'block'}} onMouseEnter={e=>{e.currentTarget.style.boxShadow=T.shadowH;e.currentTarget.style.borderColor=T.borderH}} onMouseLeave={e=>{e.currentTarget.style.boxShadow=T.shadow;e.currentTarget.style.borderColor=T.border}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+              <span style={{fontSize:10,fontWeight:700,color:T.gold,letterSpacing:1.2,textTransform:'uppercase'}}>{v.w} · BUSINESS</span>
+              <span style={{fontSize:11,color:T.txtD,fontFamily:"'DM Sans',sans-serif"}}>▶ {v.dur}</span>
+            </div>
+            <h3 style={{fontSize:15,fontWeight:700,color:T.txt,marginBottom:6,lineHeight:1.4}}>{v.t}</h3>
+            <p style={{fontSize:12,color:T.txtS}}>{v.sp}</p>
+            <p style={{fontSize:11,color:T.gold,marginTop:12,fontWeight:600}}>TED에서 보기 →</p>
+          </a>
+        ))}
+      </div>
+      <div style={{maxWidth:640,margin:'32px auto 0',padding:'20px 24px',background:'rgba(184,134,11,0.06)',border:`1px solid rgba(184,134,11,0.2)`,borderRadius:12,textAlign:'center'}}>
+        <p style={{fontSize:13,color:T.txt,lineHeight:1.8}}>
+          <strong style={{color:T.gold}}>💡 참여 적합도 체크</strong><br/>
+          위 영상 중 하나를 골라 들어보세요.<br/>
+          <strong>60~80% 정도 이해</strong>된다면 이 스터디에 딱 맞는 레벨입니다.
         </p>
+      </div>
+    </Sec>
+
+    {/* 원어민 튜터 소개 */}
+    <section style={{padding:'80px 24px',borderTop:`1px solid ${T.border}`}}>
+      <div style={{maxWidth:760,margin:'0 auto'}}>
+        <div style={{textAlign:'center',marginBottom:40}}>
+          <SL>NATIVE TUTOR</SL>
+          <SH>매주, 내 스피치를 직접 듣는<br/>원어민 튜터</SH>
+        </div>
+        <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'36px 32px',boxShadow:T.shadow}}>
+          <div style={{display:'grid',gap:14}}>
+            {[
+              {k:'학력',v:'캐나다 명문대 생물의학 전공 · QS 세계대학 Top 150'},
+              {k:'경력',v:'영어 스피킹 전문 지도 6년 이상'},
+              {k:'이력',v:'대기업 및 임원 대상 영어 티칭 경험'},
+              {k:'언어',v:'영어 · 한국어 · 중국어 유창'},
+            ].map((r,i)=>(
+              <div key={i} style={{display:'flex',gap:20,alignItems:'flex-start',paddingBottom:14,borderBottom:i<3?`1px solid ${T.border}`:'none'}}>
+                <span style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1,minWidth:44,paddingTop:2}}>{r.k}</span>
+                <span style={{fontSize:14,color:T.txt,lineHeight:1.7}}>{r.v}</span>
+              </div>
+            ))}
+          </div>
+          <p style={{fontSize:13,color:T.txtS,lineHeight:1.8,marginTop:24,paddingTop:20,borderTop:`1px solid ${T.border}`}}>
+            한국인이 자주 놓치는 발음·인토네이션·표현의 자연스러움까지 —<br/>
+            <strong style={{color:T.txt}}>교과서에는 없는 피드백</strong>을 매주 받아보세요.
+          </p>
+        </div>
       </div>
     </section>
 
+    {/* 피드백 샘플 */}
+    <Sec label="FEEDBACK SAMPLE" title={<>실제 원어민 피드백은<br/>어떻게 받게 되나요?</>} sub="매주 일요일 저녁까지 다음과 같은 형식의 서면 피드백을 받습니다. 스피치 샘플 → 구조화된 피드백 순으로 보여드립니다." bg={T.bgWarm}>
+      <FeedbackSample/>
+    </Sec>
+
     {/* PRICING — 3 tier */}
     <Sec label="PRICING" title={<>투자 대비 가장 확실한<br/>성장을 약속합니다</>} bg={T.bgWarm}>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:18,maxWidth:960,margin:'0 auto'}}>
-        {/* Tier 1 */}
-        <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadowH}}>
-          <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.gold,color:'#fff',fontSize:10,fontWeight:700,borderRadius:6}}>1기 모집 중</div>
-          <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 서면 피드백</p>
-          <p style={{fontSize:34,fontWeight:800,color:T.txt,margin:'12px 0 4px',letterSpacing:-1}}>₩150,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
-            {['매주 TED Talk 1편 커리큘럼','10단계 스피킹 메소드 가이드','디스코드 커뮤니티 접근','매일 과제 + 과제 완료 트래킹','피어 피드백','4주 완주 포트폴리오','원어민 튜터 1:1 서면 맞춤 피드백 (주간 스피치)'].map(f=>(<li key={f} style={{fontSize:13,color:T.txtS,padding:'9px 0',borderBottom:`1px solid ${T.border}`}}>✓ {f}</li>))}
-          </ul>
-        </div>
-        {/* Tier 2 */}
-        <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadow,opacity:0.75}}>
-          <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
-          <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 비디오 피드백</p>
-          <p style={{fontSize:34,fontWeight:800,color:T.txt,margin:'12px 0 4px',letterSpacing:-1}}>₩200,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
-            {['Tier 1 전체 포함','원어민 튜터 1:1 비디오 맞춤 피드백 (주간 스피치)'].map(f=>(<li key={f} style={{fontSize:13,color:T.txtS,padding:'9px 0',borderBottom:`1px solid ${T.border}`}}>✓ {f}</li>))}
-          </ul>
-        </div>
-        {/* Tier 3 */}
-        <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadow,opacity:0.75}}>
-          <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
-          <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>프리미엄 + 1:1 컨설팅</p>
-          <p style={{fontSize:34,fontWeight:800,color:T.txt,margin:'12px 0 4px',letterSpacing:-1}}>₩300,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
-            {['Tier 2 전체 포함','1:1 온보딩 컨설팅 (Grace 직접)','중간 컨설팅 (Grace 직접)'].map(f=>(<li key={f} style={{fontSize:13,color:T.txtS,padding:'9px 0',borderBottom:`1px solid ${T.border}`}}>✓ {f}</li>))}
-          </ul>
-        </div>
-      </div>
-      <p style={{textAlign:'center',fontSize:12,color:T.txtD,marginTop:28,lineHeight:1.8}}>
+      <PricingCards nav={nav}/>
+      <p style={{textAlign:'center',fontSize:12,color:T.txtD,marginTop:28,lineHeight:1.9}}>
         * 추후 alumni 네트워킹 모임 진행 시 참여 우선권이 제공됩니다.<br/>
-        ※ 결제 후 환불은 불가합니다. 신중히 결정해주세요.
+        ※ 1기 특별가: <strong style={{color:T.txt}}>120,000원</strong> (정가 150,000원 → 대기자 한정 할인)<br/>
+        ※ 신청 ≠ 결제. 검토 후 선발된 분에게 결제 안내를 드립니다.<br/>
+        ※ 결제 후 환불은 불가합니다.
       </p>
     </Sec>
 
@@ -378,37 +429,128 @@ function TedProgram({nav}){
 // WAITLIST — 확장된 신청서
 // ━━━━━━━━━━━━━━━━━━━━━━━━
 function WaitlistForm({submitForm,formMsg,nav}){
-  return(<div style={{padding:'80px 24px 60px',maxWidth:480,margin:'0 auto'}}>
-    <div style={{textAlign:'center',marginBottom:32}}><Flame size={40}/></div>
-    <h2 style={{fontSize:26,fontWeight:800,color:T.txt,textAlign:'center',marginBottom:10}}>TED 스터디 사전 등록</h2>
-    <p style={{fontSize:14,color:T.txtS,textAlign:'center',marginBottom:32,lineHeight:1.7}}>사전 등록하시면 오픈 소식과 1기 특별가를 가장 먼저 받으실 수 있습니다.</p>
-    {formMsg?<div style={{padding:28,background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:14,textAlign:'center'}}><p style={{fontSize:17,fontWeight:700,color:T.gold}}>{formMsg}</p></div>:
-    <form onSubmit={e=>submitForm(e,'https://formspree.io/f/xgopnwdd')} style={{display:'flex',flexDirection:'column',gap:12}}>
-      <In name="name" placeholder="이름" required/>
-      <In name="email" type="email" placeholder="이메일" required/>
-      <In name="phone" placeholder="휴대폰 (알림용, 선택)"/>
-      <In name="nickname" placeholder="커뮤니티 닉네임 (선택)"/>
-      <In name="discord_id" placeholder="디스코드 ID (필수)" required/>
-      <Sel name="english_level" required>
-        <option value="">현재 영어 레벨 (필수)</option>
-        <option value="beginner">초급 — 간단한 문장 읽기 가능</option>
-        <option value="intermediate">중급 — 일상 대화 가능, 업무 영어 어려움</option>
-        <option value="upper-intermediate">중상급 — 업무 영어 가능, 유창함은 부족</option>
-      </Sel>
-      <In name="motivation" placeholder="참여 동기 (한 줄, 필수)" required/>
-      <In name="industry" placeholder="소속 업계 (선택, Grace만 열람)"/>
-      <In name="expectation" placeholder="이 프로그램에 기대하는 것 (선택)"/>
+  const Label=({children,req})=>(<p style={{fontSize:13,fontWeight:700,color:T.txt,marginBottom:10,marginTop:8,letterSpacing:-0.2}}>{children}{req&&<span style={{color:T.gold,marginLeft:4}}>*</span>}</p>)
+  const HelpText=({children})=>(<p style={{fontSize:11,color:T.txtD,marginBottom:10,lineHeight:1.6}}>{children}</p>)
+  const Radio=({name,value,children})=>(
+    <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
+      <input type="radio" name={name} value={value} required style={{marginTop:3,accentColor:T.gold}}/>
+      <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
+    </label>
+  )
+  const Check=({name,value,children})=>(
+    <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
+      <input type="checkbox" name={name} value={value} style={{marginTop:3,accentColor:T.gold}}/>
+      <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
+    </label>
+  )
+  const FieldBlock=({children})=>(<div style={{marginBottom:28}}>{children}</div>)
 
-      <label style={{display:'flex',alignItems:'flex-start',gap:10,marginTop:8,cursor:'pointer',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10}}>
-        <input type="checkbox" name="privacy_consent" required style={{marginTop:2,accentColor:T.gold}}/>
-        <span style={{fontSize:12,color:T.txtS,lineHeight:1.6}}><strong style={{color:T.txt}}>[필수]</strong> 개인정보 수집·이용 동의<br/><span style={{color:T.txtD,fontSize:11}}>이름, 이메일, 휴대폰, 디스코드 ID를 프로그램 안내 목적으로 수집합니다.</span></span>
-      </label>
-      <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10}}>
-        <input type="checkbox" name="marketing_consent" style={{marginTop:2,accentColor:T.gold}}/>
-        <span style={{fontSize:12,color:T.txtS,lineHeight:1.6}}><strong style={{color:T.txt}}>[선택]</strong> 마케팅 정보 수신 동의<br/><span style={{color:T.txtD,fontSize:11}}>새 칼럼·프로그램·이벤트 안내를 받으실 수 있습니다.</span></span>
-      </label>
-      <button type="submit" style={{padding:14,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',marginTop:4,boxShadow:T.shadow}}>사전 등록하기</button>
-      <p style={{fontSize:11,color:T.txtD,textAlign:'center'}}>무료 · 결제 아님</p>
+  return(<div style={{padding:'80px 24px 60px',maxWidth:560,margin:'0 auto'}}>
+    <div style={{textAlign:'center',marginBottom:28}}><Flame size={40}/></div>
+    <h2 style={{fontSize:26,fontWeight:800,color:T.txt,textAlign:'center',marginBottom:10,letterSpacing:-0.8}}>TED 올인원 스터디 1기 신청</h2>
+    <p style={{fontSize:13,color:T.txtS,textAlign:'center',marginBottom:36,lineHeight:1.7}}>
+      신청서를 검토 후 선발된 분께 결제 안내를 드립니다.<br/>
+      <strong style={{color:T.gold}}>신청은 무료</strong>이며, 작성에는 약 3분이 소요됩니다.
+    </p>
+
+    {formMsg?<div style={{padding:32,background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:14,textAlign:'center'}}>
+      <p style={{fontSize:17,fontWeight:700,color:T.gold,marginBottom:10}}>{formMsg}</p>
+      <p style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>제출해주셔서 감사합니다.<br/>검토 후 이메일/휴대폰으로 연락드리겠습니다.</p>
+    </div>:
+    <form onSubmit={e=>submitForm(e,'https://formspree.io/f/xgopnwdd')} style={{display:'flex',flexDirection:'column'}}>
+
+      {/* 기본 정보 */}
+      <FieldBlock>
+        <Label req>기본 정보</Label>
+        <HelpText>연락용으로만 사용되며, 외부에 공유되지 않습니다.</HelpText>
+        <div style={{display:'flex',flexDirection:'column',gap:10}}>
+          <In name="name" placeholder="이름" required/>
+          <In name="phone" placeholder="휴대폰 번호" required/>
+          <In name="email" type="email" placeholder="이메일" required/>
+        </div>
+      </FieldBlock>
+
+      {/* 영어 상황 */}
+      <FieldBlock>
+        <Label req>현재 영어 상황 (택 1)</Label>
+        <Radio name="english_status" value="a">읽기는 되는데 말은 거의 못 함. 외국인 앞에서 얼어붙은 적 있음.</Radio>
+        <Radio name="english_status" value="b">간단한 인사/주문은 되는데, 회의나 발표에서 의견 말하기 어려움.</Radio>
+        <Radio name="english_status" value="c">일상 대화는 되는데, 논리적으로 생각을 전달하는 게 약함.</Radio>
+        <Radio name="english_status" value="d">업무 영어는 하는데, 더 자연스럽고 설득력 있게 말하고 싶음.</Radio>
+      </FieldBlock>
+
+      {/* 학습 타입 */}
+      <FieldBlock>
+        <Label>나의 영어 학습 타입 (복수 선택 가능)</Label>
+        <HelpText>해당되는 모든 항목을 체크해주세요. 커리큘럼 보완 자료로 활용됩니다.</HelpText>
+        <Check name="learner_type_perfectionist" value="yes">완벽주의형 — 틀릴까봐 입을 못 연다</Check>
+        <Check name="learner_type_procrastinator" value="yes">실행 미루기형 — 시작은 맨날 하는데 3일이면 흐지부지</Check>
+        <Check name="learner_type_input_heavy" value="yes">인풋 과다형 — 영상/책은 많이 보는데 아웃풋이 없다</Check>
+        <Check name="learner_type_no_env" value="yes">환경 부재형 — 영어 쓸 일이 없어서 연습할 곳이 없다</Check>
+        <Check name="learner_type_lost" value="yes">방법 미아형 — 이것저것 해봤는데 뭐가 맞는지 모르겠다</Check>
+      </FieldBlock>
+
+      {/* 공부법 */}
+      <FieldBlock>
+        <Label req>지금까지 해본 영어 공부법</Label>
+        <textarea name="study_history" required placeholder="예: 토익, 학원, 미드 쉐도잉, 영어 앱, 1:1 과외, 독학 등" style={{width:'100%',minHeight:80,padding:'12px 14px',background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
+      </FieldBlock>
+
+      {/* 기대하는 것 */}
+      <FieldBlock>
+        <Label req>이 프로그램에서 얻고 싶은 것</Label>
+        <HelpText>⭐ <strong style={{color:T.gold}}>이 답변이 선발에 반영됩니다.</strong> 구체적으로 써주세요.</HelpText>
+        <textarea name="expectation" required placeholder="예: 매일 짧게라도 영어로 말하는 습관을 만들고 싶다 / 회의에서 의견을 논리적으로 전달할 수 있게 되고 싶다" style={{width:'100%',minHeight:100,padding:'12px 14px',background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
+      </FieldBlock>
+
+      {/* 추가 정보 (선택) */}
+      <FieldBlock>
+        <Label>추가 정보 (선택)</Label>
+        <HelpText>비슷한 업계/연차 분들 매칭에 참고됩니다. 회사명은 비공개 처리됩니다.</HelpText>
+        <div style={{display:'flex',flexDirection:'column',gap:10}}>
+          <In name="industry" placeholder="업계/분야 (예: IT, 금융, 마케팅, 교육 등)"/>
+          <In name="company" placeholder="회사명 (비공개 처리됩니다)"/>
+          <Sel name="years">
+            <option value="">연차 선택</option>
+            <option value="1-3">1~3년차</option>
+            <option value="4-7">4~7년차</option>
+            <option value="8-10">8~10년차</option>
+            <option value="11+">11년차 이상</option>
+            <option value="student">학생 · 취준생</option>
+          </Sel>
+        </div>
+      </FieldBlock>
+
+      {/* 동의 */}
+      <FieldBlock>
+        <Label req>동의 항목</Label>
+        <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'14px 16px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,marginBottom:8}}>
+          <input type="checkbox" name="privacy_consent" required style={{marginTop:3,accentColor:T.gold}}/>
+          <span style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>
+            <strong style={{color:T.txt}}>[필수]</strong> 개인정보 수집·이용에 동의합니다.<br/>
+            <span style={{color:T.txtD,fontSize:11}}>
+              · 수집 항목: 이름, 연락처, 이메일<br/>
+              · 수집 목적: 프로그램 운영 및 안내<br/>
+              · 보유 기간: 프로그램 종료 후 1년
+            </span>
+          </span>
+        </label>
+        <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'14px 16px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10}}>
+          <input type="checkbox" name="marketing_consent" style={{marginTop:3,accentColor:T.gold}}/>
+          <span style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>
+            <strong style={{color:T.txt}}>[선택]</strong> 추후 네트워킹 이벤트 오픈 시 알림 받는 것에 동의합니다.
+          </span>
+        </label>
+      </FieldBlock>
+
+      <button type="submit" style={{padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',boxShadow:T.shadow,marginTop:8}}>신청 제출하기</button>
+
+      <div style={{marginTop:20,padding:'16px 18px',background:T.bgSoft,borderRadius:10,fontSize:11,color:T.txtD,lineHeight:1.9}}>
+        ※ <strong>신청 ≠ 결제</strong>입니다. 검토 후 선발된 분에게 결제 안내를 드립니다.<br/>
+        ※ 1기 특별가: <strong style={{color:T.txt}}>120,000원</strong> (정가 150,000원)<br/>
+        ※ 프로그램 구성과 가격은 기수별로 달라질 수 있습니다.<br/>
+        ※ 결제 후 환불은 불가합니다.
+      </div>
     </form>}
   </div>)
 }
@@ -548,6 +690,159 @@ function FormPg({title,desc,onSubmit,msg,btn,note,fields,extraCta}){
       {note&&<p style={{fontSize:11,color:T.txtD,textAlign:'center'}}>{note}</p>}
       {extraCta}
     </form>}
+  </div>)
+}
+
+// ─── PRICING CARDS ───
+function PricingCards({nav}){
+  // 공통 베이스 혜택 (Tier 1에 전부 포함, Tier 2·3에도 계승)
+  const base=[
+    '4주 TED 올인원 스터디 루틴 (인풋 + 아웃풋 통합 설계)',
+    '매주 엄선된 TED Talk 영상 제공',
+    '매일 과제 가이드 + 방법론 제시',
+    '과제 완료 실시간 트래킹',
+    '매주 1회 피어 피드백 시스템',
+    '스터디 전용 디스코드 커뮤니티 + 질문방',
+    '매주 개인별 진단 · 교정 · 방향성 제시',
+    '원어민 튜터 1:1 서면 피드백 (주 1회, 주간 스피치)',
+    '4주 완주 포트폴리오',
+  ]
+  const tier2Extra=[
+    '원어민 튜터 1:1 비디오 피드백 (주 1회, 주간 스피치)',
+  ]
+  const tier3Extra=[
+    '매주 원어민 라이브 코칭',
+    '원어민 튜터 1:1 온보딩 컨설팅',
+    'Grace 1:1 중간 컨설팅 2회 (시작·중간 점검)',
+    '전자책 《영어를 커리어 무기로 바꾼》 (89p) 제공',
+  ]
+
+  const Item=({text,hl})=>(
+    <li style={{fontSize:13,color:hl?T.txt:T.txtS,padding:'10px 0',borderBottom:`1px solid ${T.border}`,display:'flex',gap:8,alignItems:'flex-start',fontWeight:hl?600:400}}>
+      <span style={{color:hl?T.gold:T.txtD,flexShrink:0,marginTop:1}}>✓</span>
+      <span style={hl?{background:'rgba(184,134,11,0.12)',padding:'1px 6px',borderRadius:4,marginLeft:-2}:{}}>{text}</span>
+    </li>
+  )
+
+  return(<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18,maxWidth:1040,margin:'0 auto'}}>
+    {/* Tier 1 */}
+    <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadowH}}>
+      <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.gold,color:'#fff',fontSize:10,fontWeight:700,borderRadius:6}}>1기 모집 중</div>
+      <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 서면 피드백</p>
+      <div style={{margin:'12px 0 4px'}}>
+        <p style={{fontSize:11,color:T.txtD,textDecoration:'line-through',marginBottom:2}}>정가 ₩150,000</p>
+        <p style={{fontSize:32,fontWeight:800,color:T.txt,letterSpacing:-1}}>₩120,000<span style={{fontSize:12,color:T.txtS,fontWeight:400}}> / 4주</span></p>
+        <p style={{fontSize:11,color:T.gold,fontWeight:600}}>1기 특별가 · 대기자 한정</p>
+      </div>
+      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
+        {base.map(f=><Item key={f} text={f}/>)}
+      </ul>
+      <button onClick={()=>nav('waitlist')} style={{width:'100%',padding:13,background:T.navy,color:'#fff',fontSize:13,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',marginTop:20}}>사전 신청하기</button>
+    </div>
+
+    {/* Tier 2 */}
+    <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadow}}>
+      <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
+      <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>셀프 스터디 + 비디오 피드백</p>
+      <div style={{margin:'12px 0 4px'}}>
+        <p style={{fontSize:22,fontWeight:700,color:T.txtS,letterSpacing:-0.5}}>가격 추후 공지</p>
+        <p style={{fontSize:11,color:T.txtD,marginTop:4}}>2기부터 오픈 예정</p>
+      </div>
+      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
+        {base.map(f=><Item key={f} text={f}/>)}
+        {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
+      </ul>
+    </div>
+
+    {/* Tier 3 */}
+    <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 26px',position:'relative',boxShadow:T.shadow}}>
+      <div style={{position:'absolute',top:-12,left:26,padding:'4px 12px',background:T.bgSoft,color:T.txtS,fontSize:10,fontWeight:700,borderRadius:6,border:`1px solid ${T.border}`}}>오픈 예정</div>
+      <p style={{fontSize:13,color:T.gold,marginTop:8,fontWeight:600}}>프리미엄 올인원</p>
+      <div style={{margin:'12px 0 4px'}}>
+        <p style={{fontSize:22,fontWeight:700,color:T.txtS,letterSpacing:-0.5}}>가격 추후 공지</p>
+        <p style={{fontSize:11,color:T.txtD,marginTop:4}}>2기부터 오픈 예정</p>
+      </div>
+      <ul style={{listStyle:'none',padding:0,margin:'20px 0 0'}}>
+        {base.map(f=><Item key={f} text={f}/>)}
+        {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
+        {tier3Extra.map(f=><Item key={f} text={f} hl/>)}
+      </ul>
+    </div>
+  </div>)
+}
+
+// ─── FEEDBACK SAMPLE (접히는 카드) ───
+function FeedbackSample(){
+  const [open,setOpen]=useState(false)
+  const Block=({title,children})=>(
+    <div style={{marginBottom:22}}>
+      <p style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>{title}</p>
+      {children}
+    </div>
+  )
+  return(<div>
+    {/* 학생 스피치 샘플 */}
+    <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:'28px 30px',marginBottom:16,boxShadow:T.shadow}}>
+      <div style={{display:'flex',gap:10,alignItems:'center',marginBottom:18,flexWrap:'wrap'}}>
+        <span style={{padding:'3px 10px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:100,fontSize:10,color:T.txtS,fontWeight:600}}>Student: 야망이-07</span>
+        <span style={{fontSize:11,color:T.txtD}}>Topic: Why small habits matter</span>
+      </div>
+      <p style={{fontSize:13,color:T.txtS,lineHeight:2,fontStyle:'italic'}}>
+        "I think this TED talk is very important because it talks about small habits. The speaker says if we do small things everyday, we can change our life. For example, if we exercise little by little, we can become healthier…"
+      </p>
+    </div>
+
+    {/* 피드백 */}
+    <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:'32px 30px',boxShadow:T.shadow}}>
+      <p style={{fontSize:11,fontWeight:700,color:T.txt,letterSpacing:2,marginBottom:20,textTransform:'uppercase'}}>주간 스피치 서면 피드백</p>
+
+      <Block title="1. 빅픽쳐 (Big Picture)">
+        <p style={{fontSize:13,color:T.txtS,lineHeight:2,marginBottom:10}}><strong style={{color:T.txt}}>Input (Listening):</strong> You clearly understood the main idea about small habits and consistency.</p>
+        <p style={{fontSize:13,color:T.txtS,lineHeight:2,marginBottom:10}}><strong style={{color:T.txt}}>Understanding (Analysis):</strong> You identified the key message and used a relevant example.</p>
+        <p style={{fontSize:13,color:T.txtS,lineHeight:2}}><strong style={{color:T.txt}}>Output (Speech):</strong> Your structure is clearer than last week, and your ideas are easier to follow.</p>
+      </Block>
+
+      <Block title="2. 이번 주 업그레이드">
+        <div style={{background:T.bgSoft,padding:'16px 18px',borderRadius:10,marginBottom:10}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.gold,marginBottom:6}}>[PRON] 발음</p>
+          <p style={{fontSize:12,color:T.txtS,lineHeight:1.8}}>❌ habit → /hay-bit/<br/>✅ /hab-bit/<br/><span style={{color:T.txtD,fontSize:11}}>→ "happy / ham / hand" 할 때 같은 'ha' 입니다.</span></p>
+        </div>
+        <div style={{background:T.bgSoft,padding:'16px 18px',borderRadius:10,marginBottom:10}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.gold,marginBottom:6}}>[EXP] 표현</p>
+          <p style={{fontSize:12,color:T.txtS,lineHeight:1.8}}>❌ "I think this idea is very good"<br/>✅ "I think this idea is <strong>powerful</strong> because it focuses on small, consistent actions"<br/><span style={{color:T.txtD,fontSize:11}}>→ "very good" 대신 왜 좋은지 확장하는 문장으로.</span></p>
+        </div>
+        <div style={{background:T.bgSoft,padding:'16px 18px',borderRadius:10}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.gold,marginBottom:6}}>[STRUCT] 구성 / 흐름</p>
+          <p style={{fontSize:12,color:T.txtS,lineHeight:1.8}}>→ "First / For example / That's why" 같은 연결어를 사용하면 전체 흐름이 훨씬 자연스러워집니다.</p>
+        </div>
+      </Block>
+
+      {open && <>
+        <Block title="3. 재사용 가능한 표현">
+          <p style={{fontSize:13,color:T.txt,fontWeight:600,marginBottom:8,fontStyle:'italic'}}>"One thing that stood out to me is that small habits create long-term change."</p>
+          <p style={{fontSize:12,color:T.txtS,lineHeight:1.8}}>→ <strong>When to use:</strong> To highlight important things, when giving your opinion.<br/>→ <strong>Why useful:</strong> A natural way to introduce things, clearer speech structure.</p>
+        </Block>
+
+        <Block title="4. 다음 주 집중 포인트">
+          <p style={{fontSize:13,color:T.txtS,lineHeight:2}}>• Practice speaking in full sentences, not word-by-word<br/>• Use upgraded expressions at least 2 times<br/>• Add simple structure words (First / For example / That's why)</p>
+        </Block>
+
+        <Block title="5. 마무리 코멘트">
+          <p style={{fontSize:13,color:T.txt,lineHeight:1.9,fontStyle:'italic',paddingLeft:18,borderLeft:`3px solid ${T.gold}`}}>
+            "You're starting to organize your thoughts more clearly, and that's a big step. If you keep repeating this process, your speaking will become much more natural."
+          </p>
+        </Block>
+      </>}
+
+      <button onClick={()=>setOpen(!open)} style={{width:'100%',padding:12,background:T.bg,color:T.txt,border:`1px solid ${T.borderH}`,borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',marginTop:10}}>
+        {open?'접기 ↑':'더 보기 ↓ (표현 라이브러리 · 다음 주 포인트 · 마무리)'}
+      </button>
+    </div>
+
+    <p style={{fontSize:11,color:T.txtD,textAlign:'center',marginTop:20,lineHeight:1.7}}>
+      ※ 피드백 예시는 수강생의 수준과 스피치 내용에 따라 달라집니다.<br/>
+      ※ 실제 수강생의 스피치 · 피드백을 재구성한 샘플입니다.
+    </p>
   </div>)
 }
 
