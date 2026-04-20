@@ -233,7 +233,8 @@ function TedProgram({nav}){
   const weekRight=[
     {d:'Day 5 (금)',t:'쉐도잉 & 녹음',s:'스피커의 속도와 인토네이션을 따라 읽어요. 천천히 시작해서 영상 속도까지. 녹음해서 내 발화를 객관적으로 확인.',o:'녹음 제출'},
     {d:'Day 6 (토)',t:'3분 스피치',s:'이번 주 TED를 내 말로 요약하거나, 주제에 대한 내 의견을 3분 안에 말해요. 매주 쌓이면 포트폴리오가 돼요.',o:'스피치 녹음'},
-    {d:'Day 7 (일)',t:'피어 피드백 + 원어민 서면 피드백',s:'동료의 스피치를 듣고 전달 체크 · 표현 수집 · 차이 발견 3가지를 코멘트해요. 평가가 아니라 서로 거울이 되는 구조. 원어민 서면 피드백도 함께 받아요.',o:'주말까지 공유'},
+    {d:'Day 7-① (일)',t:'피어 피드백',s:'동료의 스피치를 듣고 전달 체크 · 표현 수집 · 차이 발견 3가지를 코멘트해요. 평가가 아니라 서로 거울이 되는 구조예요.',o:'주말까지 공유'},
+    {d:'Day 7-② (일)',t:'원어민 서면 피드백',s:'Day 6에 제출한 스피치를 원어민 튜터가 직접 듣고 발음·표현·구성·흐름 4가지 기준으로 서면 피드백을 드려요.',o:'별도 없음'},
   ]
   const beforeAfter=[
     {b:'영상 틀면 막막하고 속상하다. 뭔 말인지 모르겠고 어디서부터 손 대야 할지 모르겠다.',a:'안 들려도 당황하지 않는다. 어디가 안 들리는지, 왜 안 들리는지 스스로 진단할 수 있다.'},
@@ -391,7 +392,7 @@ function TedProgram({nav}){
               수능 영어 4등급. 유학 경험 없음. 국내 독학으로 영어를 시작해서, 말하기를 시작한 지 1년 만에 통역을 하게 됐어요.
             </p>
             <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
-              그 경험을 기반으로 TED 스터디를 직접 운영하며 구조를 다듬어왔어요. 이후 불어, 중국어까지 공부하고, 토스트마스터즈, 혼자 1분 말하기를 8년 넘게 이어오면서 하나의 확신이 생겼어요.
+              그 경험을 기반으로 TED 스터디를 직접 운영하며 구조를 다듬어왔어요. 이후 불어, 중국어를 공부하고, 토스트마스터즈, 혼자 1분 말하기, AI 활용 등 다양한 방법을 시도하며 부딪혀 본 결과 하나의 확신이 생겼어요.
             </p>
             <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:'#fff',fontWeight:700,lineHeight:1.7,marginBottom:24,letterSpacing:-0.3}}>
               인풋을 기반으로 아웃풋을 만들 때, 그 인풋이 진짜 내 것이 된다는 것.
@@ -457,28 +458,32 @@ function TedProgram({nav}){
     {/* ━ 7. WEEKLY ━ */}
     <Sec label="WEEKLY SCHEDULE" title="1주일, 이렇게 진행됩니다" sub="매일 한 시간 정도 필요해요. 출퇴근·점심·퇴근 후로 나눠서 언제 어디서든 실행할 수 있는 시스템이에요.">
       {(() => {
-        const DayItem=({w})=>(
+        // 왼쪽(Input+Understanding): 골드 톤 — 쌓는 단계
+        // 오른쪽(Output+Feedback): 웜 오렌지 톤 — 뱉는 단계
+        const GOLD={main:T.gold,tagBg:'rgba(184,134,11,0.12)',tagBd:'rgba(184,134,11,0.3)',cardBd:'rgba(184,134,11,0.2)'}
+        const ORANGE={main:'#C4652A',tagBg:'rgba(196,101,42,0.08)',tagBd:'rgba(196,101,42,0.2)',cardBd:'rgba(196,101,42,0.22)'}
+        const DayItem=({w,c})=>(
           <div style={{padding:'20px 22px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:12,marginBottom:12}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:10,marginBottom:10,flexWrap:'wrap'}}>
-              <span style={{display:'inline-block',padding:'4px 10px',background:'rgba(184,134,11,0.12)',border:`1px solid rgba(184,134,11,0.3)`,borderRadius:100,fontSize:11,color:T.gold,fontWeight:700,letterSpacing:0.3}}>{w.d}</span>
+              <span style={{display:'inline-block',padding:'4px 10px',background:c.tagBg,border:`1px solid ${c.tagBd}`,borderRadius:100,fontSize:11,color:c.main,fontWeight:700,letterSpacing:0.3}}>{w.d}</span>
               <span style={{fontSize:'clamp(15px,1.7vw,17px)',fontWeight:800,color:T.txt,letterSpacing:-0.3,lineHeight:1.3}}>{w.t}</span>
             </div>
             <p style={{fontSize:13,color:T.txtS,lineHeight:1.7,marginBottom:12}}>{w.s}</p>
-            <div style={{display:'inline-block',padding:'5px 10px',background:T.gold,color:'#fff',borderRadius:6,fontSize:11,fontWeight:700,letterSpacing:0.3}}>제출물 · {w.o}</div>
+            <div style={{display:'inline-block',padding:'5px 10px',background:c.main,color:'#fff',borderRadius:6,fontSize:11,fontWeight:700,letterSpacing:0.3}}>제출물 · {w.o}</div>
           </div>
         )
-        const GroupCard=({phase,title,sub,items})=>(
-          <div style={{border:`1px solid ${T.border}`,borderRadius:14,padding:'28px 28px 18px',background:T.bgCard,boxShadow:T.shadow}}>
-            <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:2,marginBottom:8,textTransform:'uppercase'}}>{phase}</p>
+        const GroupCard=({phase,title,sub,items,c})=>(
+          <div style={{border:`1px solid ${c.cardBd}`,borderRadius:14,padding:'28px 28px 18px',background:T.bgCard,boxShadow:T.shadow}}>
+            <p style={{fontSize:11,fontWeight:700,color:c.main,letterSpacing:2,marginBottom:8,textTransform:'uppercase'}}>{phase}</p>
             <h3 style={{fontSize:'clamp(17px,2vw,20px)',fontWeight:800,color:T.txt,marginBottom:6,letterSpacing:-0.4}}>{title}</h3>
             <p style={{fontSize:13,color:T.txtS,marginBottom:22,lineHeight:1.6}}>{sub}</p>
-            {items.map(w=><DayItem key={w.d} w={w}/>)}
+            {items.map(w=><DayItem key={w.d} w={w} c={c}/>)}
           </div>
         )
         return(
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}} className="week-grid">
-            <GroupCard phase="Input + Understanding" title="월~목: 듣고, 분석하고, 쌓는 시간" sub="이번 주 TED를 내 안에 통과시키는 단계" items={weekLeft}/>
-            <GroupCard phase="Output + Feedback" title="금~일: 말하고, 듣고, 교정받는 시간" sub="쌓인 인풋을 내 말과 기준으로 바꾸는 단계" items={weekRight}/>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,alignItems:'start'}} className="week-grid">
+            <GroupCard phase="Input + Understanding" title="월~목: 듣고, 분석하고, 쌓는 시간" sub="이번 주 TED를 내 안에 통과시키는 단계" items={weekLeft} c={GOLD}/>
+            <GroupCard phase="Output + Feedback" title="금~일: 말하고, 듣고, 교정받는 시간" sub="쌓인 인풋을 내 말과 기준으로 바꾸는 단계" items={weekRight} c={ORANGE}/>
           </div>
         )
       })()}
