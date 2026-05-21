@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react'
-import { COLUMNS, EBOOKS } from './data'
+import { COLUMNS, EBOOKS, TESTIMONIALS_TED1 } from './data'
 import { useAuth } from './src/useAuth'
 import GatedArticle from './src/GatedArticle'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const FORMSPREE_WAITLIST = 'https://formspree.io/f/xgopnwdd'
-const FORMSPREE_REGISTER = 'https://formspree.io/f/xkopqwya'
-const FORMSPREE_PAYMENT  = 'https://formspree.io/f/xgopnwdd'
-const BANK_INFO = { bank:'카카오뱅크', account:'0000-00-0000000', holder:'한채연' }
+// 2기 신청·결제는 래피드(Latpeed)에서 진행. URL은 만든 뒤 교체.
+const LATPEED_URL = 'https://latpeed.com/products/PLACEHOLDER_TODO'
+const goToLatpeed = () => window.open(LATPEED_URL, '_blank', 'noopener,noreferrer')
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const T = {
@@ -38,7 +37,6 @@ export default function App(){
   const auth=useAuth()
   const [page,setPage]=useState('home')
   const [postId,setPostId]=useState(null)
-  const [formMsg,setFormMsg]=useState('')
   const [ebookPreview,setEbookPreview]=useState(null)
 
   useEffect(()=>{
@@ -48,7 +46,7 @@ export default function App(){
       else if(hash==='ted-program'){setPage('ted-program');setPostId(null)}
       else if(hash==='blog'){setPage('blog');setPostId(null)}
       else if(hash==='article'){setPage('article');setPostId(null)}
-      else if(['register','waitlist','ebooks','admin','login','consent','payment'].includes(hash)){setPage(hash);setPostId(null)}
+      else if(['ebooks','admin','login','consent'].includes(hash)){setPage(hash);setPostId(null)}
       else{setPage('home');setPostId(null)}
       window.scrollTo(0,0)
     }
@@ -57,14 +55,7 @@ export default function App(){
 
   useEffect(()=>{if(auth.needsConsent&&page!=='consent')window.location.hash='consent'},[auth.needsConsent,page])
 
-  const nav=(p,id)=>{window.location.hash=id||p;setFormMsg('')}
-
-  const submitForm=async(e,endpoint)=>{
-    e.preventDefault();const fd=new FormData(e.target);const name=fd.get('name')
-    if(fd.get('privacy_consent')!=='on'){setFormMsg('개인정보 수집·이용에 동의해주세요.');setTimeout(()=>setFormMsg(''),4000);return}
-    try{const res=await fetch(endpoint,{method:'POST',body:fd,headers:{'Accept':'application/json'}});if(res.ok){setFormMsg(`감사합니다, ${name}님!`);e.target.reset()}else setFormMsg('오류가 발생했습니다.')}catch{setFormMsg('네트워크 오류.')}
-    setTimeout(()=>setFormMsg(''),6000)
-  }
+  const nav=(p,id)=>{window.location.hash=id||p}
 
   const post=postId?COLUMNS.find(c=>c.id===postId):null
 
@@ -79,7 +70,7 @@ export default function App(){
               {[['home','홈'],['article','아티클'],['ebooks','전자책'],['ted-program','TED 스터디']].map(([p,l])=>(<button key={p} onClick={()=>nav(p)} style={{background:'none',border:'none',cursor:'pointer',color:page===p?T.txt:T.txtS,fontSize:13,fontWeight:page===p?600:500,padding:0}}>{l}</button>))}
             </div>
             {auth.isLoggedIn?(<div style={{display:'flex',alignItems:'center',gap:8}}><span style={{fontSize:12,color:T.txtS,maxWidth:90,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{auth.profile?.display_name||auth.user?.email?.split('@')[0]}</span><button onClick={auth.signOut} style={{background:T.bg,border:`1px solid ${T.border}`,color:T.txtS,padding:'6px 12px',borderRadius:6,fontSize:11,fontWeight:500,cursor:'pointer'}}>로그아웃</button></div>):(<button onClick={()=>nav('login')} style={{background:'none',border:'none',color:T.txt,padding:0,fontSize:13,fontWeight:500,cursor:'pointer'}}>로그인</button>)}
-            <button onClick={()=>nav('waitlist')} style={{padding:'9px 18px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',boxShadow:T.shadow}}>사전 신청</button>
+            <button onClick={goToLatpeed} style={{padding:'9px 18px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기</button>
           </div>
         </div>
       </nav>
@@ -92,9 +83,6 @@ export default function App(){
         {page==='article'&&<GatedArticle auth={auth}/>}
         {page==='login'&&<Login auth={auth} nav={nav}/>}
         {page==='consent'&&<ConsentPage auth={auth} nav={nav}/>}
-        {page==='payment'&&<PaymentPage auth={auth} nav={nav}/>}
-        {page==='register'&&<FormPg title="회원가입" desc="가입하시면 칼럼 전체와 프로그램 소식을 먼저 받으실 수 있습니다." onSubmit={e=>submitForm(e,FORMSPREE_REGISTER)} msg={formMsg} btn="가입하기" fields={[{n:'name',p:'이름',r:true},{n:'email',p:'이메일',t:'email',r:true},{n:'phone',p:'휴대폰 번호 (선택)'}]}/>}
-        {page==='waitlist'&&<WaitlistForm submitForm={submitForm} formMsg={formMsg} nav={nav}/>}
         {page==='admin'&&<Admin/>}
       </main>
 
@@ -103,7 +91,7 @@ export default function App(){
         <div style={{maxWidth:1200,margin:'0 auto',padding:'64px 24px 32px',display:'grid',gridTemplateColumns:'1.3fr 1fr 1fr 1fr',gap:40}} className="footer-grid">
           <div><div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}><Flame size={24}/><span style={{fontSize:14,fontWeight:800,color:T.txt}}>조용한 야망가들</span></div><p style={{fontSize:12,color:T.txtS,lineHeight:1.8,maxWidth:280}}>Silent Ambitious People.<br/>떠들지 않지만 실행하는 사람들을 위한 커뮤니티.</p></div>
           <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>콘텐츠</p><FL onClick={()=>nav('article')}>아티클</FL><FL onClick={()=>nav('ebooks')}>전자책 · 자료집</FL><FL onClick={()=>nav('ted-program')}>TED 올인원 스터디</FL></div>
-          <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>커뮤니티</p><FL onClick={()=>nav('waitlist')}>파일럿 기수 사전 신청</FL><FL onClick={()=>nav('login')}>로그인 / 가입</FL><FL onClick={()=>nav('consent')}>개인정보 처리방침</FL></div>
+          <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>커뮤니티</p><FL onClick={goToLatpeed}>2기 신청하기</FL><FL onClick={()=>nav('login')}>로그인 / 가입</FL><FL onClick={()=>nav('consent')}>개인정보 처리방침</FL></div>
           <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>SNS</p><a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>YouTube</a><a href="https://instagram.com/kglobal.tech.girl" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>Instagram</a><a href="https://threads.net/@getnerdywithgrace" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>Threads</a></div>
         </div>
         <div style={{borderTop:`1px solid ${T.border}`,maxWidth:1200,margin:'0 auto',padding:'24px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:12}}><p style={{fontSize:11,color:T.txtD}}>© 2026 조용한 야망가들. All rights reserved.</p><div style={{display:'flex',gap:18}}><span onClick={()=>nav('consent')} style={{fontSize:11,color:T.txtD,cursor:'pointer'}}>개인정보처리방침</span><span onClick={()=>nav('admin')} style={{fontSize:11,color:T.txtD,cursor:'pointer'}}>관리자</span></div></div>
@@ -119,9 +107,9 @@ export default function App(){
 function Home({nav}){
   const features=[
     {icon:'📝',label:'아티클',desc:'나를 지켜주었던 말들',goto:'article'},
-    {icon:'🎙️',label:'TED 올인원 스터디',desc:'4주 집중 · 파일럿 기수 모집',goto:'ted-program'},
+    {icon:'🎙️',label:'TED 올인원 스터디',desc:'4주 집중 · 2기 모집중',goto:'ted-program'},
     {icon:'📚',label:'전자책 · 자료집',desc:'깊이 있는 이야기',goto:'ebooks'},
-    {icon:'💬',label:'디스코드 커뮤니티',desc:'실행하는 사람들',goto:'waitlist'},
+    {icon:'💬',label:'디스코드 커뮤니티',desc:'실행하는 사람들',goto:'ted-program'},
     {icon:'🔥',label:'실행 시스템',desc:'의지력이 아닌 구조',goto:'blog'},
     {icon:'🎯',label:'글로벌 커리어',desc:'비전공자 빅테크 로드맵',goto:'blog'},
   ]
@@ -146,12 +134,12 @@ function Home({nav}){
       <div style={{maxWidth:1100,margin:'0 auto',borderRadius:24,overflow:'hidden',background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,padding:'56px',display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:40,alignItems:'center',boxShadow:T.shadowH,position:'relative'}} className="featured-grid">
         <div style={{position:'absolute',top:'50%',right:'-15%',transform:'translateY(-50%)',width:500,height:500,background:'radial-gradient(circle,rgba(212,168,83,0.25) 0%,transparent 60%)',pointerEvents:'none'}}/>
         <div style={{position:'relative'}}>
-          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>파일럿 기수 · 사전 모집 중</div>
+          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>2기 모집 중 · 선착순 40명</div>
           <h2 style={{fontSize:'clamp(26px,3.4vw,36px)',fontWeight:800,color:'#fff',marginBottom:16,lineHeight:1.25,letterSpacing:-1}}>커리어 점프업을 위한<br/><span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:'#E8CFA0'}}>영어 TED 올인원 스터디</span></h2>
           <p style={{fontSize:15,color:'rgba(255,255,255,0.75)',marginBottom:26,lineHeight:1.7,maxWidth:480}}>TED Talk 기반 10단계 스피킹 메소드와<br/>캐나다 명문대 출신 원어민 튜터의 1:1 피드백.<br/>4주 동안 매일 실행하고, 매주 성장합니다.</p>
           <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
             <button onClick={()=>nav('ted-program')} style={{padding:'13px 24px',background:'#fff',color:T.navy,fontSize:14,fontWeight:700,border:'none',borderRadius:8,cursor:'pointer'}}>자세히 보기 →</button>
-            <button onClick={()=>nav('waitlist')} style={{padding:'13px 24px',background:'transparent',color:'#fff',fontSize:14,fontWeight:600,border:'1px solid rgba(255,255,255,0.3)',borderRadius:8,cursor:'pointer'}}>사전 신청</button>
+            <button onClick={goToLatpeed} style={{padding:'13px 24px',background:'transparent',color:'#fff',fontSize:14,fontWeight:600,border:'1px solid rgba(255,255,255,0.3)',borderRadius:8,cursor:'pointer'}}>2기 신청하기</button>
           </div>
         </div>
         <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:220,height:220,borderRadius:'50%',background:'radial-gradient(circle at 30% 30%,rgba(212,168,83,0.3),rgba(212,168,83,0.05))',border:'1px solid rgba(212,168,83,0.3)',display:'flex',alignItems:'center',justifyContent:'center'}}><Flame size={100}/></div></div>
@@ -243,20 +231,20 @@ function TedProgram({nav}){
     {b:'혼자 시작하면 3일 만에 포기한다.',a:'28일 연속 실행 기록. 시스템과 동료가 나를 움직여줬다.'},
   ]
   const timeline=[
-    {label:'사전 모집',date:'4월 21일(화) ~ 5월 1일(금) · 조기마감 가능',active:true},
-    {label:'정식 결제',date:'4월 29일(수) ~ 5월 1일(금)',active:false},
-    {label:'오리엔테이션',date:'5월 2일(토)',active:false},
-    {label:'스터디 시작',date:'5월 4일(월)',active:true},
+    {label:'2기 모집 시작',date:'(확정 시 업데이트)',active:true},
+    {label:'선착순 40명 마감',date:'정원 마감 시',active:false},
+    {label:'오리엔테이션',date:'(확정 시 업데이트)',active:false},
+    {label:'2기 시작',date:'(확정 시 업데이트)',active:false},
   ]
 
   const faqs=[
-    ['영어를 정말 못하는데 참여할 수 있나요?','TED 영상의 60% 정도는 이해할 수 있는 분을 기준으로 설계되어 있어요. 완벽하게 알아들을 필요는 없지만, 키워드와 전체 흐름을 파악할 수 있는 정도면 충분해요. 신청 시 현재 영어 상황을 여쭤보고, 프로그램에 적합한 분을 선발해요.'],
+    ['영어를 정말 못하는데 참여할 수 있나요?','TED 영상의 60% 정도는 이해할 수 있는 분을 기준으로 설계되어 있어요. 완벽하게 알아들을 필요는 없지만, 키워드와 전체 흐름을 파악할 수 있는 정도면 충분해요. 신청 시 현재 영어 상황을 여쭤보지만, 이는 추후 운영과 피드백 참고용이에요. 선착순으로 모집해요.'],
     ['직장인인데 시간이 될까요?','매일 한 시간 정도는 필요해요. 대신 출퇴근 시간에 리스닝, 점심시간에 노트테이킹, 퇴근 후 쉐도잉처럼 시간을 쪼개서 실행할 수 있는 시스템이에요. 저도 풀타임 직장인으로 이 루틴을 만들어 왔기 때문에 충분히 가능해요. 매일 제출물이 있어서 자연스럽게 루틴이 만들어져요.'],
-    ['신청하면 바로 결제인가요?','아니요. 신청서를 검토한 후 선발된 분에게만 결제 안내를 드려요. 신청 자체는 무료이고, 결제 의무가 없어요.'],
-    ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·리더십 중심의 TED Talk을 큐레이션해서 제공해요. 15분 이내 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 파일럿 기수는 "비즈니스 × 자기계발" 테마로 4편이 준비되어 있어요.'],
+    ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 정원 40명 선착순 마감이라 결제 완료 순으로 자리가 확정돼요. 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
+    ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·리더십 중심의 TED Talk을 큐레이션해서 제공해요. 15분 이내 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 2기는 "비즈니스 × 자기계발" 테마로 4편이 준비되어 있어요.'],
     ['피드백은 어떻게 받나요?','두 가지 피드백이 있어요. 매주 3분 요약 스피치에 대해 원어민 튜터가 서면으로 발음·표현·구성 피드백을 드려요. 거기에 매주 토요일 동료들과의 피어 피드백까지 — 혼자 연습할 때는 절대 얻을 수 없는 기준이 생겨요.'],
     ['4주 후에는 어떻게 되나요?','4주간 쌓은 노트·녹음·오답노트·스피치가 나만의 영어 포트폴리오가 돼요. 완주자에게는 다음 기수 우선 안내가 제공돼요.'],
-    ['환불은 가능한가요?','결제 후 환불은 불가해요. 선발 후 결제 전에 프로그램 상세를 충분히 확인하신 후 결정해주세요.'],
+    ['환불은 가능한가요?','결제 후 환불은 불가해요. 결제 전에 프로그램 상세를 충분히 확인하신 후 결정해주세요.'],
   ]
 
   // 큰 폰트 기반 섹션 헤더
@@ -277,7 +265,7 @@ function TedProgram({nav}){
       <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:900,height:600,background:'radial-gradient(ellipse,rgba(184,134,11,0.22) 0%,transparent 65%)',pointerEvents:'none'}}/>
       <svg style={{position:'absolute',top:'28%',left:'50%',transform:'translate(-50%,-50%)',width:700,height:700,opacity:0.15,pointerEvents:'none'}} viewBox="0 0 700 700"><circle cx="350" cy="350" r="320" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="260" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="200" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="140" fill="none" stroke="#B8860B" strokeWidth="0.7"/></svg>
       <div style={{position:'relative',maxWidth:900,margin:'0 auto'}}>
-        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>파일럿 기수 · 사전 모집 중 · 인원 한정</div>
+        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>2기 모집 중 · 선착순 40명</div>
         <h1 style={{fontSize:'clamp(36px,6.5vw,68px)',fontWeight:800,color:T.txt,lineHeight:1.12,marginBottom:30,letterSpacing:-2.5}}>
           토익은 되는데<br/>
           <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:T.gold}}>입이 안 열리는</span> 당신을 위한<br/>
@@ -289,7 +277,7 @@ function TedProgram({nav}){
           4주 동안 매일 실행하고, 매주 눈에 띄게 성장해요.
         </p>
         <div style={{display:'flex',gap:12,justifyContent:'center',flexWrap:'wrap',marginBottom:50}}>
-          <button onClick={()=>nav('waitlist')} style={{padding:'17px 36px',background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',boxShadow:'0 10px 30px rgba(184,134,11,0.25)'}}>사전 신청하기 →</button>
+          <button onClick={goToLatpeed} style={{padding:'17px 36px',background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',boxShadow:'0 10px 30px rgba(184,134,11,0.25)'}}>2기 신청하기 →</button>
           <button onClick={()=>scrollTo('curriculum')} style={{padding:'17px 36px',background:'rgba(255,255,255,0.9)',color:T.txt,fontSize:15,fontWeight:600,border:'1px solid rgba(184,134,11,0.35)',borderRadius:10,cursor:'pointer',backdropFilter:'blur(10px)'}}>커리큘럼 보기 ↓</button>
         </div>
         <div style={{maxWidth:680,margin:'0 auto',textAlign:'center'}}>
@@ -496,7 +484,7 @@ function TedProgram({nav}){
     </Sec>
 
     {/* ━ 8. SAMPLE CURRICULUM ━ */}
-    <Sec id="curriculum" label="SAMPLE CURRICULUM" title={<>1기 커리큘럼 엿보기<br/>비즈니스 × 자기계발</>} sub="이번 달의 테마는 '비즈니스 성장을 위한 자기계발'이에요. 주차별 TED Talk 1편씩, 모두 5~6분 안팎으로 1주일 안에 충분히 마스터할 수 있도록 큐레이션했어요." bg={T.bgWarm} maxW={1000}>
+    <Sec id="curriculum" label="SAMPLE CURRICULUM" title={<>2기 커리큘럼 엿보기<br/>비즈니스 × 자기계발</>} sub="이번 달의 테마는 '비즈니스 성장을 위한 자기계발'이에요. 주차별 TED Talk 1편씩, 모두 5~6분 안팎으로 1주일 안에 충분히 마스터할 수 있도록 큐레이션했어요." bg={T.bgWarm} maxW={1000}>
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(400px,1fr))',gap:18}}>
         {[
           {w:'Week 1',t:'3 ways to measure your adaptability',sp:'Natalie Fratto',dur:'6:23',url:'https://www.ted.com/talks/natalie_fratto_3_ways_to_measure_your_adaptability_and_how_to_improve_it'},
@@ -606,6 +594,35 @@ function TedProgram({nav}){
       <style>{`@media(max-width:640px){.loop-grid{grid-template-columns:1fr!important;grid-template-rows:repeat(4,1fr)!important}.loop-center,.loop-arrow{display:none!important}}`}</style>
     </Sec>
 
+    {/* ━ 11. TESTIMONIALS — 1기 후기 ━ */}
+    <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="4주를 함께 완주한 1기 수강생들이 들려준 변화. 후기 이미지는 곧 업데이트될 예정이에요.">
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:20}}>
+        {TESTIMONIALS_TED1.map(t=>{
+          const initial=(t.name||'?').replace(/[()]/g,'').trim().charAt(0)||'·'
+          return(
+            <div key={t.id} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 28px',boxShadow:T.shadow,display:'flex',flexDirection:'column'}}>
+              <div style={{display:'flex',alignItems:'center',gap:14,marginBottom:18}}>
+                {t.image?(
+                  <img src={t.image} alt={t.name} style={{width:56,height:56,borderRadius:'50%',objectFit:'cover',border:`1px solid ${T.border}`}}/>
+                ):(
+                  <div style={{width:56,height:56,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 50%,#E8CFA0 100%)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:20,fontWeight:700,letterSpacing:-0.5}}>{initial}</div>
+                )}
+                <span style={{fontFamily:"'Playfair Display',serif",fontSize:42,color:T.gold,lineHeight:1,opacity:0.5,marginLeft:'auto'}}>"</span>
+              </div>
+              <p style={{fontSize:15,color:T.txt,lineHeight:1.85,marginBottom:18,flex:1}}>{t.quote}</p>
+              {t.highlight&&(
+                <p style={{fontSize:14,fontWeight:700,color:T.gold,marginBottom:18,lineHeight:1.5,letterSpacing:-0.2}}>{t.highlight}</p>
+              )}
+              <div style={{paddingTop:14,borderTop:`1px solid ${T.border}`}}>
+                <p style={{fontSize:13,fontWeight:600,color:T.txt,marginBottom:2}}>{t.name}</p>
+                <p style={{fontSize:12,color:T.txtS}}>{t.role}</p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </Sec>
+
     {/* ━ 12. BEFORE/AFTER ━ */}
     <Sec label="TRANSFORMATION" title={<>4주 후,<br/>이런 변화가 생겨요</>} bg={T.bgWarm} maxW={960}>
       <div style={{display:'grid',gap:16}}>
@@ -631,9 +648,9 @@ function TedProgram({nav}){
     <Sec label="YOUR 4 WEEKS" title={<>4주 뒤, 당신의 영어가<br/>달라져 있을 겁니다</>} sub="이 시스템에 투자하는 4주가 혼자 흘려보내는 6개월을 바꿉니다.">
       <PricingCards nav={nav}/>
       <p style={{textAlign:'center',fontSize:13,color:T.txtD,marginTop:36,lineHeight:2}}>
-        * 파일럿 기수는 <strong style={{color:T.txt}}>인원이 한정</strong>되어 있으며, 2기 이후 오픈 여부와 일정은 미정이에요.<br/>
-        * 추후 alumni 네트워킹 모임 진행 시 참여 우선권이 제공돼요.<br/>
-        ※ 신청 ≠ 결제. 검토 후 선발된 분에게 결제 안내를 드려요.<br/>
+        * 2기는 <strong style={{color:T.txt}}>선착순 40명</strong>으로 한정되어 있어요.<br/>
+        * 완주자에게는 alumni 네트워킹 모임 참여 우선권이 제공돼요.<br/>
+        ※ 신청 페이지에서 결제와 함께 진행돼요.<br/>
         ※ 결제 후 환불은 불가해요.
       </p>
     </Sec>
@@ -669,11 +686,11 @@ function TedProgram({nav}){
       <div style={{maxWidth:720,margin:'0 auto'}}>
         <h2 style={{fontSize:'clamp(28px,4vw,42px)',fontWeight:800,color:T.txt,marginBottom:20,letterSpacing:-1.2,lineHeight:1.25}}>준비되셨나요?</h2>
         <p style={{fontSize:'clamp(15px,1.8vw,18px)',color:T.txtS,marginBottom:40,lineHeight:1.8}}>
-          사전 신청하시면 오픈 소식과 파일럿 기수 특별가를 가장 먼저 받으실 수 있어요.<br/>
-          신청은 <strong style={{color:T.txt}}>무료</strong>이며, 검토 후 선발된 분에게 결제 안내를 드려요.
+          신청 페이지에서 설문 작성과 결제가 한 번에 이루어져요.<br/>
+          <strong style={{color:T.txt}}>선착순 40명</strong> 마감 시 자동으로 신청이 닫혀요.
         </p>
-        <button onClick={()=>nav('waitlist')} style={{padding:'18px 40px',background:T.navy,color:'#fff',fontSize:16,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadowH}}>사전 신청하기 →</button>
-        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>무료 · 파일럿 기수 인원 한정 · 2기 오픈 여부 미정</p>
+        <button onClick={goToLatpeed} style={{padding:'18px 40px',background:T.navy,color:'#fff',fontSize:16,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadowH}}>2기 신청하기 →</button>
+        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>선착순 40명 · 결제 후 환불 불가</p>
       </div>
     </section>
 
@@ -686,220 +703,9 @@ function TedProgram({nav}){
   </div>)
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━
-// WAITLIST — 확장된 신청서
-// (헬퍼 컴포넌트는 모듈 레벨 — 매 렌더 새 함수 참조로 재마운트되는 버그 방지)
-// ━━━━━━━━━━━━━━━━━━━━━━━━
-const WLabel=({children,req})=>(<p style={{fontSize:13,fontWeight:700,color:T.txt,marginBottom:10,marginTop:8,letterSpacing:-0.2}}>{children}{req&&<span style={{color:T.gold,marginLeft:4}}>*</span>}</p>)
-const WHelp=({children})=>(<p style={{fontSize:11,color:T.txtD,marginBottom:10,lineHeight:1.6}}>{children}</p>)
-const WRadio=({name,value,onChange,checked,children})=>(
-  <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
-    <input type="radio" name={name} value={value} required style={{marginTop:3,accentColor:T.gold}} onChange={onChange} checked={checked}/>
-    <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
-  </label>
-)
-const WCheck=({name,value,children})=>(
-  <label style={{display:'flex',gap:10,alignItems:'flex-start',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,cursor:'pointer',marginBottom:6}}>
-    <input type="checkbox" name={name} value={value} style={{marginTop:3,accentColor:T.gold}}/>
-    <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>{children}</span>
-  </label>
-)
-const WField=({children})=>(<div style={{marginBottom:28}}>{children}</div>)
-
-const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const PHONE_RE=/^010-\d{4}-\d{4}$/
-const ERR_COLOR='#E24B4A'
-
-const formatPhone=(raw)=>{
-  const d=(raw||'').replace(/\D/g,'').slice(0,11)
-  if(d.length<4)return d
-  if(d.length<8)return `${d.slice(0,3)}-${d.slice(3)}`
-  return `${d.slice(0,3)}-${d.slice(3,7)}-${d.slice(7)}`
-}
-// 포맷 전후 커서 위치 재계산: 원본 문자열에서 커서 앞까지의 숫자 개수를 센 뒤, 포맷된 문자열에서 같은 개수의 숫자가 나타난 뒤의 인덱스로 이동
-const recalcPhoneCursor=(oldCursor,formatted)=>{
-  const digitsBefore=oldCursor
-  let count=0
-  for(let i=0;i<formatted.length;i++){
-    if(/\d/.test(formatted[i]))count++
-    if(count>=digitsBefore)return i+1
-  }
-  return formatted.length
-}
-
-function WaitlistForm({submitForm,formMsg,nav}){
-  const [errors,setErrors]=useState({})
-  const [phone,setPhone]=useState('')
-  const [email,setEmail]=useState('')
-  const [engStatus,setEngStatus]=useState('')
-  const phoneRef=useRef(null)
-  const cursorRef=useRef(null)
-
-  useLayoutEffect(()=>{
-    if(phoneRef.current&&cursorRef.current!==null){
-      const pos=cursorRef.current
-      phoneRef.current.setSelectionRange(pos,pos)
-      cursorRef.current=null
-    }
-  },[phone])
-
-  const onPhoneChange=(e)=>{
-    const raw=e.target.value
-    const rawCursor=e.target.selectionStart??raw.length
-    const digitsBeforeCursor=(raw.slice(0,rawCursor).match(/\d/g)||[]).length
-    const f=formatPhone(raw)
-    cursorRef.current=recalcPhoneCursor(digitsBeforeCursor,f)
-    setPhone(f)
-    if(errors.phone&&PHONE_RE.test(f))setErrors(p=>{const n={...p};delete n.phone;return n})
-  }
-  const onPhoneBlur=()=>{
-    if(phone&&!PHONE_RE.test(phone))setErrors(p=>({...p,phone:'010-0000-0000 형식으로 입력해주세요'}))
-  }
-  const onEmailChange=(e)=>{
-    const v=e.target.value
-    setEmail(v)
-    if(errors.email&&EMAIL_RE.test(v))setErrors(p=>{const n={...p};delete n.email;return n})
-  }
-  const onEmailBlur=()=>{
-    if(email&&!EMAIL_RE.test(email))setErrors(p=>({...p,email:'올바른 이메일 주소를 입력해주세요 (예: name@email.com)'}))
-  }
-
-  const onSubmit=(e)=>{
-    const newErr={}
-    if(!EMAIL_RE.test(email))newErr.email='올바른 이메일 주소를 입력해주세요 (예: name@email.com)'
-    if(!PHONE_RE.test(phone))newErr.phone='010-0000-0000 형식으로 입력해주세요'
-    if(Object.keys(newErr).length){e.preventDefault();setErrors(newErr);return}
-    setErrors({})
-    submitForm(e,'https://formspree.io/f/xgopnwdd')
-  }
-
-  const errStyle={fontSize:12,color:ERR_COLOR,marginTop:6,lineHeight:1.5}
-  const baseInput={width:'100%',padding:'12px 14px',background:T.bg,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit'}
-  const inputWithErr=(k)=>({...baseInput,border:`1px solid ${errors[k]?ERR_COLOR:T.border}`})
-
-  return(<div style={{padding:'80px 24px 60px',maxWidth:560,margin:'0 auto'}}>
-    <div style={{textAlign:'center',marginBottom:28}}><Flame size={40}/></div>
-    <h2 style={{fontSize:26,fontWeight:800,color:T.txt,textAlign:'center',marginBottom:10,letterSpacing:-0.8}}>TED 올인원 스터디 1기 신청</h2>
-    <p style={{fontSize:13,color:T.txtS,textAlign:'center',marginBottom:36,lineHeight:1.7}}>
-      신청서를 검토 후 선발된 분께 결제 안내를 드립니다.<br/>
-      <strong style={{color:T.gold}}>신청은 무료</strong>이며, 작성에는 약 3분이 소요됩니다.
-    </p>
-
-    {formMsg?<div style={{padding:32,background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:14,textAlign:'center'}}>
-      <p style={{fontSize:17,fontWeight:700,color:T.gold,marginBottom:10}}>{formMsg}</p>
-      <p style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>제출해주셔서 감사합니다.<br/>검토 후 이메일/휴대폰으로 연락드리겠습니다.</p>
-    </div>:
-    <form onSubmit={onSubmit} noValidate style={{display:'flex',flexDirection:'column'}}>
-
-      {/* 기본 정보 */}
-      <WField>
-        <WLabel req>기본 정보</WLabel>
-        <WHelp>연락용으로만 사용되며, 외부에 공유되지 않습니다.</WHelp>
-        <div style={{display:'flex',flexDirection:'column',gap:10}}>
-          <In name="name" placeholder="이름" required/>
-          <div>
-            <input ref={phoneRef} type="tel" name="phone" placeholder="010-0000-0000" required value={phone} onChange={onPhoneChange} onBlur={onPhoneBlur} maxLength={13} inputMode="numeric" pattern="010-\d{4}-\d{4}" style={inputWithErr('phone')}/>
-            {errors.phone&&<p style={errStyle}>{errors.phone}</p>}
-          </div>
-          <div>
-            <input type="email" name="email" placeholder="name@email.com" required value={email} onChange={onEmailChange} onBlur={onEmailBlur} style={inputWithErr('email')}/>
-            {errors.email&&<p style={errStyle}>{errors.email}</p>}
-          </div>
-        </div>
-      </WField>
-
-      {/* 영어 상황 */}
-      <WField>
-        <WLabel req>현재 영어 상황</WLabel>
-        <WHelp>현재 상황과 가장 가까운 걸 하나 골라주세요.</WHelp>
-        <WRadio name="english_status" value="a" checked={engStatus==='a'} onChange={()=>setEngStatus('a')}>토익/오픽 점수는 있는데, 실전에서 말이 잘 안나와요. 머릿속에서 한국어→영어 번역하다가 타이밍을 놓쳐요.</WRadio>
-        <WRadio name="english_status" value="b" checked={engStatus==='b'} onChange={()=>setEngStatus('b')}>영어 이메일은 쓰는데, 회의에서 의견 말하라고 하면 얼어붙어요. 듣는 건 되는데 입이 안 열려요.</WRadio>
-        <WRadio name="english_status" value="c" checked={engStatus==='c'} onChange={()=>setEngStatus('c')}>일상 대화는 되는데, 논리적으로 설명하거나 설득하는 게 안 돼요. 두세 문장 이상 이어가기가 어려워요.</WRadio>
-        <WRadio name="english_status" value="d" checked={engStatus==='d'} onChange={()=>setEngStatus('d')}>업무 영어는 하고 있는데, 매번 같은 표현만 쓰게 돼요. 더 자연스럽고 다양하게 말하고 싶어요.</WRadio>
-        <WRadio name="english_status" value="other" checked={engStatus==='other'} onChange={()=>setEngStatus('other')}>기타 (직접 입력)</WRadio>
-        {engStatus==='other'&&(
-          <textarea name="english_status_other" required placeholder="현재 영어 상황을 자유롭게 적어주세요" style={{width:'100%',minHeight:80,padding:'12px 14px',marginTop:6,background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
-        )}
-      </WField>
-
-      {/* 학습 타입 */}
-      <WField>
-        <WLabel>나의 영어 학습 타입 (복수 선택 가능)</WLabel>
-        <WHelp>해당되는 모든 항목을 체크해주세요. 커리큘럼 보완 자료로 활용됩니다.</WHelp>
-        <WCheck name="learner_type_perfectionist" value="yes">완벽주의형 — 틀릴까봐 입을 못 연다</WCheck>
-        <WCheck name="learner_type_procrastinator" value="yes">실행 미루기형 — 시작은 맨날 하는데 3일이면 흐지부지</WCheck>
-        <WCheck name="learner_type_input_heavy" value="yes">인풋 과다형 — 영상/책은 많이 보는데 아웃풋이 없다</WCheck>
-        <WCheck name="learner_type_no_env" value="yes">환경 부재형 — 영어 쓸 일이 없어서 연습할 곳이 없다</WCheck>
-        <WCheck name="learner_type_lost" value="yes">방법 미아형 — 이것저것 해봤는데 뭐가 맞는지 모르겠다</WCheck>
-      </WField>
-
-      {/* 공부법 */}
-      <WField>
-        <WLabel req>지금까지 해본 영어 공부법</WLabel>
-        <textarea name="study_history" required placeholder="예: 토익, 학원, 미드 쉐도잉, 영어 앱, 1:1 과외, 독학 등" style={{width:'100%',minHeight:80,padding:'12px 14px',background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
-      </WField>
-
-      {/* 기대하는 것 */}
-      <WField>
-        <WLabel req>이 프로그램에서 얻고 싶은 것</WLabel>
-        <WHelp>⭐ <strong style={{color:T.gold}}>이 답변이 선발에 반영됩니다.</strong> 구체적으로 써주세요.</WHelp>
-        <textarea name="expectation" required placeholder="예: 매일 짧게라도 영어로 말하는 습관을 만들고 싶다 / 회의에서 의견을 논리적으로 전달할 수 있게 되고 싶다" style={{width:'100%',minHeight:100,padding:'12px 14px',background:T.bg,border:`1px solid ${T.border}`,borderRadius:8,color:T.txt,fontSize:14,outline:'none',fontFamily:'inherit',resize:'vertical'}}/>
-      </WField>
-
-      {/* 추가 정보 (선택) */}
-      <WField>
-        <WLabel>추가 정보 (선택)</WLabel>
-        <WHelp>비슷한 업계/연차 분들 매칭에 참고됩니다. 회사명은 비공개 처리됩니다.</WHelp>
-        <div style={{display:'flex',flexDirection:'column',gap:10}}>
-          <In name="industry" placeholder="업계/분야 (예: IT, 금융, 마케팅, 교육 등)"/>
-          <In name="company" placeholder="회사명 (비공개 처리됩니다)"/>
-          <Sel name="years">
-            <option value="">연차 선택</option>
-            <option value="1-3">1~3년차</option>
-            <option value="4-7">4~7년차</option>
-            <option value="8-10">8~10년차</option>
-            <option value="11+">11년차 이상</option>
-            <option value="student">학생 · 취준생</option>
-          </Sel>
-        </div>
-      </WField>
-
-      {/* 동의 */}
-      <WField>
-        <WLabel req>동의 항목</WLabel>
-        <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'14px 16px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10,marginBottom:8}}>
-          <input type="checkbox" name="privacy_consent" required style={{marginTop:3,accentColor:T.gold}}/>
-          <span style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>
-            <strong style={{color:T.txt}}>[필수]</strong> 개인정보 수집·이용에 동의합니다.<br/>
-            <span style={{color:T.txtD,fontSize:11}}>
-              · 수집 항목: 이름, 연락처, 이메일<br/>
-              · 수집 목적: 프로그램 운영 및 안내<br/>
-              · 보유 기간: 프로그램 종료 후 1년
-            </span>
-          </span>
-        </label>
-        <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'14px 16px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10}}>
-          <input type="checkbox" name="marketing_consent" style={{marginTop:3,accentColor:T.gold}}/>
-          <span style={{fontSize:12,color:T.txtS,lineHeight:1.7}}>
-            <strong style={{color:T.txt}}>[선택]</strong> 추후 네트워킹 이벤트 오픈 시 알림 받는 것에 동의합니다.
-          </span>
-        </label>
-      </WField>
-
-      <button type="submit" style={{padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',boxShadow:T.shadow,marginTop:8}}>신청 제출하기</button>
-
-      <div style={{marginTop:20,padding:'16px 18px',background:T.bgSoft,borderRadius:10,fontSize:11,color:T.txtD,lineHeight:1.9}}>
-        ※ <strong>신청 ≠ 결제</strong>입니다. 검토 후 선발된 분에게 결제 안내를 드립니다.<br/>
-        ※ 프로그램 구성과 가격은 기수별로 달라질 수 있습니다.<br/>
-        ※ 결제 후 환불은 불가합니다.
-      </div>
-    </form>}
-  </div>)
-}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━
-// BLOG / POST / EBOOKS / LOGIN / CONSENT / PAYMENT / ADMIN
-// (기존과 동일, Orson 라이트 톤 유지)
+// BLOG / POST / EBOOKS / LOGIN / CONSENT / ADMIN
 // ━━━━━━━━━━━━━━━━━━━━━━━━
 
 function BlogList({nav}){
@@ -996,44 +802,6 @@ function ConsentPage({auth,nav}){
   </div>)
 }
 
-function PaymentPage({auth,nav}){
-  const [sub,setSub]=useState(false),[done,setDone]=useState(false),[err,setErr]=useState('')
-  if(!auth.isLoggedIn||!auth.profile?.privacy_consent)return(<div style={{padding:'100px 24px',textAlign:'center'}}><p style={{fontSize:14,color:T.txtS}}>로그인 후 이용 가능합니다.</p><button onClick={()=>nav('login')} style={{marginTop:20,padding:'12px 28px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:13,fontWeight:600,cursor:'pointer'}}>로그인</button></div>)
-  const go=async e=>{e.preventDefault();setSub(true);setErr('');const fd=new FormData(e.target);fd.append('user_email',auth.user.email);fd.append('product','TED 올인원 4주 스터디 1기');fd.append('amount','150000');try{const r=await fetch(FORMSPREE_PAYMENT,{method:'POST',body:fd,headers:{'Accept':'application/json'}});if(r.ok)setDone(true);else setErr('전송 실패.')}catch{setErr('네트워크 오류.')}setSub(false)}
-  if(done)return(<div style={{padding:'100px 24px',maxWidth:520,margin:'0 auto',textAlign:'center'}}><Flame size={44}/><h2 style={{fontSize:24,fontWeight:800,color:T.txt,margin:'18px 0 12px'}}>입금 알림 접수 완료</h2><p style={{fontSize:14,color:T.txtS,lineHeight:1.8}}>확인 후 디스코드 초대를 보내드립니다.</p><button onClick={()=>nav('home')} style={{marginTop:28,padding:'12px 28px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:13,fontWeight:600,cursor:'pointer'}}>홈으로</button></div>)
-  return(<div style={{padding:'80px 24px',maxWidth:560,margin:'0 auto'}}>
-    <div style={{textAlign:'center',marginBottom:32}}><Flame size={40}/></div>
-    <h2 style={{fontSize:26,fontWeight:800,color:T.txt,textAlign:'center',marginBottom:32}}>결제하기</h2>
-    <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:14,padding:28,marginBottom:20,boxShadow:T.shadow}}><p style={{fontSize:12,color:T.gold,fontWeight:600}}>1기 특별가</p><p style={{fontSize:19,fontWeight:700,color:T.txt,margin:'8px 0'}}>TED 올인원 4주 스터디</p><p style={{fontSize:32,fontWeight:800,color:T.txt}}>₩150,000</p></div>
-    <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,padding:28,marginBottom:20,boxShadow:T.shadow}}>
-      <p style={{fontSize:14,fontWeight:700,color:T.gold,marginBottom:16}}>계좌이체 정보</p>
-      <table style={{width:'100%',fontSize:14,color:T.txt,lineHeight:2}}><tbody><tr><td style={{color:T.txtS,width:80}}>은행</td><td style={{fontWeight:600}}>{BANK_INFO.bank}</td></tr><tr><td style={{color:T.txtS}}>계좌번호</td><td style={{fontWeight:600}}>{BANK_INFO.account}</td></tr><tr><td style={{color:T.txtS}}>예금주</td><td style={{fontWeight:600}}>{BANK_INFO.holder}</td></tr><tr><td style={{color:T.txtS}}>금액</td><td style={{color:T.gold,fontWeight:700}}>₩150,000</td></tr></tbody></table>
-      <p style={{fontSize:11,color:T.txtD,marginTop:16,lineHeight:1.6}}>※ 입금 후 아래 폼 작성. 환불 불가.</p>
-    </div>
-    <form onSubmit={go} style={{display:'flex',flexDirection:'column',gap:12}}>
-      <In name="depositor_name" placeholder="입금자명" required/><In name="phone" placeholder="휴대폰 (선택)"/>
-      {err&&<p style={{fontSize:12,color:'#DC2626',textAlign:'center'}}>{err}</p>}
-      <button type="submit" disabled={sub} style={{padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:sub?'wait':'pointer',opacity:sub?0.6:1}}>{sub?'전송 중...':'입금 완료 알림 보내기'}</button>
-    </form>
-  </div>)
-}
-
-function FormPg({title,desc,onSubmit,msg,btn,note,fields,extraCta}){
-  return(<div style={{padding:'80px 24px',maxWidth:460,margin:'0 auto'}}>
-    <div style={{textAlign:'center',marginBottom:32}}><Flame size={40}/></div>
-    <h2 style={{fontSize:26,fontWeight:800,color:T.txt,textAlign:'center',marginBottom:10}}>{title}</h2>
-    <p style={{fontSize:14,color:T.txtS,textAlign:'center',marginBottom:32,lineHeight:1.7}}>{desc}</p>
-    {msg?<div style={{padding:28,background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:14,textAlign:'center'}}><p style={{fontSize:17,fontWeight:700,color:T.gold}}>{msg}</p></div>:
-    <form onSubmit={onSubmit} style={{display:'flex',flexDirection:'column',gap:12}}>
-      {fields.map(f=><In key={f.n} name={f.n} type={f.t||'text'} placeholder={f.p} required={f.r}/>)}
-      <label style={{display:'flex',alignItems:'flex-start',gap:10,marginTop:8,cursor:'pointer',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10}}><input type="checkbox" name="privacy_consent" required style={{marginTop:2,accentColor:T.gold}}/><span style={{fontSize:12,color:T.txtS,lineHeight:1.6}}><strong style={{color:T.txt}}>[필수]</strong> 개인정보 수집·이용 동의</span></label>
-      <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'12px 14px',background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:10}}><input type="checkbox" name="marketing_consent" style={{marginTop:2,accentColor:T.gold}}/><span style={{fontSize:12,color:T.txtS,lineHeight:1.6}}><strong style={{color:T.txt}}>[선택]</strong> 마케팅 수신 동의</span></label>
-      <button type="submit" style={{padding:14,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:'pointer',marginTop:4,boxShadow:T.shadow}}>{btn}</button>
-      {note&&<p style={{fontSize:11,color:T.txtD,textAlign:'center'}}>{note}</p>}
-      {extraCta}
-    </form>}
-  </div>)
-}
 
 // ─── PRICING CARDS ───
 function PricingCards({nav}){
@@ -1068,7 +836,7 @@ function PricingCards({nav}){
   return(<div style={{maxWidth:720,margin:'0 auto'}}>
     {/* Tier 1 — 1기 메인 카드, 크고 중앙 */}
     <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:20,padding:'48px 44px',position:'relative',boxShadow:T.shadowH,wordBreak:'keep-all',lineBreak:'strict'}}>
-      <div style={{position:'absolute',top:-14,left:36,padding:'5px 14px',background:T.gold,color:'#fff',fontSize:11,fontWeight:700,borderRadius:6,letterSpacing:0.5}}>파일럿 기수 모집 중</div>
+      <div style={{position:'absolute',top:-14,left:36,padding:'5px 14px',background:T.gold,color:'#fff',fontSize:11,fontWeight:700,borderRadius:6,letterSpacing:0.5}}>2기 모집 중</div>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:20,flexWrap:'wrap',marginBottom:32,paddingTop:8}}>
         <div>
           <p style={{fontSize:14,color:T.gold,fontWeight:700,marginBottom:10,letterSpacing:0.3}}>TED 올인원 4주 스터디</p>
@@ -1082,7 +850,7 @@ function PricingCards({nav}){
       <ul style={{listStyle:'none',padding:0,margin:'0 0 32px'}}>
         {base.map(f=><Item key={f} text={f}/>)}
       </ul>
-      <button onClick={()=>nav('waitlist')} style={{width:'100%',padding:16,background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>사전 신청하기 →</button>
+      <button onClick={goToLatpeed} style={{width:'100%',padding:16,background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
     </div>
 
     {/* 2기/3기 — 작게, 하단에 접은 형태 */}

@@ -212,3 +212,16 @@ export const EBOOKS = [
     desc:"토익은 되는데 입이 안 열리는 당신을 위한 실전 가이드.",
     preview:"하루 8시간을 영어에 투자했는데도 막상 입이 열리지 않았던 건, 공부 시간의 문제가 아니라 인풋과 아웃풋의 비율 문제였습니다.\n\n방법을 바꿨어요. TED Talk 1편을 보고, 핵심 문장 3개를 골라서, 내 이야기로 바꿔서 말해보기.\n\n이 단순한 루프를 매일 10분씩 돌렸더니, 3개월 만에 회의에서 의견을 말할 수 있게 됐어요..." }
 ];
+
+// 1기 후기 — image는 추후 /public/testimonials/ 에 파일 추가 후 경로 교체
+export const TESTIMONIALS_TED1 = [
+  { id:"t-1", name:"(추후)", role:"1기 수강생", image:null,
+    quote:"(후기 텍스트가 들어갈 자리입니다.)",
+    highlight:"(핵심 변화 한 줄)" },
+  { id:"t-2", name:"(추후)", role:"1기 수강생", image:null,
+    quote:"(후기 텍스트가 들어갈 자리입니다.)",
+    highlight:"(핵심 변화 한 줄)" },
+  { id:"t-3", name:"(추후)", role:"1기 수강생", image:null,
+    quote:"(후기 텍스트가 들어갈 자리입니다.)",
+    highlight:"(핵심 변화 한 줄)" },
+];
