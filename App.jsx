@@ -134,7 +134,7 @@ function Home({nav}){
       <div style={{maxWidth:1100,margin:'0 auto',borderRadius:24,overflow:'hidden',background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,padding:'56px',display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:40,alignItems:'center',boxShadow:T.shadowH,position:'relative'}} className="featured-grid">
         <div style={{position:'absolute',top:'50%',right:'-15%',transform:'translateY(-50%)',width:500,height:500,background:'radial-gradient(circle,rgba(212,168,83,0.25) 0%,transparent 60%)',pointerEvents:'none'}}/>
         <div style={{position:'relative'}}>
-          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>2기 모집 중 · 그룹당 30명</div>
+          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>2기 모집 중 · 최대 30명 소그룹</div>
           <h2 style={{fontSize:'clamp(26px,3.4vw,36px)',fontWeight:800,color:'#fff',marginBottom:16,lineHeight:1.25,letterSpacing:-1}}>커리어 점프업을 위한<br/><span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:'#E8CFA0'}}>영어 TED 올인원 스터디</span></h2>
           <p style={{fontSize:15,color:'rgba(255,255,255,0.75)',marginBottom:26,lineHeight:1.7,maxWidth:480}}>TED Talk 기반 10단계 스피킹 메소드와<br/>캐나다 명문대 출신 원어민 튜터의 1:1 피드백.<br/>4주 동안 매일 실행하고, 매주 성장합니다.</p>
           <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
@@ -232,7 +232,7 @@ function TedProgram({nav}){
   ]
   const timeline=[
     {label:'2기 모집 시작',date:'(확정 시 업데이트)',active:true},
-    {label:'그룹별 정원 마감',date:'정원 마감 시',active:false},
+    {label:'소그룹 정원 마감',date:'정원 마감 시',active:false},
     {label:'오리엔테이션',date:'(확정 시 업데이트)',active:false},
     {label:'2기 시작',date:'(확정 시 업데이트)',active:false},
   ]
@@ -240,7 +240,7 @@ function TedProgram({nav}){
   const faqs=[
     ['영어를 정말 못하는데 참여할 수 있나요?','TED 영상의 60% 정도는 이해할 수 있는 분을 기준으로 설계되어 있어요. 완벽하게 알아들을 필요는 없지만, 키워드와 전체 흐름을 파악할 수 있는 정도면 충분해요. 신청 시 현재 영어 상황을 여쭤보지만, 이는 추후 운영과 피드백 참고용이에요.'],
     ['직장인인데 시간이 될까요?','매일 한 시간 정도는 필요해요. 대신 출퇴근 시간에 리스닝, 점심시간에 노트테이킹, 퇴근 후 쉐도잉처럼 시간을 쪼개서 실행할 수 있는 시스템이에요. 저도 풀타임 직장인으로 이 루틴을 만들어 왔기 때문에 충분히 가능해요. 매일 제출물이 있어서 자연스럽게 루틴이 만들어져요.'],
-    ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 한 그룹은 30명까지만 운영하고, 신청이 많으면 추가 그룹을 편성해요. 결제 완료 순으로 자리가 확정되며, 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
+    ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 한 소그룹은 최대 30명까지만 운영하고, 신청이 많으면 추가 그룹을 편성해요. 결제 완료 순으로 자리가 확정되며, 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
     ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·리더십 중심의 TED Talk을 큐레이션해서 제공해요. 15분 이내 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 2기는 "비즈니스 × 자기계발" 테마로 4편이 준비되어 있어요.'],
     ['피드백은 어떻게 받나요?','두 가지 피드백이 있어요. 매주 3분 요약 스피치에 대해 원어민 튜터가 서면으로 발음·표현·구성 피드백을 드려요. 거기에 매주 토요일 동료들과의 피어 피드백까지 — 혼자 연습할 때는 절대 얻을 수 없는 기준이 생겨요.'],
     ['4주 후에는 어떻게 되나요?','4주간 쌓은 노트·녹음·오답노트·스피치가 나만의 영어 포트폴리오가 돼요. 완주자에게는 다음 기수 우선 안내가 제공돼요.'],
@@ -265,7 +265,7 @@ function TedProgram({nav}){
       <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:900,height:600,background:'radial-gradient(ellipse,rgba(184,134,11,0.22) 0%,transparent 65%)',pointerEvents:'none'}}/>
       <svg style={{position:'absolute',top:'28%',left:'50%',transform:'translate(-50%,-50%)',width:700,height:700,opacity:0.15,pointerEvents:'none'}} viewBox="0 0 700 700"><circle cx="350" cy="350" r="320" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="260" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="200" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="140" fill="none" stroke="#B8860B" strokeWidth="0.7"/></svg>
       <div style={{position:'relative',maxWidth:900,margin:'0 auto'}}>
-        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>2기 모집 중 · 그룹당 30명</div>
+        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>2기 모집 중 · 최대 30명 소그룹</div>
         <h1 style={{fontSize:'clamp(36px,6.5vw,68px)',fontWeight:800,color:T.txt,lineHeight:1.12,marginBottom:30,letterSpacing:-2.5}}>
           토익은 되는데<br/>
           <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:T.gold}}>입이 안 열리는</span> 당신을 위한<br/>
@@ -648,7 +648,7 @@ function TedProgram({nav}){
     <Sec label="YOUR 4 WEEKS" title={<>4주 뒤, 당신의 영어가<br/>달라져 있을 겁니다</>} sub="이 시스템에 투자하는 4주가 혼자 흘려보내는 6개월을 바꿉니다.">
       <PricingCards nav={nav}/>
       <p style={{textAlign:'center',fontSize:13,color:T.txtD,marginTop:36,lineHeight:2}}>
-        * 한 그룹은 <strong style={{color:T.txt}}>최대 30명</strong>까지만 운영하고, 인원이 많아지면 추가 그룹으로 나눠 운영해요.<br/>
+        * 한 <strong style={{color:T.txt}}>소그룹은 최대 30명</strong>까지만 운영하고, 인원이 많아지면 추가 그룹으로 나눠 운영해요.<br/>
         * 완주자에게는 alumni 네트워킹 모임 참여 우선권이 제공돼요.<br/>
         ※ 신청 페이지에서 결제와 함께 진행돼요.<br/>
         ※ 결제 후 환불은 불가해요.
@@ -687,10 +687,10 @@ function TedProgram({nav}){
         <h2 style={{fontSize:'clamp(28px,4vw,42px)',fontWeight:800,color:T.txt,marginBottom:20,letterSpacing:-1.2,lineHeight:1.25}}>준비되셨나요?</h2>
         <p style={{fontSize:'clamp(15px,1.8vw,18px)',color:T.txtS,marginBottom:40,lineHeight:1.8}}>
           신청 페이지에서 설문 작성과 결제가 한 번에 이루어져요.<br/>
-          한 그룹은 <strong style={{color:T.txt}}>30명 정원</strong>이며, 신청이 많으면 추가 그룹을 편성해요.
+          한 <strong style={{color:T.txt}}>소그룹은 최대 30명</strong>이며, 신청이 많으면 추가 그룹을 편성해요.
         </p>
         <button onClick={goToLatpeed} style={{padding:'18px 40px',background:T.navy,color:'#fff',fontSize:16,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadowH}}>2기 신청하기 →</button>
-        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>그룹당 30명 정원 · 결제 후 환불 불가</p>
+        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>최대 30명 소그룹 · 결제 후 환불 불가</p>
       </div>
     </section>
 
@@ -844,7 +844,7 @@ function PricingCards({nav}){
         </div>
         <div style={{textAlign:'right'}}>
           <p style={{fontSize:'clamp(32px,4vw,42px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:14,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>그룹당 30명 정원</p>
+          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>최대 30명 소그룹</p>
         </div>
       </div>
       <ul style={{listStyle:'none',padding:0,margin:'0 0 32px'}}>
