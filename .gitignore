@@ -4,3 +4,7 @@ dist
 .env.local
 .DS_Store
 *.log
+
+# 래피드/SNS 업로드용 deliverable (사이트 빌드와 무관)
+latpeed-*.png
+latpeed-*.jpg
