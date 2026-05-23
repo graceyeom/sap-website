@@ -232,6 +232,7 @@ function TedProgram({nav}){
   ]
   const timeline=[
     {label:'2기 모집 중',date:'정원 마감 시 마감',active:true},
+    {label:'디스코드 입장권 전달',date:'결제 후 1일 이내',active:false},
     {label:'오리엔테이션',date:'6월 20일 (토)',active:false},
     {label:'2기 시작',date:'6월 22일 (월)',active:false},
     {label:'4주 과정 종료',date:'7월 19일 (일)',active:false},
@@ -240,7 +241,7 @@ function TedProgram({nav}){
   const faqs=[
     ['영어를 정말 못하는데 참여할 수 있나요?','TED 영상의 60% 정도는 이해할 수 있는 분을 기준으로 설계되어 있어요. 완벽하게 알아들을 필요는 없지만, 키워드와 전체 흐름을 파악할 수 있는 정도면 충분해요. 신청 시 현재 영어 상황을 여쭤보지만, 이는 추후 운영과 피드백 참고용이에요.'],
     ['직장인인데 시간이 될까요?','매일 한 시간 정도는 필요해요. 대신 출퇴근 시간에 리스닝, 점심시간에 노트테이킹, 퇴근 후 쉐도잉처럼 시간을 쪼개서 실행할 수 있는 시스템이에요. 저도 풀타임 직장인으로 이 루틴을 만들어 왔기 때문에 충분히 가능해요. 매일 제출물이 있어서 자연스럽게 루틴이 만들어져요.'],
-    ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 한 소그룹은 최대 30명까지만 운영하고, 신청이 많으면 추가 그룹을 편성해요. 결제 완료 순으로 자리가 확정되며, 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
+    ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 최대 30명 소규모로 운영되며, 결제 완료 순으로 자리가 확정돼요. 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
     ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·심리학 중심의 TED Talk을 큐레이션해서 제공해요. 5분 안팎 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 2기는 "자기관리 × 생산성" 테마로 4편이 준비되어 있어요.'],
     ['피드백은 어떻게 받나요?','두 가지 피드백이 있어요. 매주 3분 요약 스피치에 대해 원어민 튜터가 서면으로 발음·표현·구성 피드백을 드려요. 거기에 매주 토요일 동료들과의 피어 피드백까지 — 혼자 연습할 때는 절대 얻을 수 없는 기준이 생겨요.'],
     ['4주 후에는 어떻게 되나요?','4주간 쌓은 노트·녹음·오답노트·스피치가 나만의 영어 포트폴리오가 돼요. 완주자에게는 다음 기수 우선 안내가 제공돼요.'],
@@ -504,23 +505,21 @@ function TedProgram({nav}){
 
     {/* ━ 8. SAMPLE CURRICULUM ━ */}
     <Sec id="curriculum" label="SAMPLE CURRICULUM" title={<>2기 커리큘럼 엿보기<br/>자기관리 × 생산성</>} sub="이번 달 테마는 '나를 움직이는 자기관리'예요. 나쁜 습관 끊기, 미루지 않기, 시간 관리, 번아웃 없는 팀워크까지 — 일과 삶에 바로 쓰는 4편을 5분 안팎으로 큐레이션했어요." bg={T.bgWarm} maxW={1000}>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(400px,1fr))',gap:18}}>
-        {[
-          {w:'Week 1',cat:'PSYCHOLOGY',t:'Why is it so hard to break a bad habit?',sp:'TED-Ed',dur:'4:44',url:'https://www.ted.com/talks/ted_ed_why_is_it_so_hard_to_break_a_bad_habit'},
-          {w:'Week 2',cat:'PSYCHOLOGY',t:'Why you procrastinate even when it feels bad',sp:'TED-Ed',dur:'5:26',url:'https://www.ted.com/talks/ted_ed_why_you_procrastinate_even_when_it_feels_bad'},
-          {w:'Week 3',cat:'PSYCHOLOGY',t:'How to manage your time more effectively',sp:'Brian Christian',dur:'4:47',url:'https://www.ted.com/talks/brian_christian_how_to_manage_your_time_more_effectively_according_to_machines'},
-          {w:'Week 4',cat:'BUSINESS',t:'How to be a team player — without burning out',sp:'Rob Cross',dur:'5:37',url:'https://www.ted.com/talks/rob_cross_how_to_be_a_team_player_without_burning_out'},
-        ].map((v,i)=>(
-          <a key={i} href={v.url} target="_blank" rel="noreferrer" style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 30px',textDecoration:'none',boxShadow:T.shadow,transition:'all 0.2s',display:'block'}} onMouseEnter={e=>{e.currentTarget.style.boxShadow=T.shadowH;e.currentTarget.style.borderColor=T.borderH;e.currentTarget.style.transform='translateY(-3px)'}} onMouseLeave={e=>{e.currentTarget.style.boxShadow=T.shadow;e.currentTarget.style.borderColor=T.border;e.currentTarget.style.transform='translateY(0)'}}>
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
-              <span style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.5,textTransform:'uppercase'}}>{v.w} · {v.cat}</span>
-              <span style={{fontSize:13,color:T.txtD}}>▶ {v.dur}</span>
-            </div>
-            <h3 style={{fontSize:20,fontWeight:700,color:T.txt,marginBottom:10,lineHeight:1.35,letterSpacing:-0.3}}>{v.t}</h3>
-            <p style={{fontSize:14,color:T.txtS,marginBottom:16}}>{v.sp}</p>
-            <p style={{fontSize:13,color:T.gold,fontWeight:600}}>TED에서 보기 →</p>
-          </a>
-        ))}
+      <div style={{maxWidth:560,margin:'0 auto'}}>
+        <p style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.5,marginBottom:14,textTransform:'uppercase',textAlign:'center'}}>Week 1 영상 미리보기</p>
+        <a href="https://www.ted.com/talks/ted_ed_why_is_it_so_hard_to_break_a_bad_habit" target="_blank" rel="noreferrer" style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 30px',textDecoration:'none',boxShadow:T.shadow,transition:'all 0.2s',display:'block'}} onMouseEnter={e=>{e.currentTarget.style.boxShadow=T.shadowH;e.currentTarget.style.borderColor=T.borderH;e.currentTarget.style.transform='translateY(-3px)'}} onMouseLeave={e=>{e.currentTarget.style.boxShadow=T.shadow;e.currentTarget.style.borderColor=T.border;e.currentTarget.style.transform='translateY(0)'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+            <span style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.5,textTransform:'uppercase'}}>Week 1 · PSYCHOLOGY</span>
+            <span style={{fontSize:13,color:T.txtD}}>▶ 4:44</span>
+          </div>
+          <h3 style={{fontSize:20,fontWeight:700,color:T.txt,marginBottom:10,lineHeight:1.35,letterSpacing:-0.3}}>Why is it so hard to break a bad habit?</h3>
+          <p style={{fontSize:14,color:T.txtS,marginBottom:16}}>TED-Ed</p>
+          <p style={{fontSize:13,color:T.gold,fontWeight:600}}>TED에서 보기 →</p>
+        </a>
+        <p style={{fontSize:14,color:T.txtS,textAlign:'center',marginTop:20,lineHeight:1.8}}>
+          매주 이렇게 <strong style={{color:T.txt}}>5분 안팎의 TED 1편씩, 4주간 총 4편</strong>을<br/>
+          '자기관리 × 생산성' 테마로 큐레이션해 제공해요.
+        </p>
       </div>
       <div style={{width:'100%',margin:'48px auto 0',padding:'28px 32px',background:'linear-gradient(180deg,#FAF7F2 0%,transparent 100%)',border:`1px solid ${T.border}`,borderRadius:12,textAlign:'center',position:'relative'}}>
         <div style={{position:'absolute',top:0,left:'50%',transform:'translateX(-50%)',width:60,height:3,background:`linear-gradient(90deg,transparent,${T.gold},transparent)`}}/>
@@ -533,7 +532,7 @@ function TedProgram({nav}){
     </Sec>
 
     {/* ━ 9. NATIVE FEEDBACK — 튜터 소개 + 피드백 통합 ━ */}
-    <Sec label="NATIVE FEEDBACK · 이 프로그램의 심장" title={<>매주 내 스피치를 직접 듣는<br/>원어민 서면 피드백</>} sub={<>매주 5분 TED를 3분으로 요약한 스피치를 녹음하면, 원어민이 직접 듣고 <strong style={{color:T.txt}}>5가지 기준으로 서면 피드백</strong>을 드려요. "이렇게 말했는데 → 이렇게 바꿔보세요"까지 구체적으로. <strong style={{color:T.gold}}>혼자 연습하면 기준이 없어요. 이 피드백이 기준이 돼요.</strong></>} bg={T.bgWarm} maxW={900}>
+    <Sec label="NATIVE FEEDBACK · 이 프로그램의 심장" title={<>매주 내 스피치를 직접 듣는<br/>원어민 서면 피드백</>} sub={<>매주 5분 TED를 3분으로 요약한 스피치를 녹음하면, 원어민이 직접 듣고 <strong style={{color:T.txt}}>발음 · 표현/전달력 · 구성/흐름 3가지 기준으로 서면 피드백</strong>을 드려요. "이렇게 말했는데 → 이렇게 바꿔보세요"까지 구체적으로. <strong style={{color:T.gold}}>혼자 연습하면 기준이 없어요. 이 피드백이 기준이 돼요.</strong></>} bg={T.bgWarm} maxW={900}>
 
       {/* 튜터 프로필 카드 — 임팩트 있게 */}
       <div style={{background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,borderRadius:20,padding:'40px 44px',marginBottom:40,position:'relative',overflow:'hidden',boxShadow:T.shadowH}}>
@@ -643,7 +642,7 @@ function TedProgram({nav}){
     <Sec label="YOUR 4 WEEKS" title={<>4주 뒤, 당신의 영어가<br/>달라져 있을 겁니다</>} sub="이 시스템에 투자하는 4주가 혼자 흘려보내는 6개월을 바꿉니다.">
       <PricingCards nav={nav}/>
       <p style={{textAlign:'center',fontSize:13,color:T.txtD,marginTop:36,lineHeight:2}}>
-        * 한 <strong style={{color:T.txt}}>소그룹은 최대 30명</strong>까지만 운영하고, 인원이 많아지면 추가 그룹으로 나눠 운영해요.<br/>
+        * <strong style={{color:T.txt}}>최대 30명 소규모</strong>로 운영돼요.<br/>
         * 완주자에게는 alumni 네트워킹 모임 참여 우선권이 제공돼요.<br/>
         ※ 신청 페이지에서 결제와 함께 진행돼요.<br/>
         ※ 결제 후 환불은 불가해요.
@@ -682,7 +681,7 @@ function TedProgram({nav}){
         <h2 style={{fontSize:'clamp(28px,4vw,42px)',fontWeight:800,color:T.txt,marginBottom:20,letterSpacing:-1.2,lineHeight:1.25}}>준비되셨나요?</h2>
         <p style={{fontSize:'clamp(15px,1.8vw,18px)',color:T.txtS,marginBottom:40,lineHeight:1.8}}>
           신청 페이지에서 설문 작성과 결제가 한 번에 이루어져요.<br/>
-          한 <strong style={{color:T.txt}}>소그룹은 최대 30명</strong>이며, 신청이 많으면 추가 그룹을 편성해요.
+          <strong style={{color:T.txt}}>최대 30명 소규모</strong>로 운영돼요.
         </p>
         <button onClick={goToLatpeed} style={{padding:'18px 40px',background:T.navy,color:'#fff',fontSize:16,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadowH}}>2기 신청하기 →</button>
         <p style={{fontSize:13,color:T.txtD,marginTop:18}}>최대 30명 소그룹 · 결제 후 환불 불가</p>
@@ -828,45 +827,51 @@ function PricingCards({nav}){
     </li>
   )
 
-  return(<div style={{maxWidth:720,margin:'0 auto'}}>
-    {/* Tier 1 — 1기 메인 카드, 크고 중앙 */}
-    <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:20,padding:'48px 44px',position:'relative',boxShadow:T.shadowH,wordBreak:'keep-all',lineBreak:'strict'}}>
-      <div style={{position:'absolute',top:-14,left:36,padding:'5px 14px',background:T.gold,color:'#fff',fontSize:11,fontWeight:700,borderRadius:6,letterSpacing:0.5}}>2기 모집 중</div>
-      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:20,flexWrap:'wrap',marginBottom:32,paddingTop:8}}>
-        <div>
-          <p style={{fontSize:14,color:T.gold,fontWeight:700,marginBottom:10,letterSpacing:0.3}}>TED 올인원 4주 스터디</p>
-          <p style={{fontSize:13,color:T.txtS}}>챌린지 + 원어민 서면 피드백</p>
+  return(<div style={{maxWidth:880,margin:'0 auto'}}>
+    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,alignItems:'start'}} className="price-grid">
+      {/* Tier 1 — Basic */}
+      <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'40px 32px',position:'relative',boxShadow:T.shadow,wordBreak:'keep-all',lineBreak:'strict'}}>
+        <div style={{marginBottom:24}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.txtD,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>Tier 1 · Basic</p>
+          <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>TED 올인원 4주 스터디</p>
+          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 서면 피드백</p>
+          <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
+          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>최대 30명 소규모</p>
         </div>
-        <div style={{textAlign:'right'}}>
-          <p style={{fontSize:'clamp(32px,4vw,42px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:14,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>최대 30명 소그룹</p>
-        </div>
+        <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
+          {base.map(f=><Item key={f} text={f}/>)}
+        </ul>
+        <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.bg,color:T.navy,fontSize:14,fontWeight:700,border:`1.5px solid ${T.navy}`,borderRadius:12,cursor:'pointer'}}>2기 신청하기 →</button>
       </div>
-      <ul style={{listStyle:'none',padding:0,margin:'0 0 32px'}}>
-        {base.map(f=><Item key={f} text={f}/>)}
-      </ul>
-      <button onClick={goToLatpeed} style={{width:'100%',padding:16,background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
+
+      {/* Tier 2 — Premium, 추천 강조 */}
+      <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:20,padding:'40px 32px',position:'relative',boxShadow:T.shadowH,wordBreak:'keep-all',lineBreak:'strict'}}>
+        <div style={{position:'absolute',top:-14,left:32,padding:'5px 14px',background:T.gold,color:'#fff',fontSize:11,fontWeight:700,borderRadius:6,letterSpacing:0.5}}>추천</div>
+        <div style={{marginBottom:24,paddingTop:6}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>Tier 2 · Premium</p>
+          <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>TED 올인원 4주 스터디 PLUS</p>
+          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 <strong style={{color:T.txt}}>비디오</strong> 피드백</p>
+          <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩200,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
+          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>최대 30명 소규모</p>
+        </div>
+        <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
+          {base.map(f=><Item key={f} text={f}/>)}
+          {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
+        </ul>
+        <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
+      </div>
     </div>
 
-    {/* 2기/3기 — 작게, 하단에 접은 형태 */}
+    {/* Tier 3 — 하단 추후 공지 */}
     <div style={{marginTop:32}}>
-      <p style={{fontSize:12,fontWeight:700,color:T.txtD,letterSpacing:1.5,marginBottom:14,textTransform:'uppercase',textAlign:'center'}}>향후 오픈 예정인 옵션</p>
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}} className="future-tiers">
-        <div style={{background:T.bgSoft,border:`1px dashed ${T.border}`,borderRadius:12,padding:'20px 22px',wordBreak:'keep-all'}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.txtS,letterSpacing:0.5,marginBottom:6,textTransform:'uppercase'}}>Tier 2</p>
-          <h4 style={{fontSize:14,fontWeight:700,color:T.txt,marginBottom:6,lineHeight:1.4}}>챌린지 + 비디오 피드백</h4>
-          <p style={{fontSize:12,color:T.txtS,lineHeight:1.7,marginBottom:4}}>Tier 1 전체 + 원어민 비디오 피드백</p>
-          <p style={{fontSize:11,color:T.txtD}}>가격 · 일정 추후 공지</p>
-        </div>
-        <div style={{background:T.bgSoft,border:`1px dashed ${T.border}`,borderRadius:12,padding:'20px 22px',wordBreak:'keep-all'}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.txtS,letterSpacing:0.5,marginBottom:6,textTransform:'uppercase'}}>Tier 3</p>
-          <h4 style={{fontSize:14,fontWeight:700,color:T.txt,marginBottom:6,lineHeight:1.4}}>프리미엄 올인원</h4>
-          <p style={{fontSize:12,color:T.txtS,lineHeight:1.7,marginBottom:4}}>Tier 2 + 라이브 코칭 + 1:1 컨설팅 2회 + 전자책</p>
-          <p style={{fontSize:11,color:T.txtD}}>가격 · 일정 추후 공지</p>
-        </div>
+      <p style={{fontSize:12,fontWeight:700,color:T.txtD,letterSpacing:1.5,marginBottom:14,textTransform:'uppercase',textAlign:'center'}}>향후 오픈 예정</p>
+      <div style={{background:T.bgSoft,border:`1px dashed ${T.border}`,borderRadius:12,padding:'20px 24px',wordBreak:'keep-all',maxWidth:440,margin:'0 auto',textAlign:'center'}}>
+        <p style={{fontSize:11,fontWeight:700,color:T.txtS,letterSpacing:0.5,marginBottom:6,textTransform:'uppercase'}}>Tier 3 · 프리미엄 올인원</p>
+        <p style={{fontSize:12,color:T.txtS,lineHeight:1.7,marginBottom:4}}>Tier 2 + 라이브 코칭 + 1:1 컨설팅 2회 + 전자책</p>
+        <p style={{fontSize:11,color:T.txtD}}>가격 · 일정 추후 공지</p>
       </div>
     </div>
-    <style>{`@media(max-width:560px){.future-tiers{grid-template-columns:1fr!important}}`}</style>
+    <style>{`@media(max-width:600px){.price-grid{grid-template-columns:1fr!important}}`}</style>
   </div>)
 }
 
@@ -958,27 +963,8 @@ function FeedbackSample(){
       <span style={{fontSize:13,fontWeight:700,color:T.gold,letterSpacing:2,textTransform:'uppercase'}}>↓ 주간 스피치 서면 피드백 ↓</span>
     </div>
 
-    {/* 1. 빅픽쳐 */}
-    <BlockCard num="1" title="빅픽쳐 (Big Picture)">
-      <p style={{fontSize:13,color:T.txtD,marginBottom:16,lineHeight:1.7}}>학습 루프 수행 강화 · 지난 주 대비 성장 확인 · 노력과 결과의 연결</p>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:14}}>
-        <div style={{background:T.bgSoft,padding:'20px 22px',borderRadius:12}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1,marginBottom:8,textTransform:'uppercase'}}>Input · 듣기</p>
-          <p style={{fontSize:14,color:T.txt,lineHeight:1.8}}>You clearly understood the main idea about small habits and consistency.</p>
-        </div>
-        <div style={{background:T.bgSoft,padding:'20px 22px',borderRadius:12}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1,marginBottom:8,textTransform:'uppercase'}}>Understanding · 분석</p>
-          <p style={{fontSize:14,color:T.txt,lineHeight:1.8}}>You identified the key message and used a relevant example.</p>
-        </div>
-        <div style={{background:T.bgSoft,padding:'20px 22px',borderRadius:12}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1,marginBottom:8,textTransform:'uppercase'}}>Output · 스피치</p>
-          <p style={{fontSize:14,color:T.txt,lineHeight:1.8}}>Your structure is clearer than last week, and your ideas are easier to follow.</p>
-        </div>
-      </div>
-    </BlockCard>
-
-    {/* 2. 발음 */}
-    <BlockCard num="2" title="발음 (Pronunciation)">
+    {/* 1. 발음 */}
+    <BlockCard num="1" title="발음 (Pronunciation)">
       <p style={{fontSize:13,color:T.txtD,marginBottom:16,lineHeight:1.7}}>한국인이 자주 놓치는 발음 교정</p>
       <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:14}} className="fb-compare">
         <div style={{background:'rgba(220,38,38,0.06)',border:'1px solid rgba(220,38,38,0.2)',padding:'20px 22px',borderRadius:12}}>
@@ -995,8 +981,8 @@ function FeedbackSample(){
       </p>
     </BlockCard>
 
-    {/* 3. 표현 */}
-    <BlockCard num="3" title="표현 / 전달력 (Expression)">
+    {/* 2. 표현 */}
+    <BlockCard num="2" title="표현 / 전달력 (Expression)">
       <p style={{fontSize:13,color:T.txtD,marginBottom:16,lineHeight:1.7}}>바로 쓸 수 있는 표현 업그레이드</p>
       <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:14}} className="fb-compare">
         <div style={{background:'rgba(220,38,38,0.06)',border:'1px solid rgba(220,38,38,0.2)',padding:'20px 22px',borderRadius:12}}>
@@ -1013,8 +999,8 @@ function FeedbackSample(){
       </p>
     </BlockCard>
 
-    {/* 4. 구성 */}
-    <BlockCard num="4" title="구성 / 흐름 (Structure)">
+    {/* 3. 구성 */}
+    <BlockCard num="3" title="구성 / 흐름 (Structure)">
       <p style={{fontSize:13,color:T.txtD,marginBottom:16,lineHeight:1.7}}>말의 흐름을 만드는 연결어 사용법</p>
       <div style={{background:'rgba(22,163,74,0.04)',border:'1px solid rgba(22,163,74,0.15)',padding:'24px 26px',borderRadius:12,marginBottom:14}}>
         <p style={{fontSize:11,fontWeight:700,color:'#16A34A',marginBottom:12,letterSpacing:0.5}}>✅ 이렇게 바꿔보세요</p>
@@ -1026,15 +1012,6 @@ function FeedbackSample(){
       </div>
       <p style={{fontSize:14,color:T.txtS,lineHeight:1.8,paddingLeft:16,borderLeft:`3px solid ${T.gold}`}}>
         → <strong style={{color:T.txt}}>"First / For example / That's why"</strong> 같은 연결어를 쓰면 전체 흐름이 훨씬 자연스러워져요.
-      </p>
-    </BlockCard>
-
-    {/* 5. 마무리 코멘트 */}
-    <BlockCard num="5" title="마무리 코멘트" hl>
-      <p style={{fontSize:13,color:T.txtD,marginBottom:18,lineHeight:1.7}}>지속성과 몰입도 강화 — 동기 부여</p>
-      <p style={{fontSize:'clamp(15px,1.9vw,18px)',color:T.txt,lineHeight:1.8,fontStyle:'italic',paddingLeft:20,borderLeft:`4px solid ${T.gold}`,fontWeight:500}}>
-        "You're starting to organize your thoughts more clearly, and that's a big step.<br/>
-        If you keep repeating this process, your speaking will become much more natural by Week 4."
       </p>
     </BlockCard>
 
