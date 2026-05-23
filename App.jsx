@@ -612,6 +612,14 @@ function TedProgram({nav}){
       <style>{`@media(max-width:640px){.loop-grid{grid-template-columns:1fr!important;grid-template-rows:repeat(4,1fr)!important}.loop-center,.loop-arrow{display:none!important}}`}</style>
     </Sec>
 
+    {/* ━ 10.5 REAL COMMUNITY — 실제 인증 현장 ━ */}
+    <Sec label="REAL COMMUNITY" title={<>혼자가 아니에요,<br/>매일 함께 인증해요</>} sub="매일 과제를 디스코드에 인증하고, 동료와 원어민 튜터의 피드백이 실시간으로 오가요. 아래는 실제 1기 커뮤니티의 모습이에요 (개인정보는 가렸어요).">
+      <DiscordThread channelName="금-스피치" channelSub="1기 · 주간 스피치 인증" maxW={580} messages={[
+        {av:'Y',name:'Y님',time:'오후 9:45',file:{name:'1w_스피치.m4a',dur:'3:02'},reactions:[{e:'👍',n:2},{e:'👏',n:2}]},
+        {av:'T',name:'원어민 튜터',bot:true,time:'오후 10:47',text:'📩 전달 체크: 왜 변화의 시대에 적응력이 필요한지, 논리적 뼈대를 아주 잘 잡아주셨어요.\n🧲 표현 수집: "The reason suggested in this video is…"로 시작하니 스피치의 격식이 확 올라갔어요.\n🔀 차이 발견: 교재 속 예시 대신 본인이 매일 쓰는 실제 경험을 매칭하신 점이 정말 돋보였어요.',reactions:[{e:'🔥',n:3},{e:'🥹',n:2}]},
+      ]}/>
+    </Sec>
+
     {/* ━ 11. TESTIMONIALS — 1기 후기 (롤링) ━ */}
     <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="4주를 함께한 1기 참가자들이 커뮤니티에 자발적으로 남긴 소감 중 일부예요. 개인정보 보호를 위해 이름은 가렸어요.">
       <TestimonialCarousel/>
@@ -876,6 +884,48 @@ function PricingCards({nav}){
 }
 
 // ─── TESTIMONIAL CAROUSEL — 1기 자발적 후기 롤링 ───
+// ─── DISCORD THREAD — 인증/피드백 채널 재현 (정적 목업) ───
+function DiscordThread({channelName,channelSub,messages,maxW=580}){
+  const D={bg:'#313338',head:'#2b2d31',nameC:'#E8CFA0',time:'#949ba4',text:'#dbdee1',sub:'#b5bac1',pill:'rgba(255,255,255,0.06)',pillB:'rgba(255,255,255,0.08)'}
+  return(
+    <div style={{maxWidth:maxW,margin:'0 auto',borderRadius:14,overflow:'hidden',boxShadow:'0 14px 40px rgba(0,0,0,0.18)',border:'1px solid rgba(0,0,0,0.25)'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,padding:'12px 18px',background:D.head}}>
+        <span style={{color:'#80848e',fontSize:18,fontWeight:600,lineHeight:1}}>#</span>
+        <span style={{color:'#f2f3f5',fontSize:14,fontWeight:600}}>{channelName}</span>
+        {channelSub&&<span style={{color:D.time,fontSize:12,marginLeft:'auto'}} className="dc-sub">{channelSub}</span>}
+      </div>
+      <div style={{background:D.bg,padding:'12px 0 16px'}}>
+        {messages.map((m,i)=>(
+          <div key={i} style={{display:'flex',gap:14,padding:'10px 18px'}}>
+            <div style={{width:42,height:42,borderRadius:'50%',background:m.bot?'#5865F2':`linear-gradient(135deg,${T.gold},${T.goldL} 60%,#E8CFA0)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:16,fontWeight:700,flexShrink:0}}>{m.av}</div>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:5,flexWrap:'wrap'}}>
+                <span style={{fontSize:14,fontWeight:700,color:m.bot?'#a8b1ff':D.nameC}}>{m.name}</span>
+                {m.bot&&<span style={{fontSize:9,fontWeight:700,color:'#fff',background:'#5865F2',padding:'1px 5px',borderRadius:4,letterSpacing:0.3}}>운영</span>}
+                <span style={{fontSize:11,color:D.time}}>{m.time}</span>
+              </div>
+              {m.text&&<div style={{fontSize:14,color:D.text,lineHeight:1.7,whiteSpace:'pre-line'}}>{m.text}</div>}
+              {m.file&&(
+                <div style={{display:'flex',alignItems:'center',gap:12,marginTop:8,padding:'12px 14px',background:'#2b2d31',border:`1px solid ${D.pillB}`,borderRadius:8,maxWidth:400}}>
+                  <div style={{width:34,height:34,borderRadius:'50%',background:T.gold,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div style={{flex:1,minWidth:0}}>
+                    <p style={{fontSize:13,color:'#00a8fc',fontWeight:600,marginBottom:5,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{m.file.name}</p>
+                    <div style={{height:4,background:'rgba(255,255,255,0.15)',borderRadius:2,position:'relative'}}><div style={{position:'absolute',left:0,top:0,height:4,width:'32%',background:D.sub,borderRadius:2}}/></div>
+                  </div>
+                  <span style={{fontSize:11,color:D.time,flexShrink:0}}>{m.file.dur}</span>
+                </div>
+              )}
+              {m.reactions&&<div style={{display:'flex',gap:6,flexWrap:'wrap',marginTop:10}}>{m.reactions.map((r,j)=><span key={j} style={{display:'inline-flex',alignItems:'center',gap:5,padding:'2px 9px',background:D.pill,border:`1px solid ${D.pillB}`,borderRadius:8,fontSize:13,color:D.text}}>{r.e}<span style={{fontSize:12,fontWeight:600,color:D.sub}}>{r.n}</span></span>)}</div>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function TestimonialCarousel({compact}){
   const items=TESTIMONIALS_TED1
   const [idx,setIdx]=useState(0)
