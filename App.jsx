@@ -613,7 +613,7 @@ function TedProgram({nav}){
     </Sec>
 
     {/* ━ 10.5 REAL COMMUNITY — 실제 인증 현장 ━ */}
-    <Sec label="REAL COMMUNITY" title={<>혼자가 아니에요,<br/>매일 함께 인증해요</>} sub="매일 과제를 디스코드에 인증하고, 동료와 원어민 튜터의 피드백이 실시간으로 오가요. 아래는 실제 1기 커뮤니티의 모습이에요 (개인정보는 가렸어요).">
+    <Sec label="REAL COMMUNITY" title={<>혼자가 아니에요,<br/>매일 함께 인증해요</>} sub="매일 과제를 디스코드에 인증하고, 동료와 원어민 튜터의 피드백이 실시간으로 오가요. 아래는 실제 1기 커뮤니티의 모습이에요.">
       <DiscordThread channelName="금-스피치" channelSub="1기 · 주간 스피치 인증" maxW={580} messages={[
         {av:'Y',name:'Y님',time:'오후 9:45',file:{name:'1w_스피치.m4a',dur:'3:02'},reactions:[{e:'👍',n:2},{e:'👏',n:2}]},
         {av:'T',name:'원어민 튜터',bot:true,time:'오후 10:47',text:'📩 전달 체크: 왜 변화의 시대에 적응력이 필요한지, 논리적 뼈대를 아주 잘 잡아주셨어요.\n🧲 표현 수집: "The reason suggested in this video is…"로 시작하니 스피치의 격식이 확 올라갔어요.\n🔀 차이 발견: 교재 속 예시 대신 본인이 매일 쓰는 실제 경험을 매칭하신 점이 정말 돋보였어요.',reactions:[{e:'🔥',n:3},{e:'🥹',n:2}]},
@@ -621,7 +621,7 @@ function TedProgram({nav}){
     </Sec>
 
     {/* ━ 11. TESTIMONIALS — 1기 후기 (롤링) ━ */}
-    <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="4주를 함께한 1기 참가자들이 커뮤니티에 자발적으로 남긴 소감 중 일부예요. 개인정보 보호를 위해 이름은 가렸어요.">
+    <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="4주를 함께한 1기 참가자들이 커뮤니티에 자발적으로 남긴 소감 중 일부예요.">
       <TestimonialCarousel/>
     </Sec>
 
@@ -816,12 +816,10 @@ function PricingCards({nav}){
     '매주 1회 피어 피드백 시스템',
     '스터디 전용 디스코드 커뮤니티 + 질문방',
     '매주 개인별 진단 · 교정 · 방향성 제시',
-    '원어민 튜터 1:1 서면 피드백 (주 1회, 주간 스피치)',
     '4주 완주 포트폴리오',
   ]
-  const tier2Extra=[
-    '원어민 튜터 1:1 비디오 피드백 (주 1회, 주간 스피치)',
-  ]
+  const writtenFb='원어민 튜터 1:1 서면 피드백 (주 1회, 주간 스피치)'
+  const videoFb='원어민 튜터 1:1 비디오 피드백 (주 1회, 주간 스피치)'
   const tier3Extra=[
     '매주 원어민 라이브 코칭',
     '1:1 컨설팅 총 2회 (원어민 온보딩 1회 + Grace 중간 점검 1회)',
@@ -848,6 +846,7 @@ function PricingCards({nav}){
         </div>
         <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
           {base.map(f=><Item key={f} text={f}/>)}
+          <Item text={writtenFb}/>
         </ul>
         <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.bg,color:T.navy,fontSize:14,fontWeight:700,border:`1.5px solid ${T.navy}`,borderRadius:12,cursor:'pointer'}}>2기 신청하기 →</button>
       </div>
@@ -864,7 +863,7 @@ function PricingCards({nav}){
         </div>
         <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
           {base.map(f=><Item key={f} text={f}/>)}
-          {tier2Extra.map(f=><Item key={f} text={f} hl/>)}
+          <Item text={videoFb} hl/>
         </ul>
         <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
       </div>
@@ -932,7 +931,7 @@ function TestimonialCarousel({compact}){
   const [paused,setPaused]=useState(false)
   useEffect(()=>{
     if(paused||items.length<=1)return
-    const id=setInterval(()=>setIdx(i=>(i+1)%items.length),compact?5000:7000)
+    const id=setInterval(()=>setIdx(i=>(i+1)%items.length),compact?3500:4800)
     return ()=>clearInterval(id)
   },[paused,compact,items.length])
   const t=items[idx]
