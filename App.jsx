@@ -5,7 +5,7 @@ import GatedArticle from './src/GatedArticle'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 2기 신청·결제는 래피드(Latpeed)에서 진행. URL은 만든 뒤 교체.
-const LATPEED_URL = 'https://latpeed.com/products/PLACEHOLDER_TODO'
+const LATPEED_URL = 'https://www.latpeed.com/products/K8g15'
 const goToLatpeed = () => window.open(LATPEED_URL, '_blank', 'noopener,noreferrer')
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -231,17 +231,17 @@ function TedProgram({nav}){
     {b:'혼자 시작하면 3일 만에 포기한다.',a:'28일 연속 실행 기록. 시스템과 동료가 나를 움직여줬다.'},
   ]
   const timeline=[
-    {label:'2기 모집 시작',date:'(확정 시 업데이트)',active:true},
-    {label:'소그룹 정원 마감',date:'정원 마감 시',active:false},
-    {label:'오리엔테이션',date:'(확정 시 업데이트)',active:false},
-    {label:'2기 시작',date:'(확정 시 업데이트)',active:false},
+    {label:'2기 모집 중',date:'정원 마감 시 마감',active:true},
+    {label:'오리엔테이션',date:'6월 20일 (토)',active:false},
+    {label:'2기 시작',date:'6월 22일 (월)',active:false},
+    {label:'4주 과정 종료',date:'7월 19일 (일)',active:false},
   ]
 
   const faqs=[
     ['영어를 정말 못하는데 참여할 수 있나요?','TED 영상의 60% 정도는 이해할 수 있는 분을 기준으로 설계되어 있어요. 완벽하게 알아들을 필요는 없지만, 키워드와 전체 흐름을 파악할 수 있는 정도면 충분해요. 신청 시 현재 영어 상황을 여쭤보지만, 이는 추후 운영과 피드백 참고용이에요.'],
     ['직장인인데 시간이 될까요?','매일 한 시간 정도는 필요해요. 대신 출퇴근 시간에 리스닝, 점심시간에 노트테이킹, 퇴근 후 쉐도잉처럼 시간을 쪼개서 실행할 수 있는 시스템이에요. 저도 풀타임 직장인으로 이 루틴을 만들어 왔기 때문에 충분히 가능해요. 매일 제출물이 있어서 자연스럽게 루틴이 만들어져요.'],
     ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 한 소그룹은 최대 30명까지만 운영하고, 신청이 많으면 추가 그룹을 편성해요. 결제 완료 순으로 자리가 확정되며, 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
-    ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·리더십 중심의 TED Talk을 큐레이션해서 제공해요. 15분 이내 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 2기는 "비즈니스 × 자기계발" 테마로 4편이 준비되어 있어요.'],
+    ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·심리학 중심의 TED Talk을 큐레이션해서 제공해요. 5분 안팎 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 2기는 "자기관리 × 생산성" 테마로 4편이 준비되어 있어요.'],
     ['피드백은 어떻게 받나요?','두 가지 피드백이 있어요. 매주 3분 요약 스피치에 대해 원어민 튜터가 서면으로 발음·표현·구성 피드백을 드려요. 거기에 매주 토요일 동료들과의 피어 피드백까지 — 혼자 연습할 때는 절대 얻을 수 없는 기준이 생겨요.'],
     ['4주 후에는 어떻게 되나요?','4주간 쌓은 노트·녹음·오답노트·스피치가 나만의 영어 포트폴리오가 돼요. 완주자에게는 다음 기수 우선 안내가 제공돼요.'],
     ['환불은 가능한가요?','결제 후 환불은 불가해요. 결제 전에 프로그램 상세를 충분히 확인하신 후 결정해주세요.'],
@@ -285,6 +285,25 @@ function TedProgram({nav}){
           <p style={{fontSize:15,color:T.txtS,fontWeight:400,letterSpacing:-0.2}}><strong style={{fontWeight:700,color:T.txt}}>36만 명</strong>이 공감한 TED 공부법 기반</p>
         </div>
       </div>
+    </section>
+
+    {/* ━ 1.5 SOCIAL PROOF + 후기 롤링 (앞단) ━ */}
+    <section style={{padding:'56px 24px 64px',background:T.bg}}>
+      <div style={{maxWidth:720,margin:'0 auto',textAlign:'center'}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:16,marginBottom:26,flexWrap:'wrap'}}>
+          <div style={{display:'flex',alignItems:'center'}}>
+            {TESTIMONIALS_TED1.map((t,i)=>{
+              const ini=(t.name||'?').replace(/[()님\s]/g,'').charAt(0)||'·'
+              return <div key={i} style={{width:40,height:40,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 60%,#E8CFA0 100%)`,border:'2px solid #fff',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:14,fontWeight:700,marginLeft:i===0?0:-12,boxShadow:'0 2px 8px rgba(0,0,0,0.08)',position:'relative',zIndex:i}}>{ini}</div>
+            })}
+            <div style={{width:40,height:40,borderRadius:'50%',background:T.navy,border:'2px solid #fff',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:12,fontWeight:700,marginLeft:-12,boxShadow:'0 2px 8px rgba(0,0,0,0.08)',position:'relative',zIndex:99}}>40+</div>
+          </div>
+          <p style={{fontSize:'clamp(14px,1.7vw,16px)',color:T.txt,fontWeight:500,letterSpacing:-0.2}}>이미 <strong style={{color:T.gold,fontWeight:700}}>40명이 넘는 멤버</strong>가<br className="sp-br"/> 이 여정을 함께하고 있어요</p>
+        </div>
+        <TestimonialCarousel compact/>
+        <p style={{fontSize:12,color:T.txtD,marginTop:16,lineHeight:1.6}}>실제 참가자들이 커뮤니티에 자발적으로 남긴 소감 중 극히 일부예요.</p>
+      </div>
+      <style>{`@media(min-width:561px){.sp-br{display:none}}`}</style>
     </section>
 
     <GoldDivider/>
@@ -484,17 +503,17 @@ function TedProgram({nav}){
     </Sec>
 
     {/* ━ 8. SAMPLE CURRICULUM ━ */}
-    <Sec id="curriculum" label="SAMPLE CURRICULUM" title={<>2기 커리큘럼 엿보기<br/>비즈니스 × 자기계발</>} sub="이번 달의 테마는 '비즈니스 성장을 위한 자기계발'이에요. 주차별 TED Talk 1편씩, 모두 5~6분 안팎으로 1주일 안에 충분히 마스터할 수 있도록 큐레이션했어요." bg={T.bgWarm} maxW={1000}>
+    <Sec id="curriculum" label="SAMPLE CURRICULUM" title={<>2기 커리큘럼 엿보기<br/>자기관리 × 생산성</>} sub="이번 달 테마는 '나를 움직이는 자기관리'예요. 나쁜 습관 끊기, 미루지 않기, 시간 관리, 번아웃 없는 팀워크까지 — 일과 삶에 바로 쓰는 4편을 5분 안팎으로 큐레이션했어요." bg={T.bgWarm} maxW={1000}>
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(400px,1fr))',gap:18}}>
         {[
-          {w:'Week 1',t:'3 ways to measure your adaptability',sp:'Natalie Fratto',dur:'6:23',url:'https://www.ted.com/talks/natalie_fratto_3_ways_to_measure_your_adaptability_and_how_to_improve_it'},
-          {w:'Week 2',t:'Why working from home is good for business',sp:'Matt Mullenweg',dur:'4:27',url:'https://www.ted.com/talks/matt_mullenweg_why_working_from_home_is_good_for_business'},
-          {w:'Week 3',t:'3 steps to getting what you want in a negotiation',sp:'Ruchi Sinha',dur:'5:00',url:'https://www.ted.com/talks/ruchi_sinha_3_steps_to_getting_what_you_want_in_a_negotiation'},
-          {w:'Week 4',t:'3 rules for better work-life balance',sp:'Ashley Whillans',dur:'5:07',url:'https://www.ted.com/talks/ashley_whillans_3_rules_for_better_work_life_balance'},
+          {w:'Week 1',cat:'PSYCHOLOGY',t:'Why is it so hard to break a bad habit?',sp:'TED-Ed',dur:'4:44',url:'https://www.ted.com/talks/ted_ed_why_is_it_so_hard_to_break_a_bad_habit'},
+          {w:'Week 2',cat:'PSYCHOLOGY',t:'Why you procrastinate even when it feels bad',sp:'TED-Ed',dur:'5:26',url:'https://www.ted.com/talks/ted_ed_why_you_procrastinate_even_when_it_feels_bad'},
+          {w:'Week 3',cat:'PSYCHOLOGY',t:'How to manage your time more effectively',sp:'Brian Christian',dur:'4:47',url:'https://www.ted.com/talks/brian_christian_how_to_manage_your_time_more_effectively_according_to_machines'},
+          {w:'Week 4',cat:'BUSINESS',t:'How to be a team player — without burning out',sp:'Rob Cross',dur:'5:37',url:'https://www.ted.com/talks/rob_cross_how_to_be_a_team_player_without_burning_out'},
         ].map((v,i)=>(
           <a key={i} href={v.url} target="_blank" rel="noreferrer" style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 30px',textDecoration:'none',boxShadow:T.shadow,transition:'all 0.2s',display:'block'}} onMouseEnter={e=>{e.currentTarget.style.boxShadow=T.shadowH;e.currentTarget.style.borderColor=T.borderH;e.currentTarget.style.transform='translateY(-3px)'}} onMouseLeave={e=>{e.currentTarget.style.boxShadow=T.shadow;e.currentTarget.style.borderColor=T.border;e.currentTarget.style.transform='translateY(0)'}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
-              <span style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.5,textTransform:'uppercase'}}>{v.w} · BUSINESS</span>
+              <span style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1.5,textTransform:'uppercase'}}>{v.w} · {v.cat}</span>
               <span style={{fontSize:13,color:T.txtD}}>▶ {v.dur}</span>
             </div>
             <h3 style={{fontSize:20,fontWeight:700,color:T.txt,marginBottom:10,lineHeight:1.35,letterSpacing:-0.3}}>{v.t}</h3>
@@ -594,33 +613,9 @@ function TedProgram({nav}){
       <style>{`@media(max-width:640px){.loop-grid{grid-template-columns:1fr!important;grid-template-rows:repeat(4,1fr)!important}.loop-center,.loop-arrow{display:none!important}}`}</style>
     </Sec>
 
-    {/* ━ 11. TESTIMONIALS — 1기 후기 ━ */}
-    <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="4주를 함께 완주한 1기 수강생들이 들려준 변화. 후기 이미지는 곧 업데이트될 예정이에요.">
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:20}}>
-        {TESTIMONIALS_TED1.map(t=>{
-          const initial=(t.name||'?').replace(/[()]/g,'').trim().charAt(0)||'·'
-          return(
-            <div key={t.id} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 28px',boxShadow:T.shadow,display:'flex',flexDirection:'column'}}>
-              <div style={{display:'flex',alignItems:'center',gap:14,marginBottom:18}}>
-                {t.image?(
-                  <img src={t.image} alt={t.name} style={{width:56,height:56,borderRadius:'50%',objectFit:'cover',border:`1px solid ${T.border}`}}/>
-                ):(
-                  <div style={{width:56,height:56,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 50%,#E8CFA0 100%)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:20,fontWeight:700,letterSpacing:-0.5}}>{initial}</div>
-                )}
-                <span style={{fontFamily:"'Playfair Display',serif",fontSize:42,color:T.gold,lineHeight:1,opacity:0.5,marginLeft:'auto'}}>"</span>
-              </div>
-              <p style={{fontSize:15,color:T.txt,lineHeight:1.85,marginBottom:18,flex:1}}>{t.quote}</p>
-              {t.highlight&&(
-                <p style={{fontSize:14,fontWeight:700,color:T.gold,marginBottom:18,lineHeight:1.5,letterSpacing:-0.2}}>{t.highlight}</p>
-              )}
-              <div style={{paddingTop:14,borderTop:`1px solid ${T.border}`}}>
-                <p style={{fontSize:13,fontWeight:600,color:T.txt,marginBottom:2}}>{t.name}</p>
-                <p style={{fontSize:12,color:T.txtS}}>{t.role}</p>
-              </div>
-            </div>
-          )
-        })}
-      </div>
+    {/* ━ 11. TESTIMONIALS — 1기 후기 (롤링) ━ */}
+    <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="4주를 함께한 1기 참가자들이 커뮤니티에 자발적으로 남긴 소감 중 일부예요. 개인정보 보호를 위해 이름은 가렸어요.">
+      <TestimonialCarousel/>
     </Sec>
 
     {/* ━ 12. BEFORE/AFTER ━ */}
@@ -873,6 +868,67 @@ function PricingCards({nav}){
     </div>
     <style>{`@media(max-width:560px){.future-tiers{grid-template-columns:1fr!important}}`}</style>
   </div>)
+}
+
+// ─── TESTIMONIAL CAROUSEL — 1기 자발적 후기 롤링 ───
+function TestimonialCarousel({compact}){
+  const items=TESTIMONIALS_TED1
+  const [idx,setIdx]=useState(0)
+  const [paused,setPaused]=useState(false)
+  useEffect(()=>{
+    if(paused||items.length<=1)return
+    const id=setInterval(()=>setIdx(i=>(i+1)%items.length),compact?5000:6500)
+    return ()=>clearInterval(id)
+  },[paused,compact,items.length])
+  const t=items[idx]
+  const initial=(t.name||'?').replace(/[()님\s]/g,'').trim().charAt(0)||'·'
+  const Avatar=({size})=>(
+    t.image
+      ? <img src={t.image} alt="" style={{width:size,height:size,borderRadius:'50%',objectFit:'cover',border:`1px solid ${T.border}`,flexShrink:0}}/>
+      : <div style={{width:size,height:size,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 50%,#E8CFA0 100%)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:Math.round(size*0.36),fontWeight:700,flexShrink:0}}>{initial}</div>
+  )
+  const dots=(
+    <div style={{display:'flex',gap:7,justifyContent:'center',marginTop:compact?18:28}}>
+      {items.map((_,i)=>(
+        <button key={i} onClick={()=>setIdx(i)} aria-label={`후기 ${i+1}`} style={{width:i===idx?22:7,height:7,borderRadius:100,border:'none',padding:0,cursor:'pointer',background:i===idx?T.gold:T.borderH,transition:'all 0.3s'}}/>
+      ))}
+    </div>
+  )
+
+  if(compact){
+    return(
+      <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:640,margin:'0 auto'}}>
+        <div key={idx} style={{display:'flex',alignItems:'center',gap:18,background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'22px 26px',boxShadow:T.shadow,animation:'tFade 0.6s ease',textAlign:'left'}}>
+          <Avatar size={48}/>
+          <div style={{flex:1,minWidth:0}}>
+            <p style={{fontSize:15,color:T.txt,lineHeight:1.55,fontWeight:600,marginBottom:6,letterSpacing:-0.2}}>"{t.highlight}"</p>
+            <p style={{fontSize:12,color:T.txtS}}>{t.name} · {t.role}</p>
+          </div>
+        </div>
+        {dots}
+        <style>{`@keyframes tFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}`}</style>
+      </div>
+    )
+  }
+
+  return(
+    <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:720,margin:'0 auto'}}>
+      <div key={idx} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'44px 48px',boxShadow:T.shadowH,animation:'tFade 0.6s ease',position:'relative'}} className="tcard">
+        <span style={{position:'absolute',top:24,right:36,fontFamily:"'Playfair Display',serif",fontSize:64,color:T.gold,lineHeight:1,opacity:0.25}}>"</span>
+        {t.highlight&&<p style={{fontSize:'clamp(18px,2.2vw,22px)',fontWeight:700,color:T.gold,marginBottom:20,lineHeight:1.5,letterSpacing:-0.3}}>{t.highlight}</p>}
+        <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:T.txt,lineHeight:1.9,marginBottom:28}}>{t.quote}</p>
+        <div style={{display:'flex',alignItems:'center',gap:14,paddingTop:20,borderTop:`1px solid ${T.border}`}}>
+          <Avatar size={48}/>
+          <div>
+            <p style={{fontSize:14,fontWeight:600,color:T.txt}}>{t.name}</p>
+            <p style={{fontSize:12,color:T.txtS}}>{t.role}</p>
+          </div>
+        </div>
+      </div>
+      {dots}
+      <style>{`@keyframes tFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:560px){.tcard{padding:32px 26px!important}}`}</style>
+    </div>
+  )
 }
 
 // ─── FEEDBACK SAMPLE — 5블록 전체 펼침, 크게 ───
