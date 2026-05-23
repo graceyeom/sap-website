@@ -882,18 +882,23 @@ function TestimonialCarousel({compact}){
   const [paused,setPaused]=useState(false)
   useEffect(()=>{
     if(paused||items.length<=1)return
-    const id=setInterval(()=>setIdx(i=>(i+1)%items.length),compact?5000:6500)
+    const id=setInterval(()=>setIdx(i=>(i+1)%items.length),compact?5000:7000)
     return ()=>clearInterval(id)
   },[paused,compact,items.length])
   const t=items[idx]
   const initial=(t.name||'?').replace(/[()님\s]/g,'').trim().charAt(0)||'·'
+  // 디스코드 다크 팔레트
+  const D={bg:'#313338',head:'#2b2d31',name:'#E8CFA0',time:'#949ba4',text:'#dbdee1',sub:'#b5bac1',pill:'rgba(255,255,255,0.06)',pillB:'rgba(255,255,255,0.08)'}
   const Avatar=({size})=>(
-    t.image
-      ? <img src={t.image} alt="" style={{width:size,height:size,borderRadius:'50%',objectFit:'cover',border:`1px solid ${T.border}`,flexShrink:0}}/>
-      : <div style={{width:size,height:size,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 50%,#E8CFA0 100%)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:Math.round(size*0.36),fontWeight:700,flexShrink:0}}>{initial}</div>
+    <div style={{width:size,height:size,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 50%,#E8CFA0 100%)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:Math.round(size*0.4),fontWeight:700,flexShrink:0}}>{initial}</div>
+  )
+  const Reactions=()=>(
+    t.reactions&&t.reactions.length? <div style={{display:'flex',gap:6,flexWrap:'wrap',marginTop:12}}>
+      {t.reactions.map((r,i)=><span key={i} style={{display:'inline-flex',alignItems:'center',gap:5,padding:'2px 9px',background:D.pill,border:`1px solid ${D.pillB}`,borderRadius:8,fontSize:13,color:D.text}}>{r.e}<span style={{fontSize:12,fontWeight:600,color:D.sub}}>{r.n}</span></span>)}
+    </div> : null
   )
   const dots=(
-    <div style={{display:'flex',gap:7,justifyContent:'center',marginTop:compact?18:28}}>
+    <div style={{display:'flex',gap:7,justifyContent:'center',marginTop:compact?18:24}}>
       {items.map((_,i)=>(
         <button key={i} onClick={()=>setIdx(i)} aria-label={`후기 ${i+1}`} style={{width:i===idx?22:7,height:7,borderRadius:100,border:'none',padding:0,cursor:'pointer',background:i===idx?T.gold:T.borderH,transition:'all 0.3s'}}/>
       ))}
@@ -903,11 +908,14 @@ function TestimonialCarousel({compact}){
   if(compact){
     return(
       <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:640,margin:'0 auto'}}>
-        <div key={idx} style={{display:'flex',alignItems:'center',gap:18,background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:16,padding:'22px 26px',boxShadow:T.shadow,animation:'tFade 0.6s ease',textAlign:'left'}}>
-          <Avatar size={48}/>
+        <div key={idx} style={{display:'flex',gap:14,background:D.bg,borderRadius:14,padding:'18px 20px',boxShadow:'0 8px 28px rgba(0,0,0,0.14)',animation:'tFade 0.6s ease',textAlign:'left'}}>
+          <Avatar size={42}/>
           <div style={{flex:1,minWidth:0}}>
-            <p style={{fontSize:15,color:T.txt,lineHeight:1.55,fontWeight:600,marginBottom:6,letterSpacing:-0.2}}>"{t.highlight}"</p>
-            <p style={{fontSize:12,color:T.txtS}}>{t.name} · {t.role}</p>
+            <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:5,flexWrap:'wrap'}}>
+              <span style={{fontSize:14,fontWeight:700,color:D.name}}>{t.name}</span>
+              <span style={{fontSize:11,color:D.time}}>{t.date}</span>
+            </div>
+            <p style={{fontSize:15,color:'#fff',lineHeight:1.5,fontWeight:500}}>"{t.highlight}"</p>
           </div>
         </div>
         {dots}
@@ -917,21 +925,27 @@ function TestimonialCarousel({compact}){
   }
 
   return(
-    <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:720,margin:'0 auto'}}>
-      <div key={idx} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'44px 48px',boxShadow:T.shadowH,animation:'tFade 0.6s ease',position:'relative'}} className="tcard">
-        <span style={{position:'absolute',top:24,right:36,fontFamily:"'Playfair Display',serif",fontSize:64,color:T.gold,lineHeight:1,opacity:0.25}}>"</span>
-        {t.highlight&&<p style={{fontSize:'clamp(18px,2.2vw,22px)',fontWeight:700,color:T.gold,marginBottom:20,lineHeight:1.5,letterSpacing:-0.3}}>{t.highlight}</p>}
-        <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:T.txt,lineHeight:1.9,marginBottom:28}}>{t.quote}</p>
-        <div style={{display:'flex',alignItems:'center',gap:14,paddingTop:20,borderTop:`1px solid ${T.border}`}}>
-          <Avatar size={48}/>
-          <div>
-            <p style={{fontSize:14,fontWeight:600,color:T.txt}}>{t.name}</p>
-            <p style={{fontSize:12,color:T.txtS}}>{t.role}</p>
+    <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:680,margin:'0 auto'}}>
+      {/* 디스코드 채널 헤더 */}
+      <div style={{display:'flex',alignItems:'center',gap:8,padding:'11px 18px',background:D.head,borderRadius:'14px 14px 0 0'}}>
+        <span style={{color:'#80848e',fontSize:18,fontWeight:600,lineHeight:1}}>#</span>
+        <span style={{color:'#f2f3f5',fontSize:14,fontWeight:600}}>후기-한줄소감</span>
+        <span style={{color:D.time,fontSize:12,marginLeft:'auto'}}>1기 커뮤니티 · 자발적 소감</span>
+      </div>
+      <div key={idx} style={{display:'flex',gap:16,background:D.bg,borderRadius:'0 0 14px 14px',padding:'26px 28px',boxShadow:'0 12px 36px rgba(0,0,0,0.16)',animation:'tFade 0.6s ease',textAlign:'left'}} className="tcard">
+        <Avatar size={46}/>
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:8,flexWrap:'wrap'}}>
+            <span style={{fontSize:15,fontWeight:700,color:D.name}}>{t.name}</span>
+            <span style={{fontSize:11,color:D.time}}>{t.date} · {t.role}</span>
           </div>
+          <p style={{fontSize:'clamp(14px,1.6vw,15px)',color:D.text,lineHeight:1.75}}>{t.quote}</p>
+          {t.highlight&&<p style={{fontSize:15,color:D.name,fontWeight:600,marginTop:12,lineHeight:1.5}}>→ "{t.highlight}"</p>}
+          <Reactions/>
         </div>
       </div>
       {dots}
-      <style>{`@keyframes tFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:560px){.tcard{padding:32px 26px!important}}`}</style>
+      <style>{`@keyframes tFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:560px){.tcard{padding:22px 20px!important}}`}</style>
     </div>
   )
 }
