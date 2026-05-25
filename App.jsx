@@ -810,7 +810,6 @@ function PricingCards({nav}){
   const base=[
     '4주 TED 올인원 스터디 루틴 (인풋 + 아웃풋 통합 설계)',
     '매주 엄선된 TED Talk 영상 제공',
-    '매일 과제 가이드 + 방법론 제시',
     '과제 완료 실시간 트래킹',
     '매주 1회 피어 피드백 시스템',
     '스터디 전용 디스코드 커뮤니티 + 질문방',
@@ -819,6 +818,7 @@ function PricingCards({nav}){
   ]
   const writtenFb='원어민 튜터 1:1 서면 피드백 (주 1회, 주간 스피치)'
   const videoFb='원어민 튜터 1:1 비디오 피드백 (주 1회, 주간 스피치)'
+  const bonus='상세 학습 가이드북 (보너스 제공)'
   const tier3Extra=[
     '매주 원어민 라이브 코칭',
     '1:1 컨설팅 총 2회 (원어민 온보딩 1회 + Grace 중간 점검 1회)',
@@ -846,15 +846,15 @@ function PricingCards({nav}){
         <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
           {base.map(f=><Item key={f} text={f}/>)}
           <Item text={writtenFb}/>
+          <Item text={bonus} hl/>
         </ul>
-        <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.bg,color:T.navy,fontSize:14,fontWeight:700,border:`1.5px solid ${T.navy}`,borderRadius:12,cursor:'pointer'}}>2기 신청하기 →</button>
+        <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
       </div>
 
-      {/* Tier 2 — Premium, 추천 강조 */}
-      <div style={{background:T.bgCard,border:`2px solid ${T.gold}`,borderRadius:20,padding:'40px 32px',position:'relative',boxShadow:T.shadowH,wordBreak:'keep-all',lineBreak:'strict'}}>
-        <div style={{position:'absolute',top:-14,left:32,padding:'5px 14px',background:T.gold,color:'#fff',fontSize:11,fontWeight:700,borderRadius:6,letterSpacing:0.5}}>추천</div>
-        <div style={{marginBottom:24,paddingTop:6}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.gold,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>Tier 2 · Premium</p>
+      {/* Tier 2 — Premium (동등 표시) */}
+      <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'40px 32px',position:'relative',boxShadow:T.shadow,wordBreak:'keep-all',lineBreak:'strict'}}>
+        <div style={{marginBottom:24}}>
+          <p style={{fontSize:11,fontWeight:700,color:T.txtD,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>Tier 2 · Premium</p>
           <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>TED 올인원 4주 스터디 PLUS</p>
           <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 <strong style={{color:T.txt}}>비디오</strong> 피드백</p>
           <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩200,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
@@ -863,6 +863,7 @@ function PricingCards({nav}){
         <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
           {base.map(f=><Item key={f} text={f}/>)}
           <Item text={videoFb} hl/>
+          <Item text={bonus} hl/>
         </ul>
         <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
       </div>
