@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react'
-import { COLUMNS, EBOOKS, TESTIMONIALS_TED1 } from './data'
+import { COLUMNS, EBOOKS, TESTIMONIALS_TED1, REVIEW_SHOTS } from './data'
 import { useAuth } from './src/useAuth'
 import GatedArticle from './src/GatedArticle'
 
@@ -614,10 +614,9 @@ function TedProgram({nav}){
 
     {/* ━ 10.5 REAL COMMUNITY — 실제 인증 현장 ━ */}
     <Sec label="REAL COMMUNITY" title={<>혼자가 아니에요,<br/>매일 함께 인증해요</>} sub="매일 과제를 디스코드에 인증하고, 동료와 원어민 튜터의 피드백이 실시간으로 오가요. 아래는 실제 1기 커뮤니티의 모습이에요.">
-      <DiscordThread channelName="금-스피치" channelSub="1기 · 주간 스피치 인증" maxW={580} messages={[
-        {av:'Y',name:'Y님',time:'오후 9:45',file:{name:'1w_스피치.m4a',dur:'3:02'},reactions:[{e:'👍',n:2},{e:'👏',n:2}]},
-        {av:'T',name:'원어민 튜터',bot:true,time:'오후 10:47',text:'📩 전달 체크: 왜 변화의 시대에 적응력이 필요한지, 논리적 뼈대를 아주 잘 잡아주셨어요.\n🧲 표현 수집: "The reason suggested in this video is…"로 시작하니 스피치의 격식이 확 올라갔어요.\n🔀 차이 발견: 교재 속 예시 대신 본인이 매일 쓰는 실제 경험을 매칭하신 점이 정말 돋보였어요.',reactions:[{e:'🔥',n:3},{e:'🥹',n:2}]},
-      ]}/>
+      <figure style={{margin:'0 auto',maxWidth:580,borderRadius:16,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:T.shadow,background:'#1e1f22'}}>
+        <img src="/proof/peer-feedback.webp" alt="실제 1기 스피치 채널 — 음성 제출과 피드백이 오가는 현장" loading="lazy" style={{width:'100%',display:'block'}}/>
+      </figure>
     </Sec>
 
     {/* ━ 11. TESTIMONIALS — 1기 후기 (롤링) ━ */}
@@ -883,82 +882,33 @@ function PricingCards({nav}){
 }
 
 // ─── TESTIMONIAL CAROUSEL — 1기 자발적 후기 롤링 ───
-// ─── DISCORD THREAD — 인증/피드백 채널 재현 (정적 목업) ───
-function DiscordThread({channelName,channelSub,messages,maxW=580}){
-  const D={bg:'#313338',head:'#2b2d31',nameC:'#E8CFA0',time:'#949ba4',text:'#dbdee1',sub:'#b5bac1',pill:'rgba(255,255,255,0.06)',pillB:'rgba(255,255,255,0.08)'}
-  return(
-    <div style={{maxWidth:maxW,margin:'0 auto',borderRadius:14,overflow:'hidden',boxShadow:'0 14px 40px rgba(0,0,0,0.18)',border:'1px solid rgba(0,0,0,0.25)'}}>
-      <div style={{display:'flex',alignItems:'center',gap:8,padding:'12px 18px',background:D.head}}>
-        <span style={{color:'#80848e',fontSize:18,fontWeight:600,lineHeight:1}}>#</span>
-        <span style={{color:'#f2f3f5',fontSize:14,fontWeight:600}}>{channelName}</span>
-        {channelSub&&<span style={{color:D.time,fontSize:12,marginLeft:'auto'}} className="dc-sub">{channelSub}</span>}
-      </div>
-      <div style={{background:D.bg,padding:'12px 0 16px'}}>
-        {messages.map((m,i)=>(
-          <div key={i} style={{display:'flex',gap:14,padding:'10px 18px'}}>
-            <div style={{width:42,height:42,borderRadius:'50%',background:m.bot?'#5865F2':`linear-gradient(135deg,${T.gold},${T.goldL} 60%,#E8CFA0)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:16,fontWeight:700,flexShrink:0}}>{m.av}</div>
-            <div style={{flex:1,minWidth:0}}>
-              <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:5,flexWrap:'wrap'}}>
-                <span style={{fontSize:14,fontWeight:700,color:m.bot?'#a8b1ff':D.nameC}}>{m.name}</span>
-                {m.bot&&<span style={{fontSize:9,fontWeight:700,color:'#fff',background:'#5865F2',padding:'1px 5px',borderRadius:4,letterSpacing:0.3}}>운영</span>}
-                <span style={{fontSize:11,color:D.time}}>{m.time}</span>
-              </div>
-              {m.text&&<div style={{fontSize:14,color:D.text,lineHeight:1.7,whiteSpace:'pre-line'}}>{m.text}</div>}
-              {m.file&&(
-                <div style={{display:'flex',alignItems:'center',gap:12,marginTop:8,padding:'12px 14px',background:'#2b2d31',border:`1px solid ${D.pillB}`,borderRadius:8,maxWidth:400}}>
-                  <div style={{width:34,height:34,borderRadius:'50%',background:T.gold,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-                  </div>
-                  <div style={{flex:1,minWidth:0}}>
-                    <p style={{fontSize:13,color:'#00a8fc',fontWeight:600,marginBottom:5,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{m.file.name}</p>
-                    <div style={{height:4,background:'rgba(255,255,255,0.15)',borderRadius:2,position:'relative'}}><div style={{position:'absolute',left:0,top:0,height:4,width:'32%',background:D.sub,borderRadius:2}}/></div>
-                  </div>
-                  <span style={{fontSize:11,color:D.time,flexShrink:0}}>{m.file.dur}</span>
-                </div>
-              )}
-              {m.reactions&&<div style={{display:'flex',gap:6,flexWrap:'wrap',marginTop:10}}>{m.reactions.map((r,j)=><span key={j} style={{display:'inline-flex',alignItems:'center',gap:5,padding:'2px 9px',background:D.pill,border:`1px solid ${D.pillB}`,borderRadius:8,fontSize:13,color:D.text}}>{r.e}<span style={{fontSize:12,fontWeight:600,color:D.sub}}>{r.n}</span></span>)}</div>}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 function TestimonialCarousel({compact}){
-  const items=TESTIMONIALS_TED1
+  const txtItems=TESTIMONIALS_TED1
+  const shots=REVIEW_SHOTS
+  const len=compact?txtItems.length:shots.length
   const [idx,setIdx]=useState(0)
   const [paused,setPaused]=useState(false)
   useEffect(()=>{
-    if(paused||items.length<=1)return
-    const id=setInterval(()=>setIdx(i=>(i+1)%items.length),compact?3500:4800)
+    if(paused||len<=1)return
+    const id=setInterval(()=>setIdx(i=>(i+1)%len),compact?3500:4800)
     return ()=>clearInterval(id)
-  },[paused,compact,items.length])
-  const t=items[idx]
-  const initial=(t.name||'?').replace(/[()님\s]/g,'').trim().charAt(0)||'·'
-  // 디스코드 다크 팔레트
-  const D={bg:'#313338',head:'#2b2d31',name:'#E8CFA0',time:'#949ba4',text:'#dbdee1',sub:'#b5bac1',pill:'rgba(255,255,255,0.06)',pillB:'rgba(255,255,255,0.08)'}
-  const Avatar=({size})=>(
-    <div style={{width:size,height:size,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 50%,#E8CFA0 100%)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:Math.round(size*0.4),fontWeight:700,flexShrink:0}}>{initial}</div>
-  )
-  const Reactions=()=>(
-    t.reactions&&t.reactions.length? <div style={{display:'flex',gap:6,flexWrap:'wrap',marginTop:12}}>
-      {t.reactions.map((r,i)=><span key={i} style={{display:'inline-flex',alignItems:'center',gap:5,padding:'2px 9px',background:D.pill,border:`1px solid ${D.pillB}`,borderRadius:8,fontSize:13,color:D.text}}>{r.e}<span style={{fontSize:12,fontWeight:600,color:D.sub}}>{r.n}</span></span>)}
-    </div> : null
-  )
-  const dots=(
+  },[paused,compact,len])
+  const D={bg:'#313338',name:'#E8CFA0',time:'#949ba4'}
+  const Dots=({n})=>(
     <div style={{display:'flex',gap:7,justifyContent:'center',marginTop:compact?18:24}}>
-      {items.map((_,i)=>(
+      {Array.from({length:n}).map((_,i)=>(
         <button key={i} onClick={()=>setIdx(i)} aria-label={`후기 ${i+1}`} style={{width:i===idx?22:7,height:7,borderRadius:100,border:'none',padding:0,cursor:'pointer',background:i===idx?T.gold:T.borderH,transition:'all 0.3s'}}/>
       ))}
     </div>
   )
 
   if(compact){
+    const t=txtItems[idx]
+    const initial=(t.name||'?').replace(/[()님\s]/g,'').trim().charAt(0)||'·'
     return(
       <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:640,margin:'0 auto'}}>
         <div key={idx} style={{display:'flex',gap:14,background:D.bg,borderRadius:14,padding:'18px 20px',boxShadow:'0 8px 28px rgba(0,0,0,0.14)',animation:'tFade 0.6s ease',textAlign:'left'}}>
-          <Avatar size={42}/>
+          <div style={{width:42,height:42,borderRadius:'50%',background:`linear-gradient(135deg,${T.gold} 0%,${T.goldL} 50%,#E8CFA0 100%)`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:17,fontWeight:700,flexShrink:0}}>{initial}</div>
           <div style={{flex:1,minWidth:0}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:5,flexWrap:'wrap'}}>
               <span style={{fontSize:14,fontWeight:700,color:D.name}}>{t.name}</span>
@@ -967,34 +917,19 @@ function TestimonialCarousel({compact}){
             <p style={{fontSize:15,color:'#fff',lineHeight:1.5,fontWeight:500}}>"{t.highlight}"</p>
           </div>
         </div>
-        {dots}
+        <Dots n={txtItems.length}/>
         <style>{`@keyframes tFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}`}</style>
       </div>
     )
   }
 
   return(
-    <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:680,margin:'0 auto'}}>
-      {/* 디스코드 채널 헤더 */}
-      <div style={{display:'flex',alignItems:'center',gap:8,padding:'11px 18px',background:D.head,borderRadius:'14px 14px 0 0'}}>
-        <span style={{color:'#80848e',fontSize:18,fontWeight:600,lineHeight:1}}>#</span>
-        <span style={{color:'#f2f3f5',fontSize:14,fontWeight:600}}>후기-한줄소감</span>
-        <span style={{color:D.time,fontSize:12,marginLeft:'auto'}}>1기 커뮤니티 · 자발적 소감</span>
+    <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:560,margin:'0 auto'}}>
+      <div key={idx} style={{borderRadius:16,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:'0 12px 36px rgba(0,0,0,0.12)',animation:'tFade 0.6s ease',background:'#fff'}}>
+        <img src={shots[idx]} alt={`1기 참가자 후기 ${idx+1}`} loading="lazy" style={{width:'100%',display:'block'}}/>
       </div>
-      <div key={idx} style={{display:'flex',gap:16,background:D.bg,borderRadius:'0 0 14px 14px',padding:'26px 28px',boxShadow:'0 12px 36px rgba(0,0,0,0.16)',animation:'tFade 0.6s ease',textAlign:'left'}} className="tcard">
-        <Avatar size={46}/>
-        <div style={{flex:1,minWidth:0}}>
-          <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:8,flexWrap:'wrap'}}>
-            <span style={{fontSize:15,fontWeight:700,color:D.name}}>{t.name}</span>
-            <span style={{fontSize:11,color:D.time}}>{t.date} · {t.role}</span>
-          </div>
-          <p style={{fontSize:'clamp(14px,1.6vw,15px)',color:D.text,lineHeight:1.75}}>{t.quote}</p>
-          {t.highlight&&<p style={{fontSize:15,color:D.name,fontWeight:600,marginTop:12,lineHeight:1.5}}>→ "{t.highlight}"</p>}
-          <Reactions/>
-        </div>
-      </div>
-      {dots}
-      <style>{`@keyframes tFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:560px){.tcard{padding:22px 20px!important}}`}</style>
+      <Dots n={shots.length}/>
+      <style>{`@keyframes tFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
     </div>
   )
 }
@@ -1003,7 +938,7 @@ function TestimonialCarousel({compact}){
 function FeedbackSample(){
   return(<div>
     <figure style={{margin:0,borderRadius:16,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:T.shadow,background:'#1e1f22'}}>
-      <img src="/proof/peer-feedback.webp" alt="원어민 튜터의 실제 주간 스피치 피드백 — 디스코드 스피치 채널" loading="lazy" style={{width:'100%',display:'block'}}/>
+      <img src="/proof/tutor-feedback.webp" alt="원어민 튜터의 실제 주간 스피치 피드백 — 디스코드 스피치 채널" loading="lazy" style={{width:'100%',display:'block'}}/>
     </figure>
     <p style={{fontSize:13,color:T.txtD,textAlign:'center',marginTop:18,lineHeight:1.8}}>
       실제 1기 <strong style={{color:T.txtS}}>스피치 채널</strong> — 음성으로 제출한 주간 스피치를 원어민 튜터가 직접 듣고, 발음 · 표현 · 구성 · 흐름을 짚어 상세 피드백을 드려요.

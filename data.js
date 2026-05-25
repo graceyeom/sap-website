@@ -240,3 +240,11 @@ export const TESTIMONIALS_TED1 = [
     quote:"유튜브로 방법론은 이해했지만 막상 하면 막혀서 그만두곤 했는데, 디테일한 가이드 덕에 한 사이클을 끝까지 돌렸다는 게 뿌듯해요. '시스템'이라 말씀하신 것 이상으로 체계적이라 놀랐습니다.",
     highlight:"'시스템'이라는 말 이상으로 체계적이에요" },
 ];
+
+// 1기 후기 — 실제 디스코드 '한 줄 소감' 캡처 (개인정보 마스킹 처리됨)
+export const REVIEW_SHOTS = [
+  "/proof/review-1.png",
+  "/proof/review-2.webp",
+  "/proof/review-3.webp",
+  "/proof/review-5.webp",
+];
