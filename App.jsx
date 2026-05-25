@@ -245,6 +245,7 @@ function TedProgram({nav}){
     ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·심리학 중심의 TED Talk을 큐레이션해서 제공해요. 5분 안팎 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 2기는 "자기관리 × 생산성" 테마로 4편이 준비되어 있어요.'],
     ['피드백은 어떻게 받나요?','두 가지 피드백이 있어요. 매주 3분 요약 스피치에 대해 원어민 튜터가 서면으로 발음·표현·구성 피드백을 드려요. 거기에 매주 토요일 동료들과의 피어 피드백까지 — 혼자 연습할 때는 절대 얻을 수 없는 기준이 생겨요.'],
     ['4주 후에는 어떻게 되나요?','4주간 쌓은 노트·녹음·오답노트·스피치가 나만의 영어 포트폴리오가 돼요. 완주자에게는 다음 기수 우선 안내가 제공돼요.'],
+    ['중간에 빠지게 되는 기준(킥아웃)이 있나요?','몰입도 높은 환경을 위해, 열정적으로 참여하지 못하는 경우 부득이하게 킥아웃될 수 있어요. 다만 최대한 완주하실 수 있도록 더 가벼운 버전으로 도와드리고, 사정이 생기면 미리 알려주실 경우 최대한 반영해드려요. 상세 기준은 프로그램 시작 전 오리엔테이션에서 안내드려요.'],
     ['환불은 가능한가요?','결제 후 환불은 불가해요. 결제 전에 프로그램 상세를 충분히 확인하신 후 결정해주세요.'],
   ]
 
@@ -385,44 +386,7 @@ function TedProgram({nav}){
       </div>
     </section>
 
-    {/* ━ 4. ABOUT GRACE — 만든 사람 ━ */}
-    <Sec label="ABOUT" title="만든 사람" bg={T.bgWarm} maxW={860}>
-      <div style={{background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,borderRadius:20,padding:'48px 52px',position:'relative',overflow:'hidden',boxShadow:T.shadowH,textAlign:'center'}}>
-        <div style={{position:'absolute',top:'50%',right:'-10%',transform:'translateY(-50%)',width:400,height:400,background:'radial-gradient(circle,rgba(212,168,83,0.25) 0%,transparent 60%)',pointerEvents:'none'}}/>
-        <div style={{position:'absolute',top:'50%',left:'-10%',transform:'translateY(-50%)',width:300,height:300,background:'radial-gradient(circle,rgba(212,168,83,0.15) 0%,transparent 60%)',pointerEvents:'none'}}/>
-        <div style={{position:'relative'}}>
-          <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:11,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:26,textTransform:'uppercase'}}>
-            <span style={{width:6,height:6,borderRadius:'50%',background:'#E8CFA0'}}/>
-            Meet your instructor
-          </div>
-          <div style={{maxWidth:680,margin:'0 auto',textAlign:'left'}}>
-            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
-              수능 영어 4등급. 유학 경험 없음. 국내 독학으로 영어를 시작해서, 말하기를 시작한 지 1년 만에 통역을 하게 됐어요.
-            </p>
-            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
-              그 경험을 기반으로 TED 스터디를 직접 운영하며 구조를 다듬어왔어요. 이후 불어, 중국어를 공부하고, 토스트마스터즈, 혼자 1분 말하기, AI 활용 등 다양한 방법을 시도하며 부딪혀 본 결과 하나의 확신이 생겼어요.
-            </p>
-            <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:'#fff',fontWeight:700,lineHeight:1.7,marginBottom:24,letterSpacing:-0.3}}>
-              인풋을 기반으로 아웃풋을 만들 때, 그 인풋이 진짜 내 것이 된다는 것.
-            </p>
-            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
-              그래서 이 프로그램에는 매주 스피치를 넣었어요. 피드백이 있을 때 2배, 3배 빠르게 성장한다는 것도 직접 경험했기 때문에 원어민 튜터까지 섭외했어요.
-            </p>
-            <p style={{fontSize:'clamp(15px,1.7vw,17px)',color:'rgba(255,255,255,0.88)',lineHeight:1.95,marginBottom:24}}>
-              그리고 가장 중요한 건 — 이건 여기서만 하는 게 아니에요. <strong style={{color:'#fff',fontWeight:700}}>4주 동안 만든 이 습관과 루틴을, 프로그램이 끝난 후에도 혼자 계속 가져갈 수 있어요.</strong> 솔직히, 충분히 혼자 할 수 있어요.
-            </p>
-            <p style={{fontSize:'clamp(16px,1.9vw,19px)',color:'#B8860B',fontWeight:700,lineHeight:1.7,letterSpacing:-0.3}}>
-              그 '혼자 할 수 있는 힘'을 만들어드리는 게 이 프로그램일 뿐입니다.
-            </p>
-            <a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'inline-block',marginTop:28,fontSize:14,color:'#E8CFA0',textDecoration:'none',fontWeight:600,letterSpacing:0.3}}>
-              YouTube @kglobaltechgirl →
-            </a>
-          </div>
-        </div>
-      </div>
-    </Sec>
-
-    {/* ━ 5. DIFFERENTIATOR ━ */}
+    {/* ━ 4. DIFFERENTIATOR ━ */}
     <Sec label="WHAT MAKES US DIFFERENT" title={<>왜 기존 학원·스터디로는<br/>입이 안 열렸을까요?</>} maxW={1000}>
       <div style={{display:'grid',gap:18}}>
         {[
@@ -612,15 +576,15 @@ function TedProgram({nav}){
       <style>{`@media(max-width:640px){.loop-grid{grid-template-columns:1fr!important;grid-template-rows:repeat(4,1fr)!important}.loop-center,.loop-arrow{display:none!important}}`}</style>
     </Sec>
 
-    {/* ━ 10.5 REAL COMMUNITY — 실제 인증 현장 ━ */}
-    <Sec label="REAL COMMUNITY" title={<>혼자가 아니에요,<br/>매일 함께 인증해요</>} sub="매일 과제를 디스코드에 인증하고, 동료와 원어민 튜터의 피드백이 실시간으로 오가요. 아래는 실제 1기 커뮤니티의 모습이에요.">
+    {/* ━ 10.5 REAL COMMUNITY — 피어 피드백 예시 ━ */}
+    <Sec label="PEER FEEDBACK" title={<>혼자가 아니에요,<br/>동료와 함께 봐줘요</>} sub="스터디 동료들이 서로의 스피치를 함께 보고 의견을 나눠요. 아래는 실제 1기 커뮤니티에서 발췌한 피어 피드백 예시예요.">
       <figure style={{margin:'0 auto',maxWidth:580,borderRadius:16,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:T.shadow,background:'#1e1f22'}}>
-        <img src="/proof/peer-feedback.webp" alt="실제 1기 스피치 채널 — 음성 제출과 피드백이 오가는 현장" loading="lazy" style={{width:'100%',display:'block'}}/>
+        <img src="/proof/peer-feedback.webp" alt="실제 1기 커뮤니티의 피어 피드백 예시" loading="lazy" style={{width:'100%',display:'block'}}/>
       </figure>
     </Sec>
 
     {/* ━ 11. TESTIMONIALS — 1기 후기 (롤링) ━ */}
-    <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="4주를 함께한 1기 참가자들이 커뮤니티에 자발적으로 남긴 소감 중 일부예요.">
+    <Sec label="TESTIMONIALS" title={<>1기가 직접 남긴 후기</>} sub="실제 1기 멤버들의 회고와 후기에서 발췌했어요." maxW={1200}>
       <TestimonialCarousel/>
     </Sec>
 
@@ -813,7 +777,6 @@ function PricingCards({nav}){
     '과제 완료 실시간 트래킹',
     '매주 1회 피어 피드백 시스템',
     '스터디 전용 디스코드 커뮤니티 + 질문방',
-    '매주 개인별 진단 · 교정 · 방향성 제시',
     '4주 완주 포트폴리오',
   ]
   const writtenFb='원어민 튜터 1:1 서면 피드백 (주 1회, 주간 스피치)'
@@ -890,8 +853,8 @@ function TestimonialCarousel({compact}){
   const [idx,setIdx]=useState(0)
   const [paused,setPaused]=useState(false)
   useEffect(()=>{
-    if(paused||len<=1)return
-    const id=setInterval(()=>setIdx(i=>(i+1)%len),compact?3500:4800)
+    if(!compact||paused||len<=1)return
+    const id=setInterval(()=>setIdx(i=>(i+1)%len),3500)
     return ()=>clearInterval(id)
   },[paused,compact,len])
   const D={bg:'#313338',name:'#E8CFA0',time:'#949ba4'}
@@ -925,12 +888,16 @@ function TestimonialCarousel({compact}){
   }
 
   return(
-    <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{maxWidth:560,margin:'0 auto'}}>
-      <div key={idx} style={{borderRadius:16,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:'0 12px 36px rgba(0,0,0,0.12)',animation:'tFade 0.6s ease',background:'#fff'}}>
-        <img src={shots[idx]} alt={`1기 참가자 후기 ${idx+1}`} loading="lazy" style={{width:'100%',display:'block'}}/>
+    <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{overflow:'hidden',maxWidth:1200,margin:'0 auto',WebkitMaskImage:'linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)',maskImage:'linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)'}}>
+      <div style={{display:'flex',gap:20,width:'max-content',animation:`tMarquee ${shots.length*9}s linear infinite`,animationPlayState:paused?'paused':'running'}}>
+        {[...shots,...shots].map((src,i)=>(
+          <div key={i} style={{flexShrink:0,width:300,height:430,borderRadius:14,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:'0 8px 26px rgba(0,0,0,0.10)',background:'#fff',position:'relative'}}>
+            <img src={src} alt="1기 참가자 후기" loading="lazy" style={{width:'100%',display:'block'}}/>
+            <div style={{position:'absolute',left:0,right:0,bottom:0,height:90,background:'linear-gradient(transparent,#fff)',pointerEvents:'none'}}/>
+          </div>
+        ))}
       </div>
-      <Dots n={shots.length}/>
-      <style>{`@keyframes tFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}`}</style>
+      <style>{`@keyframes tMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
     </div>
   )
 }
