@@ -999,90 +999,15 @@ function TestimonialCarousel({compact}){
   )
 }
 
-// ─── FEEDBACK SAMPLE — 5블록 전체 펼침, 크게 ───
+// ─── FEEDBACK SAMPLE — 실제 원어민 피드백 캡처 ───
 function FeedbackSample(){
-  const BlockCard=({num,title,children,hl})=>(
-    <div style={{background:T.bgCard,border:hl?`2px solid ${T.gold}`:`1px solid ${T.border}`,borderRadius:18,padding:'36px 40px',marginBottom:20,boxShadow:T.shadow}}>
-      <div style={{display:'flex',alignItems:'center',gap:14,marginBottom:20,paddingBottom:16,borderBottom:`1px solid ${T.border}`}}>
-        <div style={{width:42,height:42,borderRadius:'50%',background:T.gold,color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,flexShrink:0}}>{num}</div>
-        <h4 style={{fontSize:'clamp(18px,2.2vw,22px)',fontWeight:700,color:T.txt,letterSpacing:-0.3}}>{title}</h4>
-      </div>
-      {children}
-    </div>
-  )
   return(<div>
-    {/* 학생 스피치 샘플 — 크게 */}
-    <div style={{background:T.bgSoft,border:`1px solid ${T.border}`,borderRadius:16,padding:'32px 36px',marginBottom:24}}>
-      <div style={{display:'flex',gap:12,alignItems:'center',marginBottom:20,flexWrap:'wrap'}}>
-        <span style={{padding:'5px 14px',background:T.bg,border:`1px solid ${T.borderH}`,borderRadius:100,fontSize:12,color:T.txt,fontWeight:700}}>📝 Student: 야망이-07</span>
-        <span style={{fontSize:13,color:T.txtS}}>Topic: <strong>Why small habits matter</strong></span>
-      </div>
-      <p style={{fontSize:15,color:T.txt,lineHeight:2,fontStyle:'italic'}}>
-        "I think this TED talk is very important because it talks about small habits. The speaker says if we do small things everyday, we can change our life. For example, if we exercise little by little, we can become healthier…"
-      </p>
-    </div>
-
-    <div style={{textAlign:'center',padding:'16px 0 28px'}}>
-      <span style={{fontSize:13,fontWeight:700,color:T.gold,letterSpacing:2,textTransform:'uppercase'}}>↓ 주간 스피치 서면 피드백 ↓</span>
-    </div>
-
-    {/* 1. 발음 */}
-    <BlockCard num="1" title="발음 (Pronunciation)">
-      <p style={{fontSize:13,color:T.txtD,marginBottom:16,lineHeight:1.7}}>한국인이 자주 놓치는 발음 교정</p>
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:14}} className="fb-compare">
-        <div style={{background:'rgba(220,38,38,0.06)',border:'1px solid rgba(220,38,38,0.2)',padding:'20px 22px',borderRadius:12}}>
-          <p style={{fontSize:11,fontWeight:700,color:'#DC2626',marginBottom:8}}>❌ You wrote</p>
-          <p style={{fontSize:16,color:T.txt,fontFamily:"'DM Sans',sans-serif",fontWeight:600}}>habit → /hay-bit/</p>
-        </div>
-        <div style={{background:'rgba(22,163,74,0.06)',border:'1px solid rgba(22,163,74,0.2)',padding:'20px 22px',borderRadius:12}}>
-          <p style={{fontSize:11,fontWeight:700,color:'#16A34A',marginBottom:8}}>✅ Try this instead</p>
-          <p style={{fontSize:16,color:T.txt,fontFamily:"'DM Sans',sans-serif",fontWeight:600}}>/hab-bit/</p>
-        </div>
-      </div>
-      <p style={{fontSize:14,color:T.txtS,lineHeight:1.8,paddingLeft:16,borderLeft:`3px solid ${T.gold}`}}>
-        → "happy / ham / hand" 할 때의 'ha' 발음이에요. 'rabbit'을 말한 뒤 'ra'를 'ha'로 바꿔보세요.
-      </p>
-    </BlockCard>
-
-    {/* 2. 표현 */}
-    <BlockCard num="2" title="표현 / 전달력 (Expression)">
-      <p style={{fontSize:13,color:T.txtD,marginBottom:16,lineHeight:1.7}}>바로 쓸 수 있는 표현 업그레이드</p>
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:14}} className="fb-compare">
-        <div style={{background:'rgba(220,38,38,0.06)',border:'1px solid rgba(220,38,38,0.2)',padding:'20px 22px',borderRadius:12}}>
-          <p style={{fontSize:11,fontWeight:700,color:'#DC2626',marginBottom:8}}>❌ You wrote</p>
-          <p style={{fontSize:15,color:T.txt,fontStyle:'italic',lineHeight:1.7}}>"I think this idea is <u>very good</u>"</p>
-        </div>
-        <div style={{background:'rgba(22,163,74,0.06)',border:'1px solid rgba(22,163,74,0.2)',padding:'20px 22px',borderRadius:12}}>
-          <p style={{fontSize:11,fontWeight:700,color:'#16A34A',marginBottom:8}}>✅ Try this instead</p>
-          <p style={{fontSize:15,color:T.txt,fontStyle:'italic',lineHeight:1.7}}>"I think this idea is <strong style={{color:T.gold}}>powerful because it focuses on small, consistent actions</strong>"</p>
-        </div>
-      </div>
-      <p style={{fontSize:14,color:T.txtS,lineHeight:1.8,paddingLeft:16,borderLeft:`3px solid ${T.gold}`}}>
-        → "very good" 같은 평범한 표현 대신, <strong style={{color:T.txt}}>"왜 좋은지"를 설명하는 문장</strong>으로 확장하면 깊이가 생겨요. 의견을 말할 때는 항상 'why'를 포함해보세요.
-      </p>
-    </BlockCard>
-
-    {/* 3. 구성 */}
-    <BlockCard num="3" title="구성 / 흐름 (Structure)">
-      <p style={{fontSize:13,color:T.txtD,marginBottom:16,lineHeight:1.7}}>말의 흐름을 만드는 연결어 사용법</p>
-      <div style={{background:'rgba(22,163,74,0.04)',border:'1px solid rgba(22,163,74,0.15)',padding:'24px 26px',borderRadius:12,marginBottom:14}}>
-        <p style={{fontSize:11,fontWeight:700,color:'#16A34A',marginBottom:12,letterSpacing:0.5}}>✅ 이렇게 바꿔보세요</p>
-        <p style={{fontSize:15,color:T.txt,lineHeight:2,fontStyle:'italic'}}>
-          "<strong style={{color:T.gold}}>First,</strong> the speaker explains how small habits create change.<br/>
-          <strong style={{color:T.gold}}>For example,</strong> exercising regularly can improve your health.<br/>
-          <strong style={{color:T.gold}}>That's why</strong> I think this idea is powerful."
-        </p>
-      </div>
-      <p style={{fontSize:14,color:T.txtS,lineHeight:1.8,paddingLeft:16,borderLeft:`3px solid ${T.gold}`}}>
-        → <strong style={{color:T.txt}}>"First / For example / That's why"</strong> 같은 연결어를 쓰면 전체 흐름이 훨씬 자연스러워져요.
-      </p>
-    </BlockCard>
-
-    <p style={{fontSize:12,color:T.txtD,textAlign:'center',marginTop:24,lineHeight:1.8}}>
-      ※ 피드백 예시는 샘플이며, 실제 내용 및 분량은 수강생의 수준과 스피치 내용에 따라 달라질 수 있습니다.
+    <figure style={{margin:0,borderRadius:16,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:T.shadow,background:'#1e1f22'}}>
+      <img src="/proof/peer-feedback.webp" alt="원어민 튜터의 실제 주간 스피치 피드백 — 디스코드 스피치 채널" loading="lazy" style={{width:'100%',display:'block'}}/>
+    </figure>
+    <p style={{fontSize:13,color:T.txtD,textAlign:'center',marginTop:18,lineHeight:1.8}}>
+      실제 1기 <strong style={{color:T.txtS}}>스피치 채널</strong> — 음성으로 제출한 주간 스피치를 원어민 튜터가 직접 듣고, 발음 · 표현 · 구성 · 흐름을 짚어 상세 피드백을 드려요.
     </p>
-
-    <style>{`@media(max-width:600px){.fb-compare{grid-template-columns:1fr!important}}`}</style>
   </div>)
 }
 
