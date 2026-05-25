@@ -134,7 +134,7 @@ function Home({nav}){
       <div style={{maxWidth:1100,margin:'0 auto',borderRadius:24,overflow:'hidden',background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,padding:'56px',display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:40,alignItems:'center',boxShadow:T.shadowH,position:'relative'}} className="featured-grid">
         <div style={{position:'absolute',top:'50%',right:'-15%',transform:'translateY(-50%)',width:500,height:500,background:'radial-gradient(circle,rgba(212,168,83,0.25) 0%,transparent 60%)',pointerEvents:'none'}}/>
         <div style={{position:'relative'}}>
-          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>2기 모집 중 · 최대 30명 소그룹</div>
+          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>2기 모집 중 · 30명 내외 소그룹</div>
           <h2 style={{fontSize:'clamp(26px,3.4vw,36px)',fontWeight:800,color:'#fff',marginBottom:16,lineHeight:1.25,letterSpacing:-1}}>커리어 점프업을 위한<br/><span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:'#E8CFA0'}}>영어 TED 올인원 스터디</span></h2>
           <p style={{fontSize:15,color:'rgba(255,255,255,0.75)',marginBottom:26,lineHeight:1.7,maxWidth:480}}>TED Talk 기반 10단계 스피킹 메소드와<br/>캐나다 명문대 출신 원어민 튜터의 1:1 피드백.<br/>4주 동안 매일 실행하고, 매주 성장합니다.</p>
           <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
@@ -241,7 +241,7 @@ function TedProgram({nav}){
   const faqs=[
     ['영어를 정말 못하는데 참여할 수 있나요?','TED 영상의 60% 정도는 이해할 수 있는 분을 기준으로 설계되어 있어요. 완벽하게 알아들을 필요는 없지만, 키워드와 전체 흐름을 파악할 수 있는 정도면 충분해요. 신청 시 현재 영어 상황을 여쭤보지만, 이는 추후 운영과 피드백 참고용이에요.'],
     ['직장인인데 시간이 될까요?','매일 한 시간 정도는 필요해요. 대신 출퇴근 시간에 리스닝, 점심시간에 노트테이킹, 퇴근 후 쉐도잉처럼 시간을 쪼개서 실행할 수 있는 시스템이에요. 저도 풀타임 직장인으로 이 루틴을 만들어 왔기 때문에 충분히 가능해요. 매일 제출물이 있어서 자연스럽게 루틴이 만들어져요.'],
-    ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 최대 30명 소규모로 운영되며, 결제 완료 순으로 자리가 확정돼요. 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
+    ['신청하면 바로 결제인가요?','네, 신청과 결제가 한 번에 이루어져요. 30명 내외 소그룹으로 운영되며, 결제 완료 순으로 자리가 확정돼요. 신청 페이지에서 작성하시는 설문은 추후 운영과 피드백 참고용으로만 활용해요.'],
     ['어떤 TED 영상으로 공부하나요?','커리어·자기계발·심리학 중심의 TED Talk을 큐레이션해서 제공해요. 5분 안팎 길이로, 직장에서 실제로 쓸 수 있는 표현이 풍부한 영상 위주예요. 2기는 "자기관리 × 생산성" 테마로 4편이 준비되어 있어요.'],
     ['피드백은 어떻게 받나요?','두 가지 피드백이 있어요. 매주 3분 요약 스피치에 대해 원어민 튜터가 서면으로 발음·표현·구성 피드백을 드려요. 거기에 매주 토요일 동료들과의 피어 피드백까지 — 혼자 연습할 때는 절대 얻을 수 없는 기준이 생겨요.'],
     ['4주 후에는 어떻게 되나요?','4주간 쌓은 노트·녹음·오답노트·스피치가 나만의 영어 포트폴리오가 돼요. 완주자에게는 다음 기수 우선 안내가 제공돼요.'],
@@ -267,7 +267,7 @@ function TedProgram({nav}){
       <div style={{position:'absolute',top:'30%',left:'50%',transform:'translate(-50%,-50%)',width:900,height:600,background:'radial-gradient(ellipse,rgba(184,134,11,0.22) 0%,transparent 65%)',pointerEvents:'none'}}/>
       <svg style={{position:'absolute',top:'28%',left:'50%',transform:'translate(-50%,-50%)',width:700,height:700,opacity:0.15,pointerEvents:'none'}} viewBox="0 0 700 700"><circle cx="350" cy="350" r="320" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="260" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="200" fill="none" stroke="#B8860B" strokeWidth="0.7"/><circle cx="350" cy="350" r="140" fill="none" stroke="#B8860B" strokeWidth="0.7"/></svg>
       <div style={{position:'relative',maxWidth:900,margin:'0 auto'}}>
-        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>2기 모집 중 · 최대 30명 소그룹</div>
+        <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'8px 18px',background:'rgba(255,255,255,0.85)',backdropFilter:'blur(10px)',border:'1px solid rgba(184,134,11,0.35)',borderRadius:100,fontSize:12,color:'#8B6914',marginBottom:32,letterSpacing:1,fontWeight:600}}><span style={{width:7,height:7,borderRadius:'50%',background:T.gold}}/>2기 모집 중 · 30명 내외 소그룹</div>
         <h1 style={{fontSize:'clamp(36px,6.5vw,68px)',fontWeight:800,color:T.txt,lineHeight:1.12,marginBottom:30,letterSpacing:-2.5}}>
           토익은 되는데<br/>
           <span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:T.gold}}>입이 안 열리는</span> 당신을 위한<br/>
@@ -613,7 +613,7 @@ function TedProgram({nav}){
     <Sec label="YOUR 4 WEEKS" title={<>4주 뒤, 당신의 영어가<br/>달라져 있을 겁니다</>} sub="이 시스템에 투자하는 4주가 혼자 흘려보내는 6개월을 바꿉니다.">
       <PricingCards nav={nav}/>
       <p style={{textAlign:'center',fontSize:13,color:T.txtD,marginTop:36,lineHeight:2}}>
-        * <strong style={{color:T.txt}}>최대 30명 소규모</strong>로 운영돼요.<br/>
+        * 신청 인원이 많아지면 <strong style={{color:T.txt}}>30명 내외의 소그룹</strong>으로 나누어, 모두가 밀착 케어를 받도록 운영해요.<br/>
         * 완주자에게는 alumni 네트워킹 모임 참여 우선권이 제공돼요.<br/>
         ※ 신청 페이지에서 결제와 함께 진행돼요.<br/>
         ※ 결제 후 환불은 불가해요.
@@ -652,10 +652,10 @@ function TedProgram({nav}){
         <h2 style={{fontSize:'clamp(28px,4vw,42px)',fontWeight:800,color:T.txt,marginBottom:20,letterSpacing:-1.2,lineHeight:1.25}}>준비되셨나요?</h2>
         <p style={{fontSize:'clamp(15px,1.8vw,18px)',color:T.txtS,marginBottom:40,lineHeight:1.8}}>
           신청 페이지에서 설문 작성과 결제가 한 번에 이루어져요.<br/>
-          <strong style={{color:T.txt}}>최대 30명 소규모</strong>로 운영돼요.
+          인원이 많아도 <strong style={{color:T.txt}}>30명 내외 소그룹</strong>으로 나누어 끝까지 밀착 케어해요.
         </p>
         <button onClick={goToLatpeed} style={{padding:'18px 40px',background:T.navy,color:'#fff',fontSize:16,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadowH}}>2기 신청하기 →</button>
-        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>최대 30명 소그룹 · 결제 후 환불 불가</p>
+        <p style={{fontSize:13,color:T.txtD,marginTop:18}}>30명 내외 소그룹 · 결제 후 환불 불가</p>
       </div>
     </section>
 
@@ -780,7 +780,7 @@ function PricingCards({nav}){
     '4주 완주 포트폴리오',
   ]
   const writtenFb='원어민 튜터 1:1 서면 피드백 (주 1회, 주간 스피치)'
-  const videoFb='원어민 튜터 1:1 비디오 피드백 (주 1회, 주간 스피치)'
+  const audioFb='원어민 튜터 1:1 음성 피드백 (주 1회, 주간 스피치)'
   const bonus='상세 학습 가이드북 (보너스 제공)'
   const tier3Extra=[
     '매주 원어민 라이브 코칭',
@@ -804,7 +804,7 @@ function PricingCards({nav}){
           <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>TED 올인원 4주 스터디</p>
           <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 서면 피드백</p>
           <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>최대 30명 소규모</p>
+          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>30명 내외 소그룹</p>
         </div>
         <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
           {base.map(f=><Item key={f} text={f}/>)}
@@ -819,13 +819,13 @@ function PricingCards({nav}){
         <div style={{marginBottom:24}}>
           <p style={{fontSize:11,fontWeight:700,color:T.txtD,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>Tier 2 · Premium</p>
           <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>TED 올인원 4주 스터디 PLUS</p>
-          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 <strong style={{color:T.txt}}>비디오</strong> 피드백</p>
+          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 <strong style={{color:T.txt}}>음성</strong> 피드백</p>
           <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩200,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
-          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>최대 30명 소규모</p>
+          <p style={{fontSize:12,color:T.txtD,marginTop:6}}>30명 내외 소그룹</p>
         </div>
         <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
           {base.map(f=><Item key={f} text={f}/>)}
-          <Item text={videoFb} hl/>
+          <Item text={audioFb} hl/>
           <Item text={bonus} hl/>
         </ul>
         <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
@@ -852,6 +852,7 @@ function TestimonialCarousel({compact}){
   const len=compact?txtItems.length:shots.length
   const [idx,setIdx]=useState(0)
   const [paused,setPaused]=useState(false)
+  const [zoom,setZoom]=useState(null)
   useEffect(()=>{
     if(!compact||paused||len<=1)return
     const id=setInterval(()=>setIdx(i=>(i+1)%len),3500)
@@ -887,19 +888,26 @@ function TestimonialCarousel({compact}){
     )
   }
 
-  return(
+  return(<>
     <div onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} style={{overflow:'hidden',maxWidth:1200,margin:'0 auto',WebkitMaskImage:'linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)',maskImage:'linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)'}}>
-      <div style={{display:'flex',gap:20,width:'max-content',animation:`tMarquee ${shots.length*9}s linear infinite`,animationPlayState:paused?'paused':'running'}}>
+      <div style={{display:'flex',gap:20,width:'max-content',animation:`tMarquee ${shots.length*9}s linear infinite`,animationPlayState:(paused||zoom)?'paused':'running'}}>
         {[...shots,...shots].map((src,i)=>(
-          <div key={i} style={{flexShrink:0,width:300,height:430,borderRadius:14,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:'0 8px 26px rgba(0,0,0,0.10)',background:'#fff',position:'relative'}}>
+          <div key={i} onClick={()=>setZoom(src)} style={{flexShrink:0,width:300,height:430,borderRadius:14,overflow:'hidden',border:`1px solid ${T.border}`,boxShadow:'0 8px 26px rgba(0,0,0,0.10)',background:'#fff',position:'relative',cursor:'zoom-in'}}>
             <img src={src} alt="1기 참가자 후기" loading="lazy" style={{width:'100%',display:'block'}}/>
             <div style={{position:'absolute',left:0,right:0,bottom:0,height:90,background:'linear-gradient(transparent,#fff)',pointerEvents:'none'}}/>
           </div>
         ))}
       </div>
+      <p style={{textAlign:'center',fontSize:12,color:T.txtD,marginTop:18}}>후기를 클릭하면 크게 볼 수 있어요</p>
       <style>{`@keyframes tMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
     </div>
-  )
+    {zoom&&(
+      <div onClick={()=>setZoom(null)} style={{position:'fixed',inset:0,zIndex:2000,background:'rgba(0,0,0,0.86)',display:'flex',alignItems:'center',justifyContent:'center',padding:'4vh 4vw',cursor:'zoom-out'}}>
+        <img src={zoom} alt="1기 참가자 후기 확대" style={{maxWidth:'94vw',maxHeight:'92vh',objectFit:'contain',borderRadius:12,boxShadow:'0 24px 70px rgba(0,0,0,0.55)'}}/>
+        <button onClick={()=>setZoom(null)} aria-label="닫기" style={{position:'absolute',top:20,right:24,width:42,height:42,borderRadius:'50%',border:'none',background:'rgba(255,255,255,0.15)',color:'#fff',fontSize:22,cursor:'pointer',lineHeight:1}}>×</button>
+      </div>
+    )}
+  </>)
 }
 
 // ─── FEEDBACK SAMPLE — 실제 원어민 피드백 캡처 ───
