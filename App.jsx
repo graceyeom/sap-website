@@ -46,7 +46,7 @@ export default function App(){
       else if(hash==='ted-program'){setPage('ted-program');setPostId(null)}
       else if(hash==='blog'){setPage('blog');setPostId(null)}
       else if(hash==='article'){setPage('article');setPostId(null)}
-      else if(['ebooks','admin','login','consent'].includes(hash)){setPage(hash);setPostId(null)}
+      else if(['ebooks','admin','login','consent','apply'].includes(hash)){setPage(hash);setPostId(null)}
       else{setPage('home');setPostId(null)}
       window.scrollTo(0,0)
     }
@@ -70,7 +70,7 @@ export default function App(){
               {[['home','홈'],['article','아티클'],['ebooks','전자책'],['ted-program','TED 스터디']].map(([p,l])=>(<button key={p} onClick={()=>nav(p)} style={{background:'none',border:'none',cursor:'pointer',color:page===p?T.txt:T.txtS,fontSize:13,fontWeight:page===p?600:500,padding:0}}>{l}</button>))}
             </div>
             {auth.isLoggedIn?(<div style={{display:'flex',alignItems:'center',gap:8}}><span style={{fontSize:12,color:T.txtS,maxWidth:90,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{auth.profile?.display_name||auth.user?.email?.split('@')[0]}</span><button onClick={auth.signOut} style={{background:T.bg,border:`1px solid ${T.border}`,color:T.txtS,padding:'6px 12px',borderRadius:6,fontSize:11,fontWeight:500,cursor:'pointer'}}>로그아웃</button></div>):(<button onClick={()=>nav('login')} style={{background:'none',border:'none',color:T.txt,padding:0,fontSize:13,fontWeight:500,cursor:'pointer'}}>로그인</button>)}
-            <button onClick={goToLatpeed} style={{padding:'9px 18px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기</button>
+            <button onClick={()=>nav('apply')} style={{padding:'9px 18px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',boxShadow:T.shadow}}>사전신청</button>
           </div>
         </div>
       </nav>
@@ -83,6 +83,7 @@ export default function App(){
         {page==='article'&&<GatedArticle auth={auth}/>}
         {page==='login'&&<Login auth={auth} nav={nav}/>}
         {page==='consent'&&<ConsentPage auth={auth} nav={nav}/>}
+        {page==='apply'&&<Apply nav={nav}/>}
         {page==='admin'&&<Admin/>}
       </main>
 
@@ -764,6 +765,74 @@ function ConsentPage({auth,nav}){
     </div>
     {err&&<p style={{fontSize:12,color:'#DC2626',textAlign:'center',marginBottom:12}}>{err}</p>}
     <button onClick={go} disabled={sub} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:10,cursor:sub?'wait':'pointer',opacity:sub?0.6:1}}>{sub?'저장 중...':'동의하고 시작하기'}</button>
+  </div>)
+}
+
+function Apply({nav}){
+  const [f,setF]=useState({name:'',email:'',phone:'',job:'',source:'',message:''})
+  const [pc,setPc]=useState(false),[mc,setMc]=useState(false)
+  const [sub,setSub]=useState(false),[err,setErr]=useState(''),[done,setDone]=useState(false)
+  const set=k=>e=>setF(s=>({...s,[k]:e.target.value}))
+  const Lbl=({children,req})=>(<label style={{display:'block',fontSize:13,fontWeight:600,color:T.txt,marginBottom:7}}>{children}{req&&<span style={{color:T.gold,marginLeft:3}}>*</span>}</label>)
+
+  const submit=async()=>{
+    setErr('')
+    if(!f.name.trim())return setErr('이름을 입력해 주세요.')
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.trim()))return setErr('올바른 이메일 주소를 입력해 주세요.')
+    if(!f.phone.trim())return setErr('연락처를 입력해 주세요.')
+    if(!pc)return setErr('개인정보 수집·이용에 동의해 주세요.')
+    setSub(true)
+    try{
+      const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...f,marketingConsent:mc})})
+      const data=await r.json().catch(()=>({}))
+      setSub(false)
+      if(!r.ok||!data.ok)return setErr(data.error||'신청 처리 중 오류가 발생했어요.')
+      setDone(true);window.scrollTo(0,0)
+    }catch{setSub(false);setErr('네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.')}
+  }
+
+  if(done)return(<div style={{padding:'100px 24px',maxWidth:480,margin:'0 auto',textAlign:'center'}}>
+    <Flame size={48}/>
+    <h2 style={{fontSize:24,fontWeight:800,color:T.txt,margin:'20px 0 12px'}}>사전신청이 완료되었어요!</h2>
+    <p style={{fontSize:14,color:T.txtS,lineHeight:1.8,marginBottom:32}}>2기 모집과 결제 오픈 소식을<br/>이메일·문자로 가장 먼저 보내드릴게요.</p>
+    <button onClick={()=>nav('home')} style={{padding:'13px 30px',background:T.navy,color:'#fff',border:'none',borderRadius:10,fontSize:14,fontWeight:600,cursor:'pointer'}}>홈으로</button>
+  </div>)
+
+  return(<div style={{padding:'72px 24px',maxWidth:560,margin:'0 auto'}}>
+    <div style={{textAlign:'center',marginBottom:14}}><Flame size={42}/></div>
+    <h2 style={{fontSize:28,fontWeight:800,color:T.txt,textAlign:'center',marginBottom:10,letterSpacing:-0.5}}>TED 올인원 스터디 2기 사전신청</h2>
+    <p style={{fontSize:14,color:T.txtS,textAlign:'center',lineHeight:1.7,marginBottom:28}}>지금 신청하시면 <strong style={{color:T.txt}}>2기 모집 시작과 결제 오픈</strong>을<br/>이메일·문자로 가장 먼저 안내드려요.</p>
+
+    <div style={{background:T.bgWarm,border:`1px solid ${T.border}`,borderRadius:14,padding:'20px 22px',marginBottom:28}}>
+      <p style={{fontSize:12,fontWeight:700,color:T.gold,letterSpacing:1,marginBottom:12,textTransform:'uppercase'}}>사전신청 혜택</p>
+      {['2기 모집·결제 오픈 가장 먼저 안내','사전신청자 한정 얼리버드 소식','상세 학습 가이드북 등 자료 우선 제공'].map(t=>(
+        <p key={t} style={{fontSize:13,color:T.txtS,lineHeight:1.9,display:'flex',gap:8}}><span style={{color:T.gold}}>✓</span>{t}</p>
+      ))}
+    </div>
+
+    <div style={{display:'flex',flexDirection:'column',gap:18}}>
+      <div><Lbl req>이름</Lbl><In value={f.name} onChange={set('name')} placeholder="홍길동"/></div>
+      <div><Lbl req>이메일</Lbl><In type="email" value={f.email} onChange={set('email')} placeholder="you@example.com"/></div>
+      <div><Lbl req>연락처</Lbl><In type="tel" value={f.phone} onChange={set('phone')} placeholder="01012345678"/><p style={{fontSize:12,color:T.txtD,marginTop:6}}>모집·결제 오픈 소식을 문자로 가장 먼저 안내드려요.</p></div>
+      <div><Lbl>현재 상황</Lbl><Sel value={f.job} onChange={set('job')}><option value="">선택해 주세요</option><option>직장인</option><option>1인 사업·프리랜서</option><option>창업 준비 중</option><option>학생·취준생</option><option>기타</option></Sel></div>
+      <div><Lbl>어떻게 알게 되셨나요</Lbl><Sel value={f.source} onChange={set('source')}><option value="">선택해 주세요</option><option>인스타그램</option><option>유튜브</option><option>지인 추천</option><option>검색</option><option>기타</option></Sel></div>
+      <div><Lbl>관심 티어</Lbl><Sel value={f.message} onChange={set('message')}><option value="">선택해 주세요</option><option>Tier 1 · 서면 피드백 (₩150,000)</option><option>Tier 2 · 음성 피드백 (₩200,000)</option><option>아직 고민 중</option></Sel></div>
+    </div>
+
+    <div style={{marginTop:24,display:'flex',flexDirection:'column',gap:10}}>
+      <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'13px 15px',background:T.bgSoft,borderRadius:8}}>
+        <input type="checkbox" checked={pc} onChange={e=>setPc(e.target.checked)} style={{width:18,height:18,accentColor:T.gold,marginTop:1,flexShrink:0}}/>
+        <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}><strong>[필수]</strong> 개인정보 수집·이용 동의 <span style={{color:T.txtD}}>(이름·이메일·연락처 / 2기 안내 목적 / 목적 달성 시까지 보유)</span></span>
+      </label>
+      <label style={{display:'flex',alignItems:'flex-start',gap:10,cursor:'pointer',padding:'13px 15px',background:T.bgSoft,borderRadius:8}}>
+        <input type="checkbox" checked={mc} onChange={e=>setMc(e.target.checked)} style={{width:18,height:18,accentColor:T.gold,marginTop:1,flexShrink:0}}/>
+        <span style={{fontSize:13,color:T.txt,lineHeight:1.6}}>[선택] 마케팅·홍보 정보 수신 동의 <span style={{color:T.txtD}}>(이메일·문자 / 언제든 수신거부 가능)</span></span>
+      </label>
+    </div>
+
+    {err&&<p style={{fontSize:13,color:'#DC2626',textAlign:'center',marginTop:16}}>{err}</p>}
+    <button onClick={submit} disabled={sub} style={{width:'100%',marginTop:22,padding:16,background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:sub?'wait':'pointer',opacity:sub?0.6:1,boxShadow:T.shadowH}}>{sub?'신청 중...':'사전신청 완료하기 →'}</button>
+    <p style={{fontSize:11,color:T.txtD,textAlign:'center',marginTop:14,lineHeight:1.6}}>제출 시 <span onClick={()=>nav('consent')} style={{color:T.gold,cursor:'pointer',fontWeight:600}}>개인정보 처리방침</span>에 따라 정보가 안전하게 관리됩니다.</p>
   </div>)
 }
 
