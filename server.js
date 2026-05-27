@@ -68,14 +68,8 @@ app.post('/api/subscribe', async (req, res) => {
   try {
     const { name, email, phone, job, source, message, marketingConsent } = req.body || {};
 
-    if (!name || !String(name).trim()) {
-      return res.status(400).json({ ok: false, error: '이름을 입력해 주세요.' });
-    }
     if (!email || !EMAIL_RE.test(String(email).trim())) {
       return res.status(400).json({ ok: false, error: '올바른 이메일 주소를 입력해 주세요.' });
-    }
-    if (!phone || !String(phone).trim()) {
-      return res.status(400).json({ ok: false, error: '연락처를 입력해 주세요.' });
     }
     if (!STIBEE_API_KEY || !STIBEE_LIST_ID) {
       console.error('Stibee env not configured');
@@ -85,10 +79,10 @@ app.post('/api/subscribe', async (req, res) => {
     // 스티비 커스텀 필드: 주소록에 동일한 이름의 필드를 만들어 두어야 매핑됩니다.
     const subscriber = {
       email: String(email).trim(),
-      name: String(name).trim(),
       $ad_agreed: marketingConsent ? 'Y' : 'N',
-      전화번호: String(phone).trim(),
     };
+    if (name && String(name).trim()) subscriber.name = String(name).trim();
+    if (phone && String(phone).trim()) subscriber['전화번호'] = String(phone).trim();
     if (job) subscriber['현재상황'] = String(job).trim();
     if (source) subscriber['유입경로'] = String(source).trim();
     if (message) subscriber['관심티어'] = String(message).trim();

@@ -7,6 +7,8 @@ import GatedArticle from './src/GatedArticle'
 // 2기 신청·결제는 래피드(Latpeed)에서 진행. URL은 만든 뒤 교체.
 const LATPEED_URL = 'https://www.latpeed.com/products/K8g15'
 const goToLatpeed = () => window.open(LATPEED_URL, '_blank', 'noopener,noreferrer')
+// 2기 오픈 전까지 false → TED 프로그램/신청은 '곧 공개 + 알림 신청'만 노출
+const PROGRAM_LIVE = false
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const T = {
@@ -70,7 +72,7 @@ export default function App(){
               {[['home','홈'],['article','아티클'],['ebooks','전자책'],['ted-program','TED 스터디']].map(([p,l])=>(<button key={p} onClick={()=>nav(p)} style={{background:'none',border:'none',cursor:'pointer',color:page===p?T.txt:T.txtS,fontSize:13,fontWeight:page===p?600:500,padding:0}}>{l}</button>))}
             </div>
             {auth.isLoggedIn?(<div style={{display:'flex',alignItems:'center',gap:8}}><span style={{fontSize:12,color:T.txtS,maxWidth:90,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{auth.profile?.display_name||auth.user?.email?.split('@')[0]}</span><button onClick={auth.signOut} style={{background:T.bg,border:`1px solid ${T.border}`,color:T.txtS,padding:'6px 12px',borderRadius:6,fontSize:11,fontWeight:500,cursor:'pointer'}}>로그아웃</button></div>):(<button onClick={()=>nav('login')} style={{background:'none',border:'none',color:T.txt,padding:0,fontSize:13,fontWeight:500,cursor:'pointer'}}>로그인</button>)}
-            <button onClick={()=>nav('apply')} style={{padding:'9px 18px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',boxShadow:T.shadow}}>사전신청</button>
+            <button onClick={()=>nav('apply')} style={{padding:'9px 18px',background:T.navy,color:'#fff',border:'none',borderRadius:8,fontSize:12,fontWeight:600,cursor:'pointer',boxShadow:T.shadow}}>{PROGRAM_LIVE?'사전신청':'오픈 알림'}</button>
           </div>
         </div>
       </nav>
@@ -79,11 +81,11 @@ export default function App(){
         {page==='home'&&<Home nav={nav}/>}
         {page==='blog'&&(post?<Post post={post} nav={nav} auth={auth}/>:<BlogList nav={nav}/>)}
         {page==='ebooks'&&<Ebooks preview={ebookPreview} setPreview={setEbookPreview} nav={nav}/>}
-        {page==='ted-program'&&<TedProgram nav={nav}/>}
+        {page==='ted-program'&&(PROGRAM_LIVE?<TedProgram nav={nav}/>:<ComingSoon nav={nav}/>)}
         {page==='article'&&<GatedArticle auth={auth}/>}
         {page==='login'&&<Login auth={auth} nav={nav}/>}
         {page==='consent'&&<ConsentPage auth={auth} nav={nav}/>}
-        {page==='apply'&&<Apply nav={nav}/>}
+        {page==='apply'&&(PROGRAM_LIVE?<Apply nav={nav}/>:<ComingSoon nav={nav}/>)}
         {page==='admin'&&<Admin/>}
       </main>
 
@@ -92,7 +94,7 @@ export default function App(){
         <div style={{maxWidth:1200,margin:'0 auto',padding:'64px 24px 32px',display:'grid',gridTemplateColumns:'1.3fr 1fr 1fr 1fr',gap:40}} className="footer-grid">
           <div><div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}><Flame size={24}/><span style={{fontSize:14,fontWeight:800,color:T.txt}}>조용한 야망가들</span></div><p style={{fontSize:12,color:T.txtS,lineHeight:1.8,maxWidth:280}}>Silent Ambitious People.<br/>떠들지 않지만 실행하는 사람들을 위한 커뮤니티.</p></div>
           <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>콘텐츠</p><FL onClick={()=>nav('article')}>아티클</FL><FL onClick={()=>nav('ebooks')}>전자책 · 자료집</FL><FL onClick={()=>nav('ted-program')}>TED 올인원 스터디</FL></div>
-          <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>커뮤니티</p><FL onClick={goToLatpeed}>2기 신청하기</FL><FL onClick={()=>nav('login')}>로그인 / 가입</FL><FL onClick={()=>nav('consent')}>개인정보 처리방침</FL></div>
+          <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>커뮤니티</p>{PROGRAM_LIVE?<FL onClick={goToLatpeed}>2기 신청하기</FL>:<FL onClick={()=>nav('apply')}>오픈 알림 신청</FL>}<FL onClick={()=>nav('login')}>로그인 / 가입</FL><FL onClick={()=>nav('consent')}>개인정보 처리방침</FL></div>
           <div><p style={{fontSize:11,fontWeight:700,color:T.txt,marginBottom:16,letterSpacing:0.5,textTransform:'uppercase'}}>SNS</p><a href="https://youtube.com/@kglobaltechgirl" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>YouTube</a><a href="https://instagram.com/kglobal.tech.girl" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>Instagram</a><a href="https://threads.net/@getnerdywithgrace" target="_blank" rel="noreferrer" style={{display:'block',fontSize:12,color:T.txtS,textDecoration:'none',padding:'5px 0'}}>Threads</a></div>
         </div>
         <div style={{borderTop:`1px solid ${T.border}`,maxWidth:1200,margin:'0 auto',padding:'24px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:12}}><p style={{fontSize:11,color:T.txtD}}>© 2026 조용한 야망가들. All rights reserved.</p><div style={{display:'flex',gap:18}}><span onClick={()=>nav('consent')} style={{fontSize:11,color:T.txtD,cursor:'pointer'}}>개인정보처리방침</span><span onClick={()=>nav('admin')} style={{fontSize:11,color:T.txtD,cursor:'pointer'}}>관리자</span></div></div>
@@ -108,7 +110,7 @@ export default function App(){
 function Home({nav}){
   const features=[
     {icon:'📝',label:'아티클',desc:'나를 지켜주었던 말들',goto:'article'},
-    {icon:'🎙️',label:'TED 올인원 스터디',desc:'4주 집중 · 2기 모집중',goto:'ted-program'},
+    {icon:'🎙️',label:'TED 올인원 스터디',desc:PROGRAM_LIVE?'4주 집중 · 2기 모집중':'4주 집중 · 곧 공개',goto:'ted-program'},
     {icon:'📚',label:'전자책 · 자료집',desc:'깊이 있는 이야기',goto:'ebooks'},
     {icon:'💬',label:'디스코드 커뮤니티',desc:'실행하는 사람들',goto:'ted-program'},
     {icon:'🔥',label:'실행 시스템',desc:'의지력이 아닌 구조',goto:'blog'},
@@ -135,12 +137,12 @@ function Home({nav}){
       <div style={{maxWidth:1100,margin:'0 auto',borderRadius:24,overflow:'hidden',background:`linear-gradient(135deg,${T.navy} 0%,#1a2332 100%)`,padding:'56px',display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:40,alignItems:'center',boxShadow:T.shadowH,position:'relative'}} className="featured-grid">
         <div style={{position:'absolute',top:'50%',right:'-15%',transform:'translateY(-50%)',width:500,height:500,background:'radial-gradient(circle,rgba(212,168,83,0.25) 0%,transparent 60%)',pointerEvents:'none'}}/>
         <div style={{position:'relative'}}>
-          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>2기 모집 중 · 30명 내외 소그룹</div>
+          <div style={{display:'inline-flex',alignItems:'center',gap:6,padding:'5px 12px',background:'rgba(212,168,83,0.18)',border:'1px solid rgba(212,168,83,0.4)',borderRadius:100,fontSize:10,fontWeight:700,color:'#E8CFA0',letterSpacing:1.2,marginBottom:18}}><span style={{width:5,height:5,borderRadius:'50%',background:'#E8CFA0'}}/>{PROGRAM_LIVE?'2기 모집 중 · 30명 내외 소그룹':'2기 곧 공개 · 오픈 알림 신청 중'}</div>
           <h2 style={{fontSize:'clamp(26px,3.4vw,36px)',fontWeight:800,color:'#fff',marginBottom:16,lineHeight:1.25,letterSpacing:-1}}>커리어 점프업을 위한<br/><span style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontWeight:500,color:'#E8CFA0'}}>영어 TED 올인원 스터디</span></h2>
           <p style={{fontSize:15,color:'rgba(255,255,255,0.75)',marginBottom:26,lineHeight:1.7,maxWidth:480}}>TED Talk 기반 10단계 스피킹 메소드와<br/>캐나다 명문대 출신 원어민 튜터의 1:1 피드백.<br/>4주 동안 매일 실행하고, 매주 성장합니다.</p>
           <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
-            <button onClick={()=>nav('ted-program')} style={{padding:'13px 24px',background:'#fff',color:T.navy,fontSize:14,fontWeight:700,border:'none',borderRadius:8,cursor:'pointer'}}>자세히 보기 →</button>
-            <button onClick={goToLatpeed} style={{padding:'13px 24px',background:'transparent',color:'#fff',fontSize:14,fontWeight:600,border:'1px solid rgba(255,255,255,0.3)',borderRadius:8,cursor:'pointer'}}>2기 신청하기</button>
+            <button onClick={()=>nav(PROGRAM_LIVE?'ted-program':'apply')} style={{padding:'13px 24px',background:'#fff',color:T.navy,fontSize:14,fontWeight:700,border:'none',borderRadius:8,cursor:'pointer'}}>{PROGRAM_LIVE?'자세히 보기 →':'오픈 알림 신청 →'}</button>
+            {PROGRAM_LIVE&&<button onClick={goToLatpeed} style={{padding:'13px 24px',background:'transparent',color:'#fff',fontSize:14,fontWeight:600,border:'1px solid rgba(255,255,255,0.3)',borderRadius:8,cursor:'pointer'}}>2기 신청하기</button>}
           </div>
         </div>
         <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:220,height:220,borderRadius:'50%',background:'radial-gradient(circle at 30% 30%,rgba(212,168,83,0.3),rgba(212,168,83,0.05))',border:'1px solid rgba(212,168,83,0.3)',display:'flex',alignItems:'center',justifyContent:'center'}}><Flame size={100}/></div></div>
@@ -834,6 +836,51 @@ function Apply({nav}){
     {err&&<p style={{fontSize:13,color:'#DC2626',textAlign:'center',marginTop:16}}>{err}</p>}
     <button onClick={submit} disabled={sub} style={{width:'100%',marginTop:22,padding:16,background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:sub?'wait':'pointer',opacity:sub?0.6:1,boxShadow:T.shadowH}}>{sub?'신청 중...':'사전신청 완료하기 →'}</button>
     <p style={{fontSize:11,color:T.txtD,textAlign:'center',marginTop:14,lineHeight:1.6}}>제출 시 <span onClick={()=>nav('consent')} style={{color:T.gold,cursor:'pointer',fontWeight:600}}>개인정보 처리방침</span>에 따라 정보가 안전하게 관리됩니다.</p>
+  </div>)
+}
+
+function ComingSoon({nav}){
+  const [email,setEmail]=useState('')
+  const [agree,setAgree]=useState(false)
+  const [sub,setSub]=useState(false),[err,setErr]=useState(''),[done,setDone]=useState(false)
+
+  const submit=async()=>{
+    setErr('')
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim()))return setErr('올바른 이메일 주소를 입력해 주세요.')
+    if(!agree)return setErr('오픈 알림 수신에 동의해 주세요.')
+    setSub(true)
+    try{
+      const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email.trim(),marketingConsent:true})})
+      const data=await r.json().catch(()=>({}))
+      setSub(false)
+      if(!r.ok||!data.ok)return setErr(data.error||'신청 처리 중 오류가 발생했어요.')
+      setDone(true);window.scrollTo(0,0)
+    }catch{setSub(false);setErr('네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.')}
+  }
+
+  if(done)return(<div style={{padding:'120px 24px',maxWidth:480,margin:'0 auto',textAlign:'center'}}>
+    <Flame size={48}/>
+    <h2 style={{fontSize:24,fontWeight:800,color:T.txt,margin:'20px 0 12px'}}>알림 신청이 완료됐어요!</h2>
+    <p style={{fontSize:14,color:T.txtS,lineHeight:1.8,marginBottom:32}}>2기 오픈 소식을<br/>이메일로 가장 먼저 보내드릴게요.</p>
+    <button onClick={()=>nav('home')} style={{padding:'13px 30px',background:T.navy,color:'#fff',border:'none',borderRadius:10,fontSize:14,fontWeight:600,cursor:'pointer'}}>홈으로</button>
+  </div>)
+
+  return(<div style={{padding:'120px 24px 100px',maxWidth:520,margin:'0 auto',textAlign:'center'}}>
+    <div style={{display:'inline-flex',alignItems:'center',gap:8,padding:'7px 18px',background:T.bgWarm,border:`1px solid ${T.border}`,borderRadius:100,fontSize:11,color:T.gold,marginBottom:28,letterSpacing:1.5,fontWeight:700}}><span style={{width:6,height:6,borderRadius:'50%',background:T.gold}}/>COMING SOON</div>
+    <div style={{marginBottom:18}}><Flame size={52}/></div>
+    <h1 style={{fontSize:'clamp(28px,5vw,40px)',fontWeight:800,color:T.txt,lineHeight:1.2,marginBottom:16,letterSpacing:-1}}>TED 올인원 스터디 2기<br/>곧 공개됩니다</h1>
+    <p style={{fontSize:15,color:T.txtS,lineHeight:1.8,maxWidth:420,margin:'0 auto 36px'}}>지금 막바지 준비 중이에요.<br/>이메일을 남겨주시면 <strong style={{color:T.txt}}>모집 오픈 소식을 가장 먼저</strong> 보내드릴게요.</p>
+
+    <div style={{display:'flex',flexDirection:'column',gap:12,maxWidth:380,margin:'0 auto'}}>
+      <In type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" style={{textAlign:'center'}}/>
+      <label style={{display:'flex',alignItems:'flex-start',gap:9,cursor:'pointer',padding:'12px 14px',background:T.bgSoft,borderRadius:8,textAlign:'left'}}>
+        <input type="checkbox" checked={agree} onChange={e=>setAgree(e.target.checked)} style={{width:18,height:18,accentColor:T.gold,marginTop:1,flexShrink:0}}/>
+        <span style={{fontSize:12.5,color:T.txt,lineHeight:1.6}}>오픈 알림 수신에 동의합니다 <span style={{color:T.txtD}}>(이메일 / 언제든 수신거부 가능)</span></span>
+      </label>
+      {err&&<p style={{fontSize:13,color:'#DC2626'}}>{err}</p>}
+      <button onClick={submit} disabled={sub} style={{padding:15,background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:sub?'wait':'pointer',opacity:sub?0.6:1,boxShadow:T.shadowH}}>{sub?'신청 중...':'오픈 알림 신청 →'}</button>
+    </div>
+    <p style={{fontSize:11,color:T.txtD,marginTop:18,lineHeight:1.6}}>제출 시 <span onClick={()=>nav('consent')} style={{color:T.gold,cursor:'pointer',fontWeight:600}}>개인정보 처리방침</span>에 따라 안전하게 관리됩니다.</p>
   </div>)
 }
 
