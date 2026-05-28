@@ -8,7 +8,7 @@ import GatedArticle from './src/GatedArticle'
 const LATPEED_URL = 'https://www.latpeed.com/products/K8g15'
 const goToLatpeed = () => window.open(LATPEED_URL, '_blank', 'noopener,noreferrer')
 // 2기 오픈 전까지 false → TED 프로그램/신청은 '곧 공개 + 알림 신청'만 노출
-const PROGRAM_LIVE = false
+const PROGRAM_LIVE = true
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const T = {
@@ -819,7 +819,7 @@ function Apply({nav}){
       <div><Lbl req>연락처</Lbl><In type="tel" value={f.phone} onChange={set('phone')} placeholder="01012345678"/><p style={{fontSize:12,color:T.txtD,marginTop:6}}>모집·결제 오픈 소식을 문자로 가장 먼저 안내드려요.</p></div>
       <div><Lbl>현재 상황</Lbl><Sel value={f.job} onChange={set('job')}><option value="">선택해 주세요</option><option>직장인</option><option>1인 사업·프리랜서</option><option>창업 준비 중</option><option>학생·취준생</option><option>기타</option></Sel></div>
       <div><Lbl>어떻게 알게 되셨나요</Lbl><Sel value={f.source} onChange={set('source')}><option value="">선택해 주세요</option><option>인스타그램</option><option>유튜브</option><option>지인 추천</option><option>검색</option><option>기타</option></Sel></div>
-      <div><Lbl>관심 티어</Lbl><Sel value={f.message} onChange={set('message')}><option value="">선택해 주세요</option><option>Tier 1 · 서면 피드백 (₩150,000)</option><option>Tier 2 · 음성 피드백 (₩200,000)</option><option>아직 고민 중</option></Sel></div>
+      <div><Lbl>관심 티어</Lbl><Sel value={f.message} onChange={set('message')}><option value="">선택해 주세요</option><option>베이직 · 원어민 서면 첨삭 (₩159,200)</option><option>프리미엄 · 1:1 음성 진단 (₩299,000)</option><option>아직 고민 중</option></Sel></div>
     </div>
 
     <div style={{marginTop:24,display:'flex',flexDirection:'column',gap:10}}>
@@ -896,8 +896,8 @@ function PricingCards({nav}){
     '스터디 전용 디스코드 커뮤니티 + 질문방',
     '4주 완주 포트폴리오',
   ]
-  const writtenFb='원어민 튜터 1:1 서면 피드백 (주 1회, 주간 스피치)'
-  const audioFb='원어민 튜터 1:1 음성 피드백 (주 1회, 주간 스피치)'
+  const writtenFb='원어민 튜터 1:1 서면 첨삭 (주 1회 · 문장·표현 교정)'
+  const audioFb='원어민 튜터 1:1 음성 진단 (주 1회 · 발음·억양·전달력)'
   const bonus='상세 학습 가이드북 (보너스 제공)'
   const tier3Extra=[
     '매주 원어민 라이브 코칭',
@@ -914,39 +914,45 @@ function PricingCards({nav}){
 
   return(<div style={{maxWidth:880,margin:'0 auto'}}>
     <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,alignItems:'start'}} className="price-grid">
-      {/* Tier 1 — Basic */}
+      {/* Tier 1 — 베이직 */}
       <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'40px 32px',position:'relative',boxShadow:T.shadow,wordBreak:'keep-all',lineBreak:'strict'}}>
         <div style={{marginBottom:24}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.txtD,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>Tier 1 · Basic</p>
-          <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>TED 올인원 4주 스터디</p>
-          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 서면 피드백</p>
-          <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩150,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
+          <p style={{fontSize:11,fontWeight:700,color:T.txtD,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>BASIC</p>
+          <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>베이직 · 원어민 서면 첨삭</p>
+          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>문장·표현 교정 · 4주</p>
+          <p style={{fontSize:13,color:T.txtD,textDecoration:'line-through',marginBottom:4}}>₩199,000</p>
+          <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩159,200<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
+          <p style={{fontSize:11,color:T.gold,fontWeight:700,marginTop:8,letterSpacing:0.5}}>2기 사전 오픈 · 20% 할인</p>
           <p style={{fontSize:12,color:T.txtD,marginTop:6}}>30명 내외 소그룹</p>
         </div>
-        <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
+        <ul style={{listStyle:'none',padding:0,margin:0}}>
           {base.map(f=><Item key={f} text={f}/>)}
           <Item text={writtenFb}/>
           <Item text={bonus} hl/>
         </ul>
-        <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
       </div>
 
-      {/* Tier 2 — Premium (동등 표시) */}
+      {/* Tier 2 — 프리미엄 */}
       <div style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:20,padding:'40px 32px',position:'relative',boxShadow:T.shadow,wordBreak:'keep-all',lineBreak:'strict'}}>
         <div style={{marginBottom:24}}>
-          <p style={{fontSize:11,fontWeight:700,color:T.txtD,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>Tier 2 · Premium</p>
-          <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>TED 올인원 4주 스터디 PLUS</p>
-          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>챌린지 + 원어민 <strong style={{color:T.txt}}>음성</strong> 피드백</p>
-          <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩200,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
+          <p style={{fontSize:11,fontWeight:700,color:T.txtD,letterSpacing:1,marginBottom:10,textTransform:'uppercase'}}>PREMIUM</p>
+          <p style={{fontSize:15,color:T.gold,fontWeight:700,marginBottom:6}}>프리미엄 · 1:1 음성 진단</p>
+          <p style={{fontSize:13,color:T.txtS,marginBottom:18}}>발음·억양·전달력까지, 코치가 직접 듣고 녹음으로 짚어드려요</p>
+          <p style={{fontSize:'clamp(28px,3.4vw,36px)',fontWeight:800,color:T.txt,letterSpacing:-1.5,lineHeight:1}}>₩299,000<span style={{fontSize:13,color:T.txtS,fontWeight:400}}> / 4주</span></p>
           <p style={{fontSize:12,color:T.txtD,marginTop:6}}>30명 내외 소그룹</p>
         </div>
-        <ul style={{listStyle:'none',padding:0,margin:'0 0 28px'}}>
+        <ul style={{listStyle:'none',padding:0,margin:0}}>
           {base.map(f=><Item key={f} text={f}/>)}
           <Item text={audioFb} hl/>
           <Item text={bonus} hl/>
         </ul>
-        <button onClick={goToLatpeed} style={{width:'100%',padding:15,background:T.navy,color:'#fff',fontSize:14,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadow}}>2기 신청하기 →</button>
       </div>
+    </div>
+
+    {/* 통합 CTA — 베이직/프리미엄 옵션 선택은 Latpeed에서 */}
+    <div style={{marginTop:36,padding:'28px 24px',background:T.bgWarm,border:`1px solid ${T.border}`,borderRadius:16,textAlign:'center',maxWidth:560,margin:'36px auto 0',boxShadow:T.shadow}}>
+      <p style={{fontSize:13,color:T.txtS,marginBottom:14,lineHeight:1.6}}>다음 페이지에서 <strong style={{color:T.txt}}>베이직 / 프리미엄 옵션</strong>을 선택하실 수 있어요.</p>
+      <button onClick={goToLatpeed} style={{padding:'17px 44px',background:T.navy,color:'#fff',fontSize:15,fontWeight:700,border:'none',borderRadius:12,cursor:'pointer',boxShadow:T.shadowH,minWidth:260}}>2기 신청하기 →</button>
     </div>
 
     {/* Tier 3 — 하단 추후 공지 */}
