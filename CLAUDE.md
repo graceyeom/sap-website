@@ -46,11 +46,16 @@ src/
 
 값은 OneDrive `dev-secrets\sap-website.env`에 보관 (`dev-setup`의 `sync-secrets.ps1 -Direction Pull`).
 
-## ⚠️ 현재 막혀 있는 것 (2026-08 기준)
+## ⚠️ Supabase는 의도적으로 꺼져 있습니다 (2026-08 결정)
 
-**Supabase 프로젝트 `sap-website`(ref `gwgsolvlvonakabjhdxs`)가 일시정지(INACTIVE) 상태입니다.**
-그래서 `VITE_SUPABASE_ANON_KEY`가 비어 있고, 로그인·게이트 콘텐츠가 동작하지 않습니다.
-Supabase 대시보드에서 Restore한 뒤 anon key를 `.env`에 채워야 합니다.
+Supabase 프로젝트 `sap-website`(ref `gwgsolvlvonakabjhdxs`)는 **일시정지 상태로 두기로 했습니다.**
+따라서 `VITE_SUPABASE_ANON_KEY`는 비어 있고, 로그인·게이트 콘텐츠(`GatedArticle.jsx`, `useAuth.js`)는
+동작하지 않는 것이 정상입니다.
+
+**되살리지 마세요.** 무료 플랜은 활성 프로젝트 2개까지인데 그 두 자리는 `life-os`와
+`quiet-ambition`이 쓰고 있습니다. 여기를 켜려면 둘 중 하나를 멈춰야 합니다.
+
+로그인이 필요한 기능 요청이 오면 `quiet-ambition` 쪽에 넣는 게 맞습니다.
 
 ## 브랜치
 
